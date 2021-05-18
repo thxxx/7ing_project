@@ -6,9 +6,15 @@
     <script src = "/main.js"></script>
   </head>
   <body>
-    <h1>메인</h1>
-    <p>메인</p>
+
+    <% if(!user) { %>
+    <h1>로그인 해주세요</h1>
+    <p>로그인 해주세요</p>
     <button id = "toSignIn" onclick="toSignIn()">로그인</button>
     <button id = "toSignUp" onclick="toSignUp()">회원가입</button>
+    <% } else  { %>
+    <div><%=user.User_name%>님 안녕하세요</div>
+    <button id = "logout" onclick="location.href = '/User/logout'">로그아웃</button>
+    <% } %>
   </body>
 </html>

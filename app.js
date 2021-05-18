@@ -9,8 +9,10 @@ const path = require('path');
 dotenv.config();
 const UserRouter = require('./routes/User');
 const indexRouter = require('./routes/index');
+const passportConfig = require('./passport');
 
 const app = express();
+passportConfig();
 app.set("port", process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

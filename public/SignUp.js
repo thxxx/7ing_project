@@ -29,11 +29,34 @@ function form2() {
     .then(response => {
         if(response.data.SignUp) {
             alert("회원가입 성공");
-            document.location.href = "/";
+            document.location.href = "http://localhost:3000/User/signin";
         } else {
             alert(response.data.message);
         }
     })
 
     return false;
+}
+
+function login() {
+
+    var User_id = $('#User_id').val();
+    var User_password = $('#User_password').val();
+
+    var body = {
+        User_id : User_id,
+        User_password : User_password
+    }
+
+    const header = {"Content-Type": "application/json"}
+
+    axios.post('http://localhost:3000/User/signin', body, {header})
+    .then(response => {
+        if(response.data.loginSuccess) {
+            alert("로그인 성공");
+            document.location.href = "http://localhost:3000/";
+        } else {
+            alert("다시 로그인 해주세요");
+        }
+    })
 }
