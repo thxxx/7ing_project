@@ -16,24 +16,24 @@ function form2() {
         User_name: User_name,
         User_nickname: User_nickname,
         User_id: User_id,
-        User_password2 : User_password2,
+        User_password2: User_password2,
         User_password: User_password,
-        User_gender : parseInt(User_gender),
-        User_birth : User_birth,
-        User_country : User_country
+        User_gender: parseInt(User_gender),
+        User_birth: User_birth,
+        User_country: User_country
     };
 
-    const header = {"Content-Type": "application/json"}
+    const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/User/signup', body, {header})
-    .then(response => {
-        if(response.data.SignUp) {
-            alert("회원가입 성공");
-            document.location.href = "http://localhost:3000/User/signin";
-        } else {
-            alert(response.data.message);
-        }
-    })
+    axios.post('http://localhost:3000/User/signup', body, { header })
+        .then(response => {
+            if (response.data.SignUp) {
+                alert("회원가입 성공");
+                document.location.href = "http://localhost:3000/User/signin";
+            } else {
+                alert(response.data.message);
+            }
+        })
 
     return false;
 }
@@ -44,19 +44,19 @@ function login() {
     var User_password = $('#User_password').val();
 
     var body = {
-        User_id : User_id,
-        User_password : User_password
+        User_id: User_id,
+        User_password: User_password
     }
 
-    const header = {"Content-Type": "application/json"}
+    const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/User/signin', body, {header})
-    .then(response => {
-        if(response.data.loginSuccess) {
-            alert("로그인 성공");
-            document.location.href = "http://localhost:3000/";
-        } else {
-            alert("다시 로그인 해주세요");
-        }
-    })
+    axios.post('http://localhost:3000/User/signin', body, { header })
+        .then(response => {
+            if (response.data.loginSuccess) {
+                alert("로그인 성공");
+                document.location.href = "http://localhost:3000/";
+            } else {
+                alert("다시 로그인 해주세요");
+            }
+        })
 }

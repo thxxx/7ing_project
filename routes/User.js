@@ -1,10 +1,12 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const db = require('../config/database.js');
 const passport = require('passport');
 const conn = db.init();
 const router = express.Router();
+
+setInterval(function() { conn.query('SELECT 1'); }, 5000);
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
@@ -25,76 +27,74 @@ router.post('/signup', (req, res) => { // 회원가입 로직
 
     var Originalpassword = req.body.User_password;
 
-    if(req.body.User_password == req.body.User_password2) {
-        
+    if (req.body.User_password == req.body.User_password2) {
+
         bcrypt.genSalt(saltRounds, function(err, salt) {
 
-        if(err) return res.status(200).json({SignUp : false, message : "salt produce error"});
+            if (err) return res.status(200).json({ SignUp: false, message: "salt produce error" });
 
-        bcrypt.hash(Originalpassword, salt, function(err, hash) {
+            bcrypt.hash(Originalpassword, salt, function(err, hash) {
 
-            if(err) return res.status(200).json({SignUp : false, message : "password encoding error"});
-
-            else {
-
-                var sql = "Insert into User (User_name, User_country, User_nickname, User_id, User_password, User_sex, User_birth) values (?,?,?,?,?,?,?)";
-
-                var params = [req.body.User_name, req.body.User_country, req.body.User_nickname, req.body.User_id, hash, req.body.User_gender, req.body.User_birth];
-
-                conn.query(sql, params, function (err, rows, fields) {
-
-                if(err) {
-                    // return res.status(200).json({SignUp : false, message : "Query Error"});
-                    console.log(err);
-                }
+                if (err) return res.status(200).json({ SignUp: false, message: "password encoding error" });
 
                 else {
+                    var sql = 'INSERT INTO User (User_name, User_country, User_nickname, User_id, User_password, User_sex, User_birth) VALUES (?,?,?,?,?,?,?)';
 
-                    return res.status(200).json({SignUp : true});
+                    var params = [req.body.User_name, req.body.User_country, req.body.User_nickname, req.body.User_id, hash, req.body.User_gender, req.body.User_birth];
 
-                };
+                    console.log(req.body);
+                    conn.query('INSERT INTO User (User_name, User_country, User_nickname, User_id, User_password, User_sex, User_birth) VALUES (?,?,?,?,?,?,?)', [req.body.User_name, req.body.User_country, req.body.User_nickname, req.body.User_id, hash, req.body.User_gender, req.body.User_birth], function(err, rows, fields) {
 
-                });
+                        if (err) {
+                            // return res.status(200).json({SignUp : false, message : "Query Error"});
+                            console.log(err);
+                        } else {
 
-            }
+                            return res.status(200).json({ SignUp: true });
 
-        });
+                        };
+
+                    });
+
+                }
+
+            });
 
         });
     } else {
 
-        return res.status(200).json({SignUp : false, message : "Please password confirm"});
+        return res.status(200).json({ SignUp: false, message: "Please password confirm" });
 
     }
 
 })
 
 router.post('/signin', function(req, res, next) {
+    // local 소셜로그인 말고 사이트마다 있는 로컬 로그임
     passport.authenticate('local', function(err, user, info) {
-      if (err) {
-          return res.status(400).json({loginSuccess : false, message : info});
-        }
-      if (!user) {
-        console.log("아이디가 없거나 틀림");
-        return res.status(200).json({loginSuccess : false, message : info});
-      }
-      req.logIn(user, function(err) {
         if (err) {
-            // return res.status(400).json({loginSuccess : false, message : "query error"});
-            console.log(err);
+            return res.status(400).json({ loginSuccess: false, message: info });
         }
-        else {
-            return res.status(200).json({loginSuccess : true, user : user});
+        if (!user) {
+            console.log("아이디가 없거나 틀림");
+            return res.status(200).json({ loginSuccess: false, message: info });
         }
-      });
+        req.logIn(user, function(err) {
+            if (err) {
+                // return res.status(400).json({loginSuccess : false, message : "query error"});
+                console.log(err);
+            } else {
+                return res.status(200).json({ loginSuccess: true, user: user });
+            }
+        });
     })(req, res, next);
-  });
+});
 
 
-  router.get('/logout', (req, res) => {
-      req.logout();
-      req.session.destroy();
-      res.redirect('http://localhost:3000/');
-  })
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('http://localhost:3000/');
+})
 
 module.exports = router;

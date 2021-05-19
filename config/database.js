@@ -8,19 +8,19 @@ var db_info = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    charset : process.env.DB_ENCODING,
-    connectionLimit : 50 , 
-    queueLimit : 0 , 
-    waitForConnection : true 
+    charset: process.env.DB_ENCODING,
+    connectionLimit: 50,
+    queueLimit: 0,
+    waitForConnection: true
 }
 
 module.exports = {
-    init: function () {
+    init: function() {
         return mysql.createConnection(db_info);
     },
     connect: function(conn) {
         conn.connect(function(err) {
-            if(err) console.error('mysql connection error : ' + err);
+            if (err) console.error('mysql connection error : ' + err);
             else console.log('mysql is connected successfully!');
         });
     }
