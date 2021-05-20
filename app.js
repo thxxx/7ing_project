@@ -8,7 +8,6 @@ const path = require('path');
 
 dotenv.config();
 const UserRouter = require('./routes/User');
-const MainPageRouter = require('./routes/MainPage');
 const indexRouter = require('./routes/index');
 const passportConfig = require('./passport');
 const PidRouter = require('./routes/Pid');
@@ -40,7 +39,6 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/User', UserRouter);
-app.use('/MainPage', MainPageRouter);
 app.use('/Pid', PidRouter);
 
 

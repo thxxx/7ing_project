@@ -6,6 +6,7 @@ const passport = require('passport');
 const conn = db.init();
 const router = express.Router();
 
+// mysql 접속이 끊어지는 단점이 있어서 주기적으로 신호 보내서 안끊기게 임시방편
 setInterval(function() { conn.query('SELECT 1'); }, 5000);
 
 router.use((req, res, next) => {

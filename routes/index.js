@@ -22,9 +22,9 @@ router.get('/', (req, res, next) => { // 시작
                     else {
                         console.log(result);
                         res.render('../views/index', {
-                            data: result,
-                            user: req.user ? req.user : "",
-                            sorted_good: sorted_result
+                            data: result, // Pid data 
+                            user: req.user ? req.user : "", // 현재 로그인한 유저
+                            sorted_good: sorted_result // 좋아요순으로 정렬된 Pid 4개의 데이터
                         });
                     }
                 });

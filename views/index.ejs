@@ -5,6 +5,9 @@
     <meta charset='utf-8'>
     <title>메인</title>
     <script src="/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/WritePid.js"></script>
 </head>
 
 <body>
@@ -15,74 +18,71 @@
         <button id="toSignIn" onclick="toSignIn()">로그인</button>
         <button id="toSignUp" onclick="toSignUp()">회원가입</button>
 
-        <!-- <button id="toWritePage" onclick="toWritePage(user.User_code)">게시글작성</button> -->
-        <button id="toWritePage" onclick="toWritePage()">게시글작성</button>
-        <button type="submit" onclick="getData()">데이터 불러오기</button>
-        <% if(data){ %>
+        <% } else  { %>
             <div>
-                NAME :
-                <%= data[0].Pid_title %>, AGE :
-                    <%= data[0].Pid_content %><br>
-            </div>
-            <% } %>
+                <%=user.User_name%>님 안녕하세요</div>
+            <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
 
-                <% } else  { %>
-                    <div>
-                        <%=user.User_name%>님 안녕하세요</div>
-                    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+            <button type="button" id="toWritePage" onclick="toWritePage()">게시글작성</button>
+            <button type="submit" onclick="toDetailPid()">피드로 이동</button>
 
-                    <button type="button" id="toWritePage" onclick="toWritePage()">게시글작성</button>
-                    <button type="submit" onclick="toDetailPid()">피드로 이동</button>
+            <% if(data){ %>
+                <% for(let i=0;i<data.length;i++){ %>
+                    <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
+                        <p>NAME :
+                            <%= data[i].Pid_title %>
+                        </p>
+                        <p>AGE :
+                            <%= data[i].Pid_content %>
+                        </p>
+                        <p>유저 이름 :
+                            <%= data[i].User_name %>
+                        </p>
+                        <p>유저 나라 :
+                            <%= data[i].User_country %>
+                        </p>
+                        <p>좋아요 갯수 :
+                            <%= data[i].Pid_good %>
+                        </p>
+                        <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
+                            <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
+                            <button type="submit">해당 게시글로 이동</button>
+                        </form>
+                        <form name="likeupform" action="#" method="POST">
+                            <input type="hidden" id="Pid_code_like" name="Pid_code_like" class="Pid_code_like" value="<%= data[i].Pid_code %>"> Pid :
+                            <%= data[i].Pid_code %>
+                                <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="2">
+                                <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
+                        </form>
+                    </div>
+                    <% } %>
 
-                    <% if(data){ %>
-                        <% for(let i=0;i<data.length;i++){ %>
-                            <div>
-                                NAME :
-                                <%= data[i].Pid_title %>, AGE :
-                                    <%= data[i].Pid_content %><br> 유저 이름 :
-                                        <%= data[i].User_name %><br>
-                                            <p>유저 나라 :
-                                                <%= data[i].User_country %>
-                                            </p>
-                                            <form action="http://localhost:3000/Pid/DetailPid/" method="get">
-                                                <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
-                                                <button type="submit">이도오오옫ㅇ</button>
-                                            </form>
-                                            <!-- <form action="http://localhost:3000/Pid/GoodUp/" method="post"> -->
-                                            <form name="goodupform" method="POST">
-                                                <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
-                                                <input type="hidden" id="pid_good" name="pid_good" value="<%= data[i].Pid_good %>">
-                                                <button type="submit" onclick="goodUp()">좋아요 업</button>
-                                            </form>
-                            </div>
-                            <% } %>
+                        <% } %>
+                            <!-- 데이터 출력 -->
+                            <% if(sorted_good){ %>
+                                <% for(let i=0;i<sorted_good.length;i++){ %>
+                                    <div>
+                                        좋아요 많은 순서 :
+                                        <%= sorted_good[i].Pid_title %>, AGE :
+                                            <%= sorted_good[i].Pid_content %><br> 유저 이름 :
+                                                <%= sorted_good[i].User_name %><br>
+                                                    <p>유저 나라 :
+                                                        <%= sorted_good[i].User_country %>
+                                                    </p>
+                                                    <p>좋아요 갯수 :
+                                                        <%= sorted_good[i].Pid_good %>
+                                                    </p>
+                                                    <form action="http://localhost:3000/Pid/DetailPid/" method="get">
+                                                        <input type="hidden" id="pid_code" name="pid_code" value="<%= sorted_good[i].Pid_code %>">
+                                                        <button type="submit">이도오오옫ㅇ</button>
+                                                    </form>
+                                                    <button type="submit" onclick="toDetailPid()">피드로 이동</button>
+                                    </div>
+                                    <% } %>
 
-                                <% } %>
-                                    <!-- 데이터 출력 -->
-                                    <% if(sorted_good){ %>
-                                        <% for(let i=0;i<sorted_good.length;i++){ %>
-                                            <div>
-                                                좋아요 많은 순서 :
-                                                <%= sorted_good[i].Pid_title %>, AGE :
-                                                    <%= sorted_good[i].Pid_content %><br> 유저 이름 :
-                                                        <%= sorted_good[i].User_name %><br>
-                                                            <p>유저 나라 :
-                                                                <%= sorted_good[i].User_country %>
-                                                            </p>
-                                                            <p>좋아요 갯수 :
-                                                                <%= sorted_good[i].Pid_good %>
-                                                            </p>
-                                                            <form action="http://localhost:3000/Pid/DetailPid/" method="get">
-                                                                <input type="hidden" id="pid_code" name="pid_code" value="<%= sorted_good[i].Pid_code %>">
-                                                                <button type="submit">이도오오옫ㅇ</button>
-                                                            </form>
-                                                            <button type="submit" onclick="toDetailPid()">피드로 이동</button>
-                                            </div>
+                                        <% } %>
+                                            <!-- 데이터 출력 -->
                                             <% } %>
-
-                                                <% } %>
-                                                    <!-- 데이터 출력 -->
-                                                    <% } %>
 
 
 </body>

@@ -1,4 +1,5 @@
-//Signup Form
+//게시글 작성과 좋아요 버튼
+//여기서 콘솔 로그는 웹페이지에 표시된다.
 
 function wrtiepid() {
 
@@ -33,24 +34,26 @@ function wrtiepid() {
     return false;
 }
 
+function likeUp() {
 
-function goodUp() {
-
-    var Pid_code = $('.pid_code').val();
-    var Pid_good = $('.pid_good').val();
+    var Pid_code_like = $('#Pid_code_like').val();
+    var Pid_good = $('#Pid_good').val();
 
     // 입력받은 정보를 객체로 저장
     var body = {
-        Pid_code: Pid_code,
+        Pid_code_like: Pid_code_like,
         Pid_good: Pid_good
     };
 
+    console.log("바디", body);
+
     const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/Pid/GoodUp', body, { header })
+    axios.post('http://localhost:3000/Pid/likeUp', body, { header })
         .then(response => {
-            if (response.data.GoodUpDone) {
+            if (response.data.LikeUpDone) {
                 alert("좋아요 상승.");
+                document.location.href = "/";
             } else {
                 alert(response);
             }
