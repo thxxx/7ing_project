@@ -6,6 +6,8 @@ const passport = require('passport');
 const conn = db.init();
 const router = express.Router();
 
+
+//test
 router.use((req, res, next) => {
     res.locals.user = req.user;
     next();
