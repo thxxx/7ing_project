@@ -44,6 +44,9 @@
                         <p>좋아요 갯수 :
                             <%= data[i].Pid_good %>
                         </p>
+                        <p>피드 코드:
+                            <%= data[i].Pid_code %>
+                        </p>
                         <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
                             <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
                             <button type="submit">해당 게시글로 이동</button>
@@ -51,7 +54,7 @@
                         <form name="likeupform" action="#" method="POST">
                             <input type="hidden" id="Pid_code_like" name="Pid_code_like" class="Pid_code_like" value="<%= data[i].Pid_code %>"> Pid :
                             <%= data[i].Pid_code %>
-                                <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="2">
+                                <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= data[i].Pid_good %>">
                                 <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
                         </form>
                     </div>

@@ -61,6 +61,7 @@ router.get(`/DetailPid`, (req, res) => { // 게시글 하나 클릭시 거기로
 })
 
 router.post('/DetailPid', (req, res) => { // 게시글작성 페이지 이동
+
     var sql = "SELECT * FROM Pid where Pid_code=?";
 
     var params = [req.body.pid_code];
@@ -100,6 +101,34 @@ router.post('/likeUp', (req, res) => { // 좋아요 클릭시.
         if (err) console.log(err);
         else {
             return res.status(200).json({ LikeUpDone: true });
+        }
+    })
+})
+
+
+router.post('/applyPid', (req, res) => { // 좋아요 클릭시.
+
+    console.log("pid code", req.body.Pid_code);
+
+    var Pid_code = parseInt(req.body.Pid_code);
+
+    var sql = "SELECT * FROM Pid WHERE Pid_code=?";
+
+    var params = [Pid_code];
+
+    conn.query(sql, params, (err, result, fields) => {
+        if (err) console.log(err);
+        else {
+            var sql2 = "UPDATE Pid SET Pid_currentNumber=? WHERE Pid_code=?";
+
+            var params2 = [result.Pid_curretNumber, result.Pid_code];
+
+            conn.query(sql2, params2, (err, result_pid, fields) => {
+                if (err) console.log(err);
+                else {
+                    alert("신청완료됐습니다!");
+                }
+            })
         }
     })
 })

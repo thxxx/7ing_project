@@ -36,8 +36,8 @@ function wrtiepid() {
 
 function likeUp() {
 
-    var Pid_code_like = $('#Pid_code_like').val();
-    var Pid_good = $('#Pid_good').val();
+    var Pid_code_like = $('.Pid_code_like').val();
+    var Pid_good = $('.Pid_good').val();
 
     // 입력받은 정보를 객체로 저장
     var body = {

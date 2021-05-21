@@ -18,6 +18,11 @@
 
         <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">게시글작성</h2>
 
+        <form action="http://localhost:3000/Pid/applyPid/" method="POST">
+            <input type="hidden" id="Pid_code" name="Pid_code" value="<%= piddata.Pid_code %>">
+            <button type="submit">동행신청</button>
+        </form>
+
         <div>
             글 작성자 :
             <%= user.User_name %>
