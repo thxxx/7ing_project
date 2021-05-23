@@ -18,9 +18,15 @@
 
         <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">게시글작성</h2>
 
-        <form action="http://localhost:3000/Pid/applyPid/" method="POST">
-            <input type="hidden" id="Pid_code" name="Pid_code" value="<%= piddata.Pid_code %>">
-            <button type="submit">동행신청</button>
+        <form name="likeupform" action="#" method="POST">
+            <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
+            <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= piddata.Pid_good %>">
+            <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
+        </form>
+        <form name="applypidform" action="#" method="POST">
+            <input type="hidden" id="Pid_code" class="Pid_code" name="Pid_code" value="<%= pidcode %>">
+            <!-- <button class="submit" type="button">동행신청</button> -->
+            <button class="submit" type="button" onclick="applyPid()">동행신청</button>
         </form>
 
         <div>
@@ -44,15 +50,25 @@
                         <%= piddata.Pid_recruitNumber %>
                             <br> 현재인원:
                             <%= piddata.Pid_currentNumber %>
+                                <br> 좋아요 수:
+                                <%= piddata.Pid_good %>
+                                    <br> 댓글내용:
+                                    <%= piddata.Pr_content %>
         </div>
 
+        <!-- 작성자 -->
+        <p> </p>
+        <!-- 작성 일시 -->
+
+        <!-- 내용 -->
+
         <form name="writeform" action="#" method="POST">
-
-            <input type="text" placeholder="제목" name="Pid_title" class="Pid_title" maxlength="15"><br /><br />
-
+            <!-- 내용 -->
             <input type="textfield" placeholder="본문내용" name="Pid_content" class="Pid_content" maxlength="500"><br /><br />
 
-            <button class="submit" type="button" onclick="writeReply()">등록하기<br /><br />
+            <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
+
+            <button class="submit" type="button" onclick="writeReply()">댓글달기<br /><br />
         </form>
         <!-- <button>동행신청하기</button> -->
     </div>
