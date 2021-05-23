@@ -11,6 +11,7 @@ const UserRouter = require('./routes/User');
 const indexRouter = require('./routes/index');
 const passportConfig = require('./passport');
 const PidRouter = require('./routes/Pid');
+const ActivityRouter = require('./routes/Activity');
 
 const app = express();
 passportConfig();
@@ -40,6 +41,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/User', UserRouter);
 app.use('/Pid', PidRouter);
+app.use('/Activity', ActivityRouter);
 
 
 app.use((req, res, next) => {

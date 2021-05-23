@@ -22,9 +22,11 @@
             <div>
                 <%=user.User_name%>님 안녕하세요</div>
             <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+            <button type="button" id="toMyPage" onclick="toMyPage()">마이페이지</button>
 
             <button type="button" id="toWritePage" onclick="toWritePage()">게시글작성</button>
             <button type="submit" onclick="toDetailPid()">피드로 이동</button>
+            <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
 
             <% if(data){ %>
                 <% for(let i=0;i<data.length;i++){ %>

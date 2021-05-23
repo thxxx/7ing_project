@@ -60,9 +60,9 @@ router.post('/DetailPid', (req, res) => { // 게시글작성 페이지 이동
                 console.log(err);
             } else {
                 console.log("result user", result_user[0]);
-                console.log("result pid", result_pid[0]);
+                console.log("result pid", result_pid);
                 res.render('../views/Pid/DetailPid', {
-                    piddata: result_pid[0],
+                    piddata: result_pid,
                     pidcode: req.body.pid_code,
                     user: result_user[0]
                 });
@@ -165,15 +165,15 @@ router.post('/writeReply', (req, res) => {
 
     console.log("req body : ", req.body);
 
-    var sql = "INSERT INTO Pid_reply (Pid_code, Pr_writeDate, Pr_content, Pr_author) VALUES (?,?,?,?);"
-    var params = [req.body.Pid_code, Now(), req.body.Pid_content, req.user.User_name];
+    var sql = "INSERT INTO Pid_reply (Pid_code, Pr_writeDate, Pr_content, Pr_author) VALUES (?,Now(),?,?);"
+    var params = [req.body.Pid_code, req.body.Pid_content, req.user.User_name];
 
-    conn.query(sql, params, (err, result) => {
+    conn.query("INSERT INTO Pid_reply (Pid_code, Pr_writeDate, Pr_content, Pr_author) VALUES (?,Now(),?,?);", [req.body.Pid_code, req.body.Pid_content, req.user.User_name], (err, result) => {
         if (err) {
             console.log(err);
         } else {
             console.log("결과 : ", result);
-            return res.json({ WriteReplyDone: true });
+            return res.status(200).json({ WriteReplyDone: true });
         }
     })
 })

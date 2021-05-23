@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>액티비티 메인</title>
+    <script src="/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/Activity.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <%=user.User_name%>님 안녕하세요</div>
+    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+
+    <button type="button" id="toWriteActivity" onclick="toWriteActivityPage()">액티비티작성</button>
+    <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
+
+    <% if(actdata){ %>
+        <% for(let i=0;i<actdata.length;i++){ %>
+            <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
+                <p>NAME :
+                    <%= actdata[i].At_title %>
+                </p>
+                <p>내용
+                    <%= actdata[i].At_content %>
+                </p>
+                <p>유저 이름 :
+                    <%= actdata[i].User_name %>
+                </p>
+                <p>유저 나라 :
+                    <%= actdata[i].User_country %>
+                </p>
+                <p>액티비티 코드:
+                    <%= actdata[i].At_code %>
+                </p>
+                <p>위치:
+                    <%= actdata[i].At_place %>
+                </p>
+                <p>가격:
+                    <%= actdata[i].At_price %>
+                </p>
+                <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                    <input type="hidden" id="At_code" name="At_code" value="<%= actdata[i].At_code %>">
+                    <button type="submit">해당 액티비티로 이동</button>
+                </form>
+            </div>
+            <% } %>
+
+                <% } %>
+
+
+</body>
+
+</html>

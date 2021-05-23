@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>액티비티 글 작성</title>
+    <!-- <script type="module" src="./signupnew.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/Activity.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <button id="toMainPage" onclick="toMainPage()">글쓰기취소</button>
+
+        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">게시글작성</h2>
+
+
+        <form name="writeform" action="#" method="POST">
+            <input type="text" placeholder="제목" name="At_title" class="At_title" maxlength="15"><br /><br />
+
+            <input type="text" placeholder="본문내용" name="At_content" class="At_content" maxlength="500"><br /><br />
+
+            <!-- <input type="date" id="Pid_dday" class="Pid_dday" name="Pid_dday" value="2021-05-25" min="2021-05-25" max="2021-12-31"> -->
+
+            <input type="text" placeholder="목표인원" name="At_recruitNumber" id="At_recruitNumber" class="At_recruitNumber"><br/><br />
+
+            <input type="text" placeholder="지역" name="At_place" class="At_place" maxlength="15"><br /><br />
+
+            <input type="text" placeholder="가격" name="At_price" class="At_price" maxlength="15"><br /><br />
+
+            <span class="box">
+                <input type="file" id="file" class="int_file" accept="image/*" style="display: block">
+            </span> <br /><br />
+            <br /><br />
+            <button class="submit" type="button" onclick="WriteActivity()">등록하기<br /><br />
+        </form>
+    </div>
+</body>
+
+</html>

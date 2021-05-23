@@ -93,22 +93,21 @@ function writeReply() {
     var Pid_content = $('.Pid_content').val();
     var Pid_code = $('.Pid_code').val();
 
-    var wr = {
+    var body = {
         Pid_content: Pid_content,
         Pid_code: parseInt(Pid_code),
     }
 
-    console.log("댓글달기 : ", wr);
+    console.log("댓글달기 : ", body);
 
     const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/Pid/writeReply', wr, { header })
+    axios.post('http://localhost:3000/Pid/writeReply', body, { header })
         .then(response => {
             if (response.data.WriteReplyDone) {
-                alert("동행신청 완료");
                 document.location.href = '/';
             } else {
-                console.log(response);
+                console.log(reponse);
             }
         })
 }

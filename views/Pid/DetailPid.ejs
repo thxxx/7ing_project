@@ -20,7 +20,7 @@
 
         <form name="likeupform" action="#" method="POST">
             <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
-            <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= piddata.Pid_good %>">
+            <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= piddata[0].Pid_good %>">
             <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
         </form>
         <form name="applypidform" action="#" method="POST">
@@ -39,21 +39,23 @@
         </div>
         <div>
             타이틀 :
-            <%= piddata.Pid_title %>
+            <%= piddata[0].Pid_title %>
                 <br> 내용 :
-                <%= piddata.Pid_content %>
+                <%= piddata[0].Pid_content %>
                     <br> 디데이:
                     <%= 
-                    piddata.Pid_dday %>
+                    piddata[0].Pid_dday %>
 
                         <br> 모집인원:
-                        <%= piddata.Pid_recruitNumber %>
+                        <%= piddata[0].Pid_recruitNumber %>
                             <br> 현재인원:
-                            <%= piddata.Pid_currentNumber %>
+                            <%= piddata[0].Pid_currentNumber %>
                                 <br> 좋아요 수:
-                                <%= piddata.Pid_good %>
-                                    <br> 댓글내용:
-                                    <%= piddata.Pr_content %>
+                                <%= piddata[0].Pid_good %>
+                                    <% for(let i=0;i<piddata.length;i++){ %>
+                                        <br> 댓글내용:
+                                        <%= piddata[i].Pr_content %>
+                                            <% } %>
         </div>
 
         <!-- 작성자 -->
