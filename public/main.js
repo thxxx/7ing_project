@@ -29,3 +29,7 @@ function toWriteActivityPage() {
 function toMyPage() {
     document.location.href = '/User/MyPage';
 }
+
+function toMainPage() {
+    document.location.href = '/';
+}

@@ -78,10 +78,10 @@ function applyPid() {
         .then(response => {
             if (response.data.ApplyPidDone) {
                 console.log(response.data.Pid_currentNumber);
-                alert("동행신청 완료");
+                alert("이미 인원 모집이 완료되었습니다");
                 document.location.href = '/';
             } else {
-                alert("이미 인원 모집이 완료되었습니다");
+                alert("동행신청 완료");
                 document.location.href = '/';
             }
         })
@@ -98,16 +98,21 @@ function writeReply() {
         Pid_code: parseInt(Pid_code),
     }
 
-    console.log("댓글달기 : ", body);
+    if (Pid_content == '') {
+        alert("5글자는 쓰셔야죠");
+        document.location.href = '/';
+    } else {
 
-    const header = { "Content-Type": "application/json" }
+        const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/Pid/writeReply', body, { header })
-        .then(response => {
-            if (response.data.WriteReplyDone) {
-                document.location.href = '/';
-            } else {
-                console.log(reponse);
-            }
-        })
+        axios.post('http://localhost:3000/Pid/writeReply', body, { header })
+            .then(response => {
+                if (response.data.WriteReplyDone) {
+                    alert("댓글 작성 완료");
+                    document.location.href = '/';
+                } else {
+                    console.log(reponse);
+                }
+            })
+    }
 }

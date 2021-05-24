@@ -143,16 +143,19 @@ router.post('/applyPid', (req, res) => { // 좋아요 클릭시.
 
             var params2 = [add, result[0].Pid_code];
 
-            console.log(result[0]);
-
-            conn.query(sql2, params2, (err, result_pid, fields) => {
-                if (err) console.log(err);
+            conn.query(sql2, params2, (err2, result_pid, fields) => {
+                if (err2) console.log(err2);
                 else {
-                    if (full_member) {
-                        return res.status(200).json({ ApplyPidDone: true, Pid_currentNumber: add });
-                    } else {
-                        return res.status(200).json({ ApplyPidDone: false, Pid_currentNumber: add });
-                    }
+                    var sql3 = "Insert into Pid_apply (Pid_code, Pa_id, Apply_User_code) values (?,?,?);";
+                    var params3 = [result[0].Pid_code, "Pa_id", req.user.User_code];
+                    conn.query(sql3, params3, (err3, result_apply) => {
+                        console.log("됐다 : ", result[0])
+                        if (full_member) {
+                            return res.status(200).json({ ApplyPidDone: true, Pid_currentNumber: add });
+                        } else {
+                            return res.status(200).json({ ApplyPidDone: false, Pid_currentNumber: add });
+                        }
+                    })
                 }
             })
         }
@@ -167,6 +170,7 @@ router.post('/writeReply', (req, res) => {
 
     var sql = "INSERT INTO Pid_reply (Pid_code, Pr_writeDate, Pr_content, Pr_author) VALUES (?,Now(),?,?);"
     var params = [req.body.Pid_code, req.body.Pid_content, req.user.User_name];
+
 
     conn.query("INSERT INTO Pid_reply (Pid_code, Pr_writeDate, Pr_content, Pr_author) VALUES (?,Now(),?,?);", [req.body.Pid_code, req.body.Pid_content, req.user.User_name], (err, result) => {
         if (err) {
