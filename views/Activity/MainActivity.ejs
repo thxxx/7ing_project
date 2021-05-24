@@ -17,40 +17,61 @@
     <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
 
     <button type="button" id="toWriteActivity" onclick="toWriteActivityPage()">액티비티작성</button>
-    <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
 
-    <% if(actdata){ %>
-        <% for(let i=0;i<actdata.length;i++){ %>
-            <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
-                <p>NAME :
-                    <%= actdata[i].At_title %>
-                </p>
-                <p>내용
-                    <%= actdata[i].At_content %>
-                </p>
-                <p>유저 이름 :
-                    <%= actdata[i].User_name %>
-                </p>
-                <p>유저 나라 :
-                    <%= actdata[i].User_country %>
-                </p>
-                <p>액티비티 코드:
-                    <%= actdata[i].At_code %>
-                </p>
-                <p>위치:
-                    <%= actdata[i].At_place %>
-                </p>
-                <p>가격:
-                    <%= actdata[i].At_price %>
-                </p>
-                <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
-                    <input type="hidden" id="At_code" name="At_code" value="<%= actdata[i].At_code %>">
-                    <button type="submit">해당 액티비티로 이동</button>
-                </form>
-            </div>
-            <% } %>
+    <% if(rank){ %>
+        <% for(let i=0;i<2;i++){ %>
+            <p>
+                등수 :
+                <% i %> 등!
+            </p>
+            <p>NAME :
+                <%= rank[i].At_title %>
+            </p>
+            <p>내용
+                <%= rank[i].At_content %>
+            </p>
+            <%}%>
+                <%}%>
 
-                <% } %>
+                    <% if(actdata){ %>
+                        <% for(let i=0;i<actdata.length;i++){ %>
+                            <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
+                                <p>NAME :
+                                    <%= actdata[i].At_title %>
+                                </p>
+                                <p>내용
+                                    <%= actdata[i].At_content %>
+                                </p>
+                                <p>유저 이름 :
+                                    <%= actdata[i].User_name %>
+                                </p>
+                                <p>유저 나라 :
+                                    <%= actdata[i].User_country %>
+                                </p>
+                                <p>액티비티 코드:
+                                    <%= actdata[i].At_code %>
+                                </p>
+                                <p>위치:
+                                    <%= actdata[i].At_place %>
+                                </p>
+                                <p>가격:
+                                    <%= actdata[i].At_price %>
+                                </p>
+                                <p>현재 신청 수:
+                                    <%= actdata[i].At_currentNumber %> /
+                                        <%= actdata[i].At_recruitNumber %>
+                                </p>
+                                <% if (actdata[i].At_currentNumber == actdata[i].At_recruitNumber) { %>
+                                    <!-- 이미지에 마감 표시 -->
+                                    <% } %>
+                                        <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                                            <input type="hidden" id="At_code" name="At_code" value="<%= actdata[i].At_code %>">
+                                            <button type="submit">해당 액티비티로 이동</button>
+                                        </form>
+                            </div>
+                            <% } %>
+
+                                <% } %>
 
 
 </body>

@@ -29,3 +29,30 @@ function WriteActivity() {
 
     return false;
 }
+
+
+function applyActivity() {
+
+    var At_code = $('.At_code').val();
+
+    var body = {
+        At_code: At_code
+    }
+
+    console.log("동행신청 액티비티 코드 : ", body);
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/Activity/applyActivity', body, { header })
+        .then(response => {
+            console.log("res", response);
+            if (response.data.ApplyActivityDone) {
+                console.log(response.data.At_currentNumber);
+                alert("동행신청 완료");
+                document.location.href = '/Activity';
+            } else {
+                alert("이미 인원 모집이 완료되었습니다");
+                document.location.href = '/Activity';
+            }
+        })
+}

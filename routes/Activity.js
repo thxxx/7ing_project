@@ -12,14 +12,20 @@ router.get('/', (req, res) => { // 게시글작성 페이지 이동
 
     var sql = "SELECT * FROM Activity LEFT JOIN User ON Activity.User_code=User.User_code;";
 
-    console.log(req);
-
     conn.query(sql, (err, result) => {
         if (err) console.log(err);
         else {
-            console.log("result 입니다", result)
-            res.render('../views/Activity/MainActivity', {
-                actdata: result // 배열로 여러 액티비티가 다 날아갑니다
+            var sql2 = "SELECT * FROM Activity LEFT JOIN User ON Activity.User_code=User.User_code ORDER BY Activity.At_currentNumber DESC;";
+            conn.query(sql2, (err2, result2) => {
+                if (err2) {
+                    throw err2;
+                } else {
+                    console.log("rank : ", result2)
+                    res.render('../views/Activity/MainActivity', {
+                        actdata: result, // 배열로 여러 액티비티가 다 날아갑니다
+                        rank: result2
+                    });
+                }
             });
         }
     })
@@ -47,5 +53,70 @@ router.post('/WriteActivity', (req, res) => { // 게시글작성
     });
 
 })
+
+router.post('/DetailActivity', (req, res) => { // 게시글작성 페이지 이동
+
+    var sql = "SELECT * FROM Activity WHERE At_code=?;";
+
+    var params = [req.body.At_code];
+
+    console.log("req body", req.body);
+
+    conn.query(sql, params, (err, result_at, fields) => {
+        var sql2 = "SELECT * FROM User where User_code=?";
+
+        var params2 = [result_at[0].User_code];
+        conn.query(sql2, params2, (err, result_user, fields) => {
+
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("result user", result_user[0]);
+                console.log("result At", result_at);
+                res.render('../views/Activity/DetailActivity', {
+                    atdata: result_at[0],
+                    atcode: req.body.At_code,
+                    user: result_user[0]
+                });
+            }
+        })
+    })
+})
+
+
+router.post('/applyActivity', (req, res) => { // 좋아요 클릭시.
+
+    var At_code = parseInt(req.body.At_code);
+
+    conn.query("SELECT * FROM Activity WHERE At_code=?", [At_code], (err, result, fields) => {
+        if (err) console.log(err);
+        else {
+
+            if (result[0].At_currentNumber >= result[0].At_recruitNumber) {
+                var full_member = true;
+                var add = result[0].At_currentNumber;
+            } else {
+                var full_member = false;
+                var add = result[0].At_currentNumber + 1;
+            }
+
+            var sql2 = "UPDATE Activity SET At_currentNumber = ? WHERE At_code = ?";
+
+            var params2 = [add, result[0].At_code];
+
+            conn.query(sql2, params2, (err, result_at, fields) => {
+                if (err) console.log(err);
+                else {
+                    if (full_member) {
+                        return res.status(200).json({ ApplyActivityDone: false, At_currentNumber: add });
+                    } else {
+                        return res.status(200).json({ ApplyActivityDone: true, At_currentNumber: add });
+                    }
+                }
+            })
+        }
+    })
+})
+
 
 module.exports = router;
