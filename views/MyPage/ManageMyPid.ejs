@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>동행신청 목록</title>
+    <script src="/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/MyInfo.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <%=user.User_name%>님 안녕하세요</div>
+    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+    <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+
+    <% if (applypiddata) {%>
+
+        <% for(let i=0;i<applypiddata.length;i++){ %>
+            <p> 내가 동행 신청한 타이틀 :
+                <%= applypiddata[i].Pid_title %>
+                    <%= applypiddata[i].Pid_content %>
+                        <%= applypiddata[i].Pid_currentNumber %>
+                            <%= applypiddata[i].Pid_recruitNumber %>
+            </p>
+
+            <p>동행 수락 여부 :</p>
+            <% if(applypiddata[i].Pa_enter==2){ %>
+                <p>
+                    거절됨!
+                </p>
+                <% } else if(applypiddata[i].Pa_enter==1){ %>
+                    <p>수락함!</p>
+                    <% } else if (applypiddata[i].Pid_recruitNumber==applypiddata[i].Pid_currentNumber) {%>
+                        <p> 아쉽게도 모집이 마감되었어요 </p>
+                        <% } else{ %>
+                            <p>대기중..</p>
+                            <% } %>
+                                <% } %>
+                                    <% }else{ %>
+                                        <p> 동행신청한 목록이 없습니다. </p>
+                                        <% } %>
+</body>
+
+</html>

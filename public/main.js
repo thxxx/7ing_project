@@ -27,9 +27,17 @@ function toWriteActivityPage() {
 }
 
 function toMyPage() {
-    document.location.href = '/User/MyPage';
+    document.location.href = '/MyPage/MyPage';
 }
 
 function toMainPage() {
     document.location.href = '/';
+}
+
+function toMyApplyPid() {
+    document.location.href = '/MyPage/MyApplyPid';
+}
+
+function toManagePid() {
+    document.location.href = '/MyPage/ManageMyPid';
 }

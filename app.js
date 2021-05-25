@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const passportConfig = require('./passport');
 const PidRouter = require('./routes/Pid');
 const ActivityRouter = require('./routes/Activity');
+const MyPageRouter = require('./routes/MyPage');
 
 const app = express();
 passportConfig();
@@ -42,6 +43,7 @@ app.use('/', indexRouter);
 app.use('/User', UserRouter);
 app.use('/Pid', PidRouter);
 app.use('/Activity', ActivityRouter);
+app.use('/MyPage', MyPageRouter);
 
 
 app.use((req, res, next) => {
