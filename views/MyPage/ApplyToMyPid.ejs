@@ -23,17 +23,23 @@
                 <%= applyToMyPid[i].Pid_title %>에
                     <%= applyToMyPid[i].User_name %>님이 신청했습니다.</p>
 
-            <form name="AcceptApply" action="#" method="POST">
-                <input type="hidden" id="Pa_code" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
-                <button class="submit" type="button" onclick="acceptApply()">동행신청 수락</button>
-            </form>
+            <% if(applyToMyPid[i].Pa_enter == 0){ %>
+                <form name="AcceptApply" action="#" method="POST">
+                    <input type="hidden" id="Pa_code" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
+                    <button class="submit" type="button" onclick="acceptApply()">동행신청 수락</button>
+                </form>
 
-            <form name="RejectApply" action="#" method="POST">
-                <input type="hidden" id="Pa_code" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
-                <button class="submit" type="button" onclick="rejectApply()">동행신청 거절</button>
-            </form>
-            <% } %>
-                <% } %>
+                <form name="RejectApply" action="#" method="POST">
+                    <input type="hidden" id="Pa_code" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
+                    <button class="submit" type="button" onclick="rejectApply()">동행신청 거절</button>
+                </form>
+                <% } else if(applyToMyPid[i].Pa_enter==1){ %>
+                    <p> 거절하셨습니다 </p>
+                    <% } else if (applyToMyPid[i].Pa_enter==2){ %>
+                        <p> 수락하셨습니다. </p>
+                        <% } %>
+                            <% } %>
+                                <% } %>
 </body>
 
 </html>

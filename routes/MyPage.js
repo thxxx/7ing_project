@@ -96,4 +96,78 @@ router.get('/ApplyToMyPid', (req, res) => {
     })
 })
 
+router.post('/rejectApply', (req, res) => {
+
+    console.log("거절")
+
+    var sql = "UPDATE Pid_apply SET Pa_enter=? WHERE Pa_code = ?;"
+
+    var params = [1, req.body.Pa_code];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            throw err
+        } else {
+            return res.status(200).json({ rejectApplyDone: true });
+        }
+    })
+})
+
+router.post('/acceptApply', (req, res) => {
+
+    console.log("수락")
+
+    var sql = "UPDATE Pid_apply SET Pa_enter=? WHERE Pa_code = ?;"
+
+    var params = [2, req.body.Pa_code];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            throw err
+        } else {
+            var sql2 = "SELECT * FROM Pid_apply WHERE Pa_code=?";
+            var params2 = [req.body.Pa_code];
+            conn.query(sql2, params2, (err2, result2) => {
+                if (err2) {
+                    console.log(err2);
+                } else {
+                    var sql3 = "SELECT * FROM Pid WHERE Pid_code=?";
+                    var params3 = [result2[0].Pid_code];
+                    conn.query(sql3, params3, (err3, result3) => {
+                        if (err3) {
+                            console.log(err3);
+                        } else {
+                            console.log("r3", result3);
+                            var sql4 = "UPDATE Pid SET Pid_currentNumber=? WHERE Pid_code=?";
+                            var params4 = [result3[0].Pid_currentNumber + 1, result2[0].Pid_code];
+                            conn.query(sql4, params4, (err4, result4) => {
+                                if (err4) throw err4;
+                                else {
+                                    return res.status(200).json({ acceptApplyDone: true });
+                                }
+                            })
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+router.get('/toMyReply', (req, res) => {
+
+    var sql = "SELECT * FROM Pid LEFT JOIN Pid_reply ON Pid_reply.Pid_code=Pid.Pid_code WHERE Pid_reply.Pr_author=?";
+    var params = [req.user.User_name];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Rrr", result);
+            res.render('../views/MyPage/MyReply', { myReply: result })
+        }
+    })
+})
+
 module.exports = router;

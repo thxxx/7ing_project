@@ -45,3 +45,7 @@ function toReplyToMyPid() {
 function toApplyToMyPid() {
     document.location.href = '/MyPage/ApplyToMyPid';
 }
+
+function toMyReply() {
+    document.location.href = '/MyPage/toMyReply';
+}

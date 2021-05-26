@@ -97,7 +97,7 @@ router.post('/applyActivity', (req, res) => { // 좋아요 클릭시.
                 var add = result[0].At_currentNumber;
             } else {
                 var full_member = false;
-                var add = result[0].At_currentNumber + 1;
+                var add = result[0].At_currentNumber;
             }
 
             var sql2 = "UPDATE Activity SET At_currentNumber = ? WHERE At_code = ?";
