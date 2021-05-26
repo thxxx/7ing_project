@@ -66,7 +66,7 @@ router.get('/MyApplyPid', (req, res) => {
     })
 })
 
-router.get('/ManageMyPid', (req, res) => {
+router.get('/ReplyToMyPid', (req, res) => {
 
     var sql = "SELECT * FROM Pid LEFT JOIN Pid_reply ON Pid_reply.Pid_code=Pid.Pid_code WHERE Pid.User_code=?;";
     var params = [req.user.User_code];
@@ -75,7 +75,23 @@ router.get('/ManageMyPid', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render('../views/MyPage/ManageMyPid', { replyToMyPid: result })
+            res.render('../views/MyPage/ReplyToMyPid', { replyToMyPid: result })
+        }
+    })
+})
+
+
+router.get('/ApplyToMyPid', (req, res) => {
+
+    var sql = "SELECT * FROM Pid LEFT JOIN Pid_apply ON Pid_apply.Pid_code=Pid.Pid_code LEFT JOIN User ON Pid_apply.Apply_User_code=User.User_code WHERE Pid.User_code=?;";
+    var params = [req.user.User_code];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Rrr", result);
+            res.render('../views/MyPage/ApplyToMyPid', { applyToMyPid: result })
         }
     })
 })

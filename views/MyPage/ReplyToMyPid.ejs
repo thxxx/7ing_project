@@ -17,8 +17,17 @@
     <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
     <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
 
-    <% if (replypiddata) {%>
-        <% } %>
+    <% if (replyToMyPid) {%>
+        <% for(let i=0;i<replyToMyPid.length;i++){ %>
+            <p>
+                <%= replyToMyPid[i].Pr_author %>님의 댓글</p>
+            <p>
+                내용 :
+                <%= replyToMyPid[i].Pr_content %>
+            </p>
+
+            <% } %>
+                <% } %>
 </body>
 
 </html>

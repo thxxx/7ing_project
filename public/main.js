@@ -38,6 +38,10 @@ function toMyApplyPid() {
     document.location.href = '/MyPage/MyApplyPid';
 }
 
-function toManagePid() {
-    document.location.href = '/MyPage/ManageMyPid';
+function toReplyToMyPid() {
+    document.location.href = '/MyPage/ReplyToMyPid';
+}
+
+function toApplyToMyPid() {
+    document.location.href = '/MyPage/ApplyToMyPid';
 }
