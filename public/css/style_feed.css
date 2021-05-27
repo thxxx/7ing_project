@@ -1,0 +1,145 @@
+.contest_feed {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 210px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+    width: 50%;
+    border: 1px solid #F3F2F2;
+    border-radius: 20px;
+    background-color: #F3F2F2;
+    font-family: 'Noto Sans CJK KR';
+}
+
+.but_write_feed {
+    margin-top: -35px;
+    margin-right: 200px;
+    width: 10%;
+    height: 30px;
+    float: right;
+    background-color: #cdf96e;
+    border: none;
+    border-radius: 50px; 
+}
+
+.profile_nicname_feed {
+    margin-top: 90px;
+    padding-left: 15px;
+    font-weight: 300;
+}
+
+.contest_body{
+    margin-top: -110px;
+    margin-left: 115px;
+}
+
+.profile_feed {
+    width: 20%;
+    border-radius: 70%;
+}
+
+.contest_title_feed {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.but_apply_feed {
+    margin-top: -35px;
+    padding: 1% 2%;
+    float: right;
+    width: 20%;
+    background-color: #cdf96e;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.one_feed {
+    margin-left: 15%;
+}
+.like_feed{
+    margin-left: 115px;
+    margin-bottom: 20px;
+}
+
+.like_good_feed {
+    margin-top: 3px;
+    margin-left: 8px;
+    float: left;
+}
+
+.like_com_feed {
+    margin-top: 3px;
+    margin-left: 8px;
+    float: left;
+}
+.comments_feed {
+    margin-top: -30px;
+    margin-left: 120px;
+}
+
+.comment-content_feed {
+    margin-top: 0px;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.comment_profile_feed {
+    float: left;
+    margin-top: -5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 15px;
+}
+
+.comment-date_feed {
+    margin-top: 1px;
+    font-size: 12px;
+    color: gray;
+}
+
+.but_comment_feed {
+    padding: 1% 0.5%;
+    width: 13%;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    background-color: #cdf96e;
+}
+
+.finish_feed {
+    float: right;
+    margin-top: -660px;
+    margin-right: 200px;
+    padding: 20px 20px;
+    border: 3px solid #F3F2F2;
+    border-radius: 20px;
+    font-family: 'Noto Sans CJK KR';
+}
+
+.finish_title_feed {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.finish_content_feed {
+    font-weight: lighter;
+}
+
+.finish_good_feed {
+    margin-top: -3px;
+    margin-left: 5px;
+    width: 18px;
+    float: left;
+}
+
+.finish_com_feed {
+    margin-top: -3px;
+    padding-left: 78px;
+}
+
+

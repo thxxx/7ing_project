@@ -1,50 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset='utf-8'>
-    <title>내가 좋아요 한 목록</title>
     <script src="/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
+    <meta charset="UTF-8">
+    <title>내가 좋아요 한 목록</title>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
+    <div class="container">
 
-    <div>
         <%=user.User_name%>님 안녕하세요</div>
+
     <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
     <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
 
-    <% if (pidresult) {%>
-        <% for(let i=0;i<pidresult.length;i++){ %>
-            <p>
-                피드 이름 :
-                <%= pidresult[i].Pid_title %>
-            </p>
+    <div class="full-admin">
+        <!--상위 카테고리-->
+        <div class="admin-menu">좋아요</div>
+        <hr class="admin-menu-hr">
 
-            <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
-                <input type="hidden" id="pid_code" name="pid_code" value="<%= pidresult[i].Pid_code %>">
-                <button type="submit">해당 게시글로 이동</button>
-            </form>
+        <!--박스-->
+        <div class="admin-box">
 
-            <% } %>
-                <% } %>
-                    <% if (atresult) {%>
-                        <% for(let i=0;i<atresult.length;i++){ %>
-                            <p>
-                                액티비티 이름 :
-                                <%= atresult[i].At_title %>
-                            </p>
+            <% if (pidresult) {%>
+                <% for(let i=0;i<pidresult.length;i++){ %>
+                    <div class="admin-small-t1">
+                        <span class="admin-name"><%= pidresult[i].User_nickname %></span> 님의 동행
+                    </div>
 
-                            <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
-                                <input type="hidden" id="At_code" name="At_code" value="<%= atresult[i].At_code %>">
-                                <button type="submit">해당 게시글로 이동</button>
-                            </form>
+                    <div class="admin-t1">
+                        <span class="admin-flag">(국기)</span>
+                        <%= pidresult[i].Pid_content %>
+                    </div>
+                    <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
+                        <input type="hidden" id="pid_code" name="pid_code" value="<%= pidresult[i].Pid_title %>">
+                        <button type="submit">해당 게시글로 이동</button>
+                    </form>
 
-                            <% } %>
-                                <% } %>
+                    <hr class="admin-t1-hr">
+
+                    <% } %>
+                        <% } %>
+
+                            <% if (atresult) {%>
+                                <% for(let i=0;i<atresult.length;i++){ %>
+
+                                    <div class="admin-small-t1">
+                                        <span class="admin-name"><%= atresult[i].User_nickname %></span> 님의 액티비티
+                                    </div>
+                                    <div class="admin-t1">
+                                        <span class="admin-flag">(국기)</span>
+                                        <%= atresult[i].At_title %>
+                                    </div>
+                                    <hr class="admin-t1-hr">
+
+                                    <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                                        <input type="hidden" id="At_code" name="At_code" value="<%= atresult[i].At_code %>">
+                                        <button type="submit">해당 게시글로 이동</button>
+                                    </form>
+
+                                    <% } %>
+                                        <% } %>
+        </div>
+    </div>
+
+    </div>
 </body>
 
 </html>

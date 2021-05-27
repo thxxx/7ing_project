@@ -1,0 +1,59 @@
+.boxContainer{
+    margin:auto;
+    margin-top: 2%;
+    position:relative;
+    width: 700px;
+    height: 53px;
+    border: 0.5px solid #bebebe;
+    padding:0px 10px;
+    border-radius: 50px;
+}
+
+.elementsContainer{
+    width: 105%;
+    height: 100%;
+    vertical-align: middle;
+    padding:13px 7px;
+
+}
+.search{
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 0px 5px;
+    border-radius: 50px;
+    font-family: "Noto Sans KR";
+    color:#363a3c;
+    font-weight: 600;
+}
+.search:focus{
+    outline:none;
+}
+
+.search_click{
+    background: #cdf96e;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 5px;
+    align-items: center;
+    padding-left: 3px;
+    padding-right: 3px;
+
+}
+#search_icon{
+    margin-top: 10px;
+    margin-left: 7px;
+    height: 20px;
+    width: auto;    
+}
+
+/*
+.search-icons{
+    font-size: 30px;
+    height: 10%;
+    width: 100%;
+    color:#cdf96e;
+    padding:10px 10px;
+}
+*/

@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
@@ -16,6 +17,89 @@
         <%=user.User_name%>님 안녕하세요</div>
     <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
     <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+
+    <div class="container">
+        <div class="full-admin">
+            <!--상위 카테고리-->
+            <div class="admin-menu">활동 관리</div>
+            <hr class="admin-menu-hr">
+
+            <!--하위 카테고리-->
+            <div class="admin-menu2">
+                <a href="guest-comment.html">내가 쓴 댓글</a>
+                <a href="guest-accept.html">신청 내역</a>
+            </div>
+            <div class="admin-menu2-2"> </div>
+
+            <!--박스-->
+            <hr class="admin-box-hr">
+            <div class="admin-box">
+
+
+                <% if (applypiddata) {%>
+
+                    <% for(let i=0;i<applypiddata.length;i++){ %>
+                        <div class="admin-pic">
+                            <img src="#" onerror="this.src='images/user-man.png'">
+                        </div>
+                        <div class="admin-small-t2">
+                            <span class="admin-name">(이름)</span> 님의 동행
+                        </div>
+                        <div class="admin-t2">
+                            <span class="admin-flag">(국기)</span>
+                            <span class="admin-title"><%= applypiddata[i].Pid_title %></span>
+                        </div>
+                        <button type="botton" class="guest-deny"><img src="images/guest-deny.png"></button>
+                        <hr class="admin-t2-hr">
+
+                        <% } %>
+                            <% } %>
+
+                                <div class="admin-pic">
+                                    <img src="#" onerror="this.src='images/user-woman.png'">
+                                </div>
+                                <div class="admin-small-t2">
+                                    <span class="admin-name">(이름)</span> 님의 동행
+                                </div>
+                                <div class="admin-t2">
+                                    <span class="admin-flag">(국기)</span>
+                                    <span class="admin-title">(글 제목)</span>
+                                </div>
+                                <button type="botton" class="guest-accept"><img src="images/guest-accept.png"></button>
+                                <hr class="admin-t2-hr">
+
+
+                                <div class="admin-pic">
+                                    <img src="#" onerror="this.src='images/user-woman.png'">
+                                </div>
+                                <div class="admin-small-t2">
+                                    <span class="admin-name">(이름)</span> 님의 동행
+                                </div>
+                                <div class="admin-t2">
+                                    <span class="admin-flag">(국기)</span>
+                                    <span class="admin-title">(글 제목)</span>
+                                </div>
+                                <button type="botton" class="guest-wait"><img src="images/waiting.png"></button>
+                                <hr class="admin-t2-hr">
+
+
+                                <div class="admin-pic">
+                                    <img src="#" onerror="this.src='images/user-man.png'">
+                                </div>
+                                <div class="admin-small-t2">
+                                    <span class="admin-name">(이름)</span> 님의 액티비티
+                                </div>
+                                <div class="admin-t2">
+                                    <span class="admin-flag">(국기)</span>
+                                    <span class="admin-title">(글 제목)</span>
+                                </div>
+
+                                <button type="botton" class="activity-pay"><img src="images/activity-pay.png"></button>
+                                <hr class="admin-t2-hr">
+
+            </div>
+        </div>
+    </div>
 
     <% if (applypiddata) {%>
 
@@ -43,6 +127,7 @@
                                     <% }else{ %>
                                         <p> 동행신청한 목록이 없습니다. </p>
                                         <% } %>
+
 
                                             <% if (applyactivitydata) {%>
 

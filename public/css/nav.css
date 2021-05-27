@@ -1,0 +1,145 @@
+/* Global */
+:root {
+  --text-color: #363a3c;
+  ;
+  --background-color: white;
+  --accent-color: #cdf96e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans KR";
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 20px 8.8%;
+  padding-bottom: 1%;
+  box-shadow: 0 4px 4px -4px rgba(105, 103, 103, 0.452);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* 로고 */
+.navbar__logo {
+  color: var(--accent-color);
+}
+
+/* 메뉴 */
+.navbar__menu {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 8px;
+
+}
+
+.navbar__menu li {
+  padding: 5px 20px;
+}
+
+.navbar__menu :hover {
+  color: var(--accent-color) !important;
+}
+
+.navbar__icons {
+  list-style: none;
+  color: var(--text-color);
+  display: flex;
+  padding-left: 0;
+}
+
+/* 프로필 */
+.navbar__icons li {
+}
+
+.nickname{
+  font-size: 15px;
+  color: var(--text-color);
+  margin-top: 3px;
+}
+
+.alarm{
+  height: 26px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.profile{
+  width: 30px;
+  height: 30px; 
+  border:black;
+  border-radius: 35px;
+  overflow: hidden;
+  background: rgb(216, 216, 216);
+}
+
+.pf_image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Toggle button */
+.navbar__toggleBtn {
+  display: none;
+  position: absolute;
+  right: 32px;
+  font-size: 24px;
+  color: var(--accent-color);
+}
+
+
+/* For small screen */
+@media screen and (max-width: 768px) {
+  /* Nav container */
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 24px;
+  }
+
+  /* Menu */
+  .navbar__menu {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .navbar__menu a {
+    /* Fill in an entire line so that user can click on any space */
+    display: block;
+    padding: 3px;
+  }
+
+  /* Icons */
+  .navbar__icons {
+    display: none;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Toggle button */
+  .navbar__toggleBtn {
+    display: block;
+  }
+
+  /* When toggle button is clicked - active state */
+  .navbar__menu.active,
+  .navbar__icons.active {
+    display: flex;
+  }
+}

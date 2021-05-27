@@ -1,0 +1,22 @@
+.box-icon {width: 200px;
+             height: 150px;
+             background-color: aqua;
+             text-align: center;
+             padding-top: 10px;
+             font-family: "Poppins";
+             font-size: 20px;
+           }
+       .icon-size {
+         widows: 53px;
+         height: 60px;
+         margin-top: 25px;
+       }
+       .bg {
+         content: url("../public/assets/img/white/white.png");
+         background-color: #0fa49e;
+         widows: 53px;
+         height: 150px;
+         color: #fff;
+         font-family: "Poppins";
+         font-size: 20px;
+       }

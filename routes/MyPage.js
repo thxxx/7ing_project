@@ -248,7 +248,7 @@ router.get('/toMyReply', (req, res) => {
 
 router.get('/toMyLike', (req, res) => {
 
-    var sql = "SELECT * FROM Pid_like LEFT JOIN Pid ON Pid.Pid_code=Pid_like.Pid_code WHERE Pid_like.Pl_id=?";
+    var sql = "SELECT * FROM Pid_like LEFT JOIN Pid ON Pid.Pid_code=Pid_like.Pid_code LEFT JOIN User ON User.User_code=Pid.User_code WHERE Pid_like.Pl_id=?";
     var params = [req.user.User_id];
 
     conn.query(sql, params, (err, pidresult) => {
@@ -256,7 +256,7 @@ router.get('/toMyLike', (req, res) => {
             console.log(err);
         } else {
 
-            var sql2 = "SELECT * FROM At_like LEFT JOIN Activity ON Activity.At_code=At_like.At_code WHERE At_like.Atl_id=?";
+            var sql2 = "SELECT * FROM At_like LEFT JOIN Activity ON Activity.At_code=At_like.At_code LEFT JOIN User ON User.User_code=Activity.User_code WHERE At_like.Atl_id=?";
             var params2 = [req.user.User_id];
             conn.query(sql2, params2, (err2, atresult) => {
                 if (err2) console.log(err);

@@ -1,0 +1,77 @@
+body {
+    font-family: 'Noto Sans CJK KR';
+}
+
+.profile_setting {
+    margin: 0px 300px;
+    padding: 70px;
+    border-left: 50px solid #EEEFEF;
+    border-right: 50px solid  #EEEFEF;
+}
+
+.name_setting{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 13px;
+    width: 90%;
+    border: 1px solid #EFEEEF;
+    border-radius: 10px;
+}
+
+.email_setting {
+    margin-left: 260px;
+    margin-bottom: 30px;
+    padding: 3px 5px;
+    width: 25%;
+    text-align: center;
+    border: 1px solid #EFEEEF;
+    border-radius: 15px;
+    color: #BABCBE;
+}
+
+.nicname_setting {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 13px;
+    width: 90%;
+    border: 1px solid #EFEEEF;
+    border-radius: 10px;
+}
+
+.gender_setting {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 13px;
+    width: 95%;
+    border: 1px solid #EFEEEF;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.birthday_setting {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 13px;
+    width: 90%;
+    border: 1px solid #EFEEEF;
+    border-radius: 10px;
+}
+
+.nation_setting {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 8px 13px;
+    width: 80%;
+    border: 1px solid #EFEEEF;
+    border-radius: 10px;
+}
