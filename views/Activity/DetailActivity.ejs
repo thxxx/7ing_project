@@ -13,7 +13,7 @@
 <body>
     <div class="container">
 
-        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">게시글작성</h2>
+        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">액티비티 상세 페이지</h2>
 
         <form name="likeupform" action="#" method="POST">
             <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
@@ -21,9 +21,9 @@
             <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
         </form>
 
-        <form name="applyactivityform" action="#" method="POST">
-            <input type="hidden" id="At_code" class="At_code" name="At_code" value="<%= atcode %>">
-            <button class="submit" type="button" onclick="applyActivity()">액티비티 신청</button>
+        <form action="http://localhost:3000/MyPage/toPayment" method="POST">
+            <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
+            <button type="submit">결제하기</button>
         </form>
 
         <div>

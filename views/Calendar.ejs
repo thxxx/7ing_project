@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <%- include ("./layout/header") %>
+        <link href='/calendar/main.css' rel='stylesheet' />
+        <script src='/calendar/main.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            body {
+                /* float : left; */
+                margin: 40px 10px;
+                padding: 0;
+                font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+                font-size: 14px;
+                /* display: inline-block; */
+            }
+            
+            #calendar {
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+            
+            table {
+                /* margin-left : 10%; */
+                border-radius: 50px;
+                /* border : none; */
+            }
+            
+            tbody {
+                border: 0;
+            }
+            
+            .pf_image {
+                float: left;
+                width: 70px;
+                height: 70px;
+                border-radius: 70%;
+                vertical-align: middle;
+                margin-right: 20px;
+            }
+            
+            .modal-title {
+                display: inline-block;
+                text-align: center;
+            }
+            
+            .sidepicture {
+                float: left;
+            }
+        </style>
+</head>
+
+<body>
+
+    <%- include ("./layout/top") %>
+        <!-- <div class="boxContainer">
+            <form action="" method="post" class="d-block d-flex">
+              <div class="elementsContainer">
+                      <input type="text" placeholder="동행을 떠날 날은 언제인가요?" class="search">	  
+              </div>
+              <div class="search_click">
+                  <input type="image" src="/images/search.png" id="search_icon" alt="search">
+              </div>
+            </form>
+        </div> -->
+        <br><br><br>
+
+        <script>
+            var test = "<%= JSON.stringify(Pids) %>";
+            test = test.replaceAll('&#34;', '\"');
+            test = JSON.parse(test);
+            // console.log(test);
+            // console.log(test.length);
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                var calendarEl = document.getElementById('calendar');
+                var now = moment();
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    headerToolbar: {
+                        //   left: 'prevYear,prev,next,nextYear today',
+                        //   center: 'title',
+                        //   right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                        center: 'title',
+                        left: 'prevYear,prev,dayGridMonth',
+                        right: 'dayGridWeek,next,nextYear'
+                    },
+                    initialDate: new Date(),
+                    navLinks: true, // can click day/week names to navigate views
+                    navLinkDayClick: function(date, jsEvent) {
+                        const header = {
+                            "Content-Type": "application/json"
+                        }
+                        var title = $('.modal-title').html(moment(date).format('YYYY-MM-DD'));
+                        var modalbodyhtml = "";
+                        var getPids = [];
+
+                        var body = {
+                            title: moment(date).format('YYYY-MM-DD')
+                        }
+
+                        axios.post('http://localhost:3000/Calendar/getDayPid', body, {
+                                header
+                            })
+                            .then(response => {
+                                if (response.data.getPid) {
+                                    // getPids = JSON.stringify(response.data.dayPids);
+                                    // getPids = getPids.replaceAll('&#34;', '\"');
+                                    // getPids = JSON.parse(getPids);
+                                    getPids = response.data.dayPids;
+
+                                    if (getPids.length == 0) {
+                                        modalbodyhtml += "<span class = \"box\">";
+                                        modalbodyhtml += "<span class=\"text p-3\">";
+                                        modalbodyhtml += "<div style = \"margin-left : 15px\" class=\"activity\">해당 날짜의 동행이 없습니다.</div>";
+                                        modalbodyhtml += "<div class=\"bottom-area d-flex\">";
+                                    }
+
+                                    for (var i = 0; i < getPids.length; i++) {
+                                        modalbodyhtml += "<span class = \"box\">";
+                                        modalbodyhtml += "<img class=\"pf_image\"src=\"https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg\"></span>";
+                                        modalbodyhtml += "<span class=\"text p-3\">";
+                                        modalbodyhtml += "<div class=\"activity\">" + getPids[i].title + "</div>";
+                                        modalbodyhtml += "<div class=\"bottom-area d-flex\">";
+                                        modalbodyhtml += "<span><img class=\"flag\" src=\"https://countrywisecodes.com/css/img/flags/DE-square.png\">&nbsp;&nbsp;<strong>" + getPids[i].name + "&nbsp;&#124 &nbsp;</strong></span>";
+                                        modalbodyhtml += "<span class=\"dday\"> D-12 &nbsp; &#124 &nbsp;" + getPids[i].currentNumber + "/" + getPids[i].recruitNumber + "</span></div></span><hr>";
+                                    }
+
+                                    $('.modal-body').html(modalbodyhtml);
+                                    $(".modal").modal("show");
+                                } else {
+                                    alert("피드를 불러오는데 실패했습니다.");
+                                    document.location.href = "/";
+                                }
+                            });
+                    },
+                    editable: true,
+                    // locale: 'ko',
+                    dayMaxEvents: true, // allow "more" link when too many events
+                    events: test
+                })
+                calendar.render();
+            });
+        </script>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">클릭한년월일</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- body -->
+                        <!-- <span class = "box">
+              <img class="pf_image"src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg">
+            </span>
+            <span class="text p-3">
+    						<div class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</div>
+    						<div class="bottom-area d-flex">
+                  <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png">&nbsp;&nbsp;<strong>gutentaghallo&nbsp;&#124 &nbsp;</strong></span>  
+    							<span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>				
+                </div>
+            </span> -->
+                        <!-- body end -->
+                    </div>
+                    <div class="modal-footer">
+                        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <script>
+            $(document).ready(function() {
+                var modal = $(".modal");
+                $("#modalCloseBtn").on("click", function(e) {
+
+                    modal.modal('hide');
+                })
+            });
+        </script>
+
+        <div id='calendar'></div>
+
+        <%- include ("./layout/footer") %>
+</body>
+
+</html>

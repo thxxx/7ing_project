@@ -1,78 +1,429 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <title>액티비티 메인</title>
+    <title>activity page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <script src="/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/Activity.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/css/animate.css">
+
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!--badge-->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1//css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="/css/badge.css">
+
+    <!--activity-->
+    <link rel="stylesheet" href="/css/activity.css">
 </head>
 
+
+
 <body>
+    <!--Top4 액티비티!-->
+    <section class="ftco-section-ac">
+        <div class="container">
+            <div class="row justify-content-start mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate">
+                    <h2 class="mb-4"><strong>Top4 액티비티! </strong> </h2>
+                </div>
+            </div>
 
-    <div>
-        <%=user.User_name%>님 안녕하세요</div>
-    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
-    <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
-
-    <button type="button" id="toWriteActivity" onclick="toWriteActivityPage()">액티비티작성</button>
-
-    <% if(rank.length>0){ %>
-        <% for(let i=0;i<rank.length;i++){ %>
-            <p>
-                등수 : 1 등!
-            </p>
-            <p>NAME :
-                <%= rank[i].At_title %>
-            </p>
-            <p>내용
-                <%= rank[i].At_content %>
-            </p>
-            <%}%>
-                <%}%>
-
-                    <% if(actdata.length>0){ %>
-                        <% for(let i=0;i<actdata.length;i++){ %>
-                            <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
-                                <p>NAME :
-                                    <%= actdata[i].At_title %>
-                                </p>
-                                <p>내용
-                                    <%= actdata[i].At_content %>
-                                </p>
-                                <p>유저 이름 :
-                                    <%= actdata[i].User_name %>
-                                </p>
-                                <p>유저 나라 :
-                                    <%= actdata[i].User_country %>
-                                </p>
-                                <p>액티비티 코드:
-                                    <%= actdata[i].At_code %>
-                                </p>
-                                <p>위치:
-                                    <%= actdata[i].At_place %>
-                                </p>
-                                <p>가격:
-                                    <%= actdata[i].At_price %>
-                                </p>
-                                <p>현재 신청 수:
-                                    <%= actdata[i].At_currentNumber %> /
-                                        <%= actdata[i].At_recruitNumber %>
-                                </p>
-                                <% if (actdata[i].At_currentNumber == actdata[i].At_recruitNumber) { %>
-                                    <!-- 이미지에 마감 표시 -->
-                                    <% } %>
-                                        <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
-                                            <input type="hidden" id="At_code" name="At_code" value="<%= actdata[i].At_code %>">
-                                            <button type="submit">해당 액티비티로 이동</button>
-                                        </form>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">1위</span>
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
                             </div>
-                            <% } %>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-                                <% } %>
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">2위</span>
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">3위</span>
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">4위</span>
+                    <div class="destination">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--액티비티 전체보기-->
+
+    <!-- row1-->
+    <section class="ftco-section-ac">
+        <div class="container">
+            <div class="row justify-content-start mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate">
+                    <h2 class="mb-4"><strong>액티비티 전체보기 </strong> </h2>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <% if(rank.length>0){ %>
+                    <% for(let i=0;i<rank.length;i++){ %>
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <div class="destination ac">
+                                <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3 ac-text">
+                                    <p class="bottom-area d-flex">
+                                        <span>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong><%= rank[i].User_name %></strong>
+                                </span>
+                                    </p>
+                                    <p class="activity">
+                                        <%= rank[i].At_title %>
+                                    </p>
+                                    <p class="bottom-area d-flex">
+                                        <span class="dday"> D-12 &nbsp; &#124 &nbsp; <%= rank[i].At_currentNumber %> / <%= rank[i].At_recruitNumber %> </span>
+                                    </p>
+                                </div>
+                                <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                                    <input type="hidden" id="At_code" name="At_code" value="<%= actdata[i].At_code %>">
+                                    <button type="submit">해당 액티비티로 이동</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <%}%>
+                            <%}%>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- row2-->
+    <section class="ftco-section-ac2">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!
+                            </p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">2위</span>
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센 먹자!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="close-badge-ac">마감</div>
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex ">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex ">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--row3-->
+    <section class="ftco-section-ac2">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen! 찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen! 찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen! 찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!
+                            </p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센 먹자!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex ">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <span class="notify-badge">4위</span>
+                    <div class="destination ac">
+                        <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                            <div class="icon d-flex justify-content-center align-items-center">
+                                <span class="icon-search2"></span>
+                            </div>
+                        </a>
+                        <div class="text p-3 ac-text">
+                            <p class="bottom-area d-flex ">
+                                <span><img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                    <strong>gutentaghallo</strong>
+                                </span>
+                            </p>
+                            <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                            <p class="bottom-area d-flex">
+                                <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.animateNumber.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/jquery.timepicker.min.js"></script>
+    <script src="/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="/js/google-map.js"></script>
+    <script src="/js/main.js"></script>
+
+    <!-- badge -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1//js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </body>
 

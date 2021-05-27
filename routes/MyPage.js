@@ -58,18 +58,17 @@ router.get('/MyApplyPid', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-
             var sql2 = "SELECT * FROM At_apply LEFT JOIN Activity ON At_apply.At_code=Activity.At_code WHERE At_apply.Apply_user_code=?;";
             var params2 = [req.user.User_code];
 
             conn.query(sql2, params2, (err2, result2) => {
                 if (err2) console.log(err2);
                 else {
-                    console.log("내 신청 목록", result2);
+                    console.log("내 신청 목록2", result2);
                     res.render('../views/MyPage/MyApplyPid', {
                         user: req.user,
                         applypiddata: result,
-                        applyactivitydata: result2
+                        activitydata: result2
                     });
                 }
             })

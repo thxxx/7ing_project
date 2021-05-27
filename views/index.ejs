@@ -8,87 +8,324 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
+    <%- include ("./layout/header") %>
 </head>
 
 <body>
+    <%- include ("./layout/top") %>
+        <div class="boxContainer">
+            <form action="" method="post" class="d-block d-flex">
+                <div class="elementsContainer">
+                    <input type="text" placeholder="내가 꿈꾸던 동행을 검색해보세요." class="search">
+                </div>
+                <div class="search_click">
+                    <input type="image" src="/images/search.png" id="search_icon" alt="search">
+                </div>
+            </form>
+        </div>
 
-    <% if(!user) { %>
+        <!-- <% if(!user) { %>
         <h1>로그인 해주세요</h1>
         <p>로그인 해주세요</p>
         <button id="toSignIn" onclick="toSignIn()">로그인</button>
         <button id="toSignUp" onclick="toSignUp()">회원가입</button>
+    <% } else  { %>
+    <div>
+        <%=user.User_name%>님 안녕하세요</div>
+    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+    <button type="button" id="toMyPage" onclick="toMyPage()">마이페이지</button>
+    <button type="button" id="toWritePage" onclick="toWritePage()">게시글작성</button>
+    <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
+    <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
+    <button type="button" id="toMyReply" onclick="toMyReply()">내가 단 댓글 목록</button>
+    <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">내 피드의 댓글 관리</button>
+    <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">내 피드의 신청목록</button>
+    <button type="button" id="toMyLike" onclick="toMyLike()">내가 좋아요 한 목록</button> -->
+        <!-- <% if(data){ %>
+            <% for(let i=0;i<data.length;i++){ %>
+                <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
+                    <p>NAME :
+                        <%= data[i].Pid_title %>
+                    </p>
+                    <p>AGE :
+                        <%= data[i].Pid_content %>
+                    </p>
+                    <p>유저 이름 :
+                        <%= data[i].User_name %>
+                    </p>
+                    <p>유저 나라 :
+                        <%= data[i].User_country %>
+                    </p>
+                    <p>좋아요 갯수 :
+                        <%= data[i].Pid_good %>
+                    </p>
+                    <p>피드 코드:
+                        <%= data[i].Pid_code %>
+                    </p>
+                    <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
+                        <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
+                        <button type="submit">해당 게시글로 이동</button>
+                    </form>
+                </div>
+            <% } %>
+        <% } %>
+        <!-- 데이터 출력 -->
+        <% if(sorted_good){ %>
+            <% for(let i=0;i<sorted_good.length;i++){ %>
+                <div>
+                    좋아요 많은 순서 :
+                    <%= sorted_good[i].Pid_title %>, AGE :
+                        <%= sorted_good[i].Pid_content %><br> 유저 이름 :
+                            <%= sorted_good[i].User_name %><br>
+                                <p>유저 나라 :
+                                    <%= sorted_good[i].User_country %>
+                                </p>
+                                <p>좋아요 갯수 :
+                                    <%= sorted_good[i].Pid_good %>
+                                </p>
+                                <form action="http://localhost:3000/Pid/DetailPid/" method="get">
+                                    <input type="hidden" id="pid_code" name="pid_code" value="<%= sorted_good[i].Pid_code %>">
+                                    <button type="submit">이도오오옫ㅇ</button>
+                                </form>
+                                <button type="submit" onclick="toDetailPid()">피드로 이동</button>
+                </div>
+                <% } %>
+                    <% } %> -->
+                        <!-- 데이터 출력 -->
+                        <!-- <% } %> -->
 
-        <% } else  { %>
-            <div>
-                <%=user.User_name%>님 안녕하세요</div>
-            <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
-            <button type="button" id="toMyPage" onclick="toMyPage()">마이페이지</button>
+                        <!-- body -->
+                        <!-- 사진 슬라이드 -->
+                        <div class="img_slide">
+                            <div id="slide">
+                                <input type="radio" name="pos" id="pos1" checked>
+                                <input type="radio" name="pos" id="pos2">
+                                <input type="radio" name="pos" id="pos3">
+                                <input type="radio" name="pos" id="pos4">
+                                <ul>
+                                    <li>
+                                        <img class="picture" src="/images/bg_2.jpg">
+                                    </li>
+                                    <li>
+                                        <img class="picture" src="/images/bg_1.jpg">
+                                    </li>
+                                    <li>
+                                        <img class="picture" src="/images/bg_3.jpg">
+                                    </li>
+                                    <li>
+                                        <img class="picture" src="/images/bg_4.jpg">
+                                    </li>
+                                </ul>
+                                <p class="pos">
+                                    <label for="pos1"></label>
+                                    <label for="pos2"></label>
+                                    <label for="pos3"></label>
+                                    <label for="pos4"></label>
+                                </p>
+                            </div>
+                        </div>
 
-            <button type="button" id="toWritePage" onclick="toWritePage()">게시글작성</button>
-            <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
+                        <!-- 최신글 -->
+                        <section class="ftco-section ftco-destination">
+                            <div class="container">
 
-            <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
-            <button type="button" id="toMyReply" onclick="toMyReply()">내가 단 댓글 목록</button>
-            <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">내 피드의 댓글 관리</button>
-            <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">내 피드의 신청목록</button>
-
-            <button type="button" id="toMyLike" onclick="toMyLike()">내가 좋아요 한 목록</button>
-
-            <% if(data){ %>
-                <% for(let i=0;i<data.length;i++){ %>
-                    <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
-                        <p>NAME :
-                            <%= data[i].Pid_title %>
-                        </p>
-                        <p>AGE :
-                            <%= data[i].Pid_content %>
-                        </p>
-                        <p>유저 이름 :
-                            <%= data[i].User_name %>
-                        </p>
-                        <p>유저 나라 :
-                            <%= data[i].User_country %>
-                        </p>
-                        <p>좋아요 갯수 :
-                            <%= data[i].Pid_good %>
-                        </p>
-                        <p>피드 코드:
-                            <%= data[i].Pid_code %>
-                        </p>
-                        <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
-                            <input type="hidden" id="pid_code" name="pid_code" value="<%= data[i].Pid_code %>">
-                            <button type="submit">해당 게시글로 이동</button>
-                        </form>
-                    </div>
-                    <% } %>
-
-                        <% } %>
-                            <!-- 데이터 출력 -->
-                            <% if(sorted_good){ %>
-                                <% for(let i=0;i<sorted_good.length;i++){ %>
-                                    <div>
-                                        좋아요 많은 순서 :
-                                        <%= sorted_good[i].Pid_title %>, AGE :
-                                            <%= sorted_good[i].Pid_content %><br> 유저 이름 :
-                                                <%= sorted_good[i].User_name %><br>
-                                                    <p>유저 나라 :
-                                                        <%= sorted_good[i].User_country %>
-                                                    </p>
-                                                    <p>좋아요 갯수 :
-                                                        <%= sorted_good[i].Pid_good %>
-                                                    </p>
-                                                    <form action="http://localhost:3000/Pid/DetailPid/" method="get">
-                                                        <input type="hidden" id="pid_code" name="pid_code" value="<%= sorted_good[i].Pid_code %>">
-                                                        <button type="submit">이도오오옫ㅇ</button>
-                                                    </form>
-                                                    <button type="submit" onclick="toDetailPid()">피드로 이동</button>
+                                <div class="row justify-content-start mb-5 pb-3">
+                                    <div class="col-md-7 heading-section ftco-animate">
+                                        <h2 class="mb-4"><strong>최신글</strong></h2>
                                     </div>
-                                    <% } %>
+                                    <a class="view-all" href="#최신글">최신글 전체보기</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="destination-slider owl-carousel ftco-animate">
 
-                                        <% } %>
-                                            <!-- 데이터 출력 -->
-                                            <% } %>
+                                            <!-- cycle -->
+                                            <% if(data){ %>
+                                                <% for(let i=0;i<data.length;i++){ %>
+                                                    <div class="item">
+                                                        <div class="destination ">
+                                                            <div class="text p-3">
+                                                                <div class="my-box">
+                                                                    <div class="feed-title">
+                                                                        <h3>
+                                                                            <%= data[i].Pid_title %>
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div class="feed-content">
+                                                                        <div class="feed-text">
+                                                                            <%= data[i].Pid_content %>
+                                                                        </div>
+                                                                        <div class="feed-name">
+                                                                            <img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png">
+                                                                            <span class="feed-dday"> <strong><%= data[i].User_name %> &#124 D-12 &#124  <%= data[i].Pid_currentNumber %>/<%= data[i].Pid_recruitNumber %></strong></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                        <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
+                        <!--실시간 인기글-->
+                        <section class="ftco-section ftco-destination">
+                            <div class="container">
+                                <div class="row justify-content-start mb-5 pb-3">
+                                    <div class="col-md-7 heading-section ftco-animate">
+                                        <h2 class="mb-4"><strong>실시간 인기글</strong></h2>
+                                    </div>
+                                    <a class="view-all" href="#실시간인기글">
+            실시간 인기글 전체보기
+         </a>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="destination-slider owl-carousel ftco-animate">
+
+                                            <!-- cycle -->
+                                            <% if(sorted_good){ %>
+                                                <% for(let i=0;i<sorted_good.length;i++){ %>
+                                                    <div class="item">
+                                                        <div class="destination ">
+                                                            <div class="text p-3">
+                                                                <div class="my-box">
+                                                                    <div class="feed-title">
+                                                                        <h3>
+                                                                            <%= sorted_good[i].Pid_title %>
+                                                                        </h3>
+                                                                    </div>
+                                                                    <div class="feed-content">
+                                                                        <div class="feed-text">
+                                                                            <%= sorted_good[i].Pid_content %>
+                                                                        </div>
+                                                                        <div class="feed-name">
+                                                                            <img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png">
+                                                                            <span class="feed-dday"> <strong><%= sorted_good[i].User_name %> &#124 D-12 &#124  <%= sorted_good[i].Pid_currentNumber %>/<%= sorted_good[i].Pid_recruitNumber %></strong></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                        <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <!--액티비티-->
+                        <section class="ftco-section">
+                            <div class="container">
+                                <div class="row justify-content-start mb-5 pb-3">
+                                    <div class="col-md-7 heading-section ftco-animate">
+                                        <h2 class="mb-4"><strong>Top4 액티비티! </strong> </h2>
+                                    </div>
+                                    <a class="view-all" href="#액티비티">액티비티 전체보기</a>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3 ftco-animate">
+                                        <span class="notify-badge"><strong>1위</strong></span>
+                                        <div class="destination">
+                                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
+                                                <div class="icon d-flex justify-content-center align-items-center">
+                                                    <span class="icon-search2"></span>
+                                                </div>
+                                            </a>
+                                            <div class="text p-3">
+                                                <p class="bottom-area d-flex">
+                                                    <span>
+                           <img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
+                        </span>
+                                                </p>
+                                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                                                <p class="bottom-area d-flex">
+                                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-3 ftco-animate">
+                                        <span class="notify-badge"><strong>2위</strong></span>
+                                        <div class="destination">
+                                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
+                                                <div class="icon d-flex justify-content-center align-items-center">
+                                                    <span class="icon-search2"></span>
+                                                </div>
+                                            </a>
+                                            <div class="text p-3">
+                                                <p class="bottom-area d-flex">
+                                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
+                        </span>
+                                                </p>
+                                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                                                <p class="bottom-area d-flex">
+                                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-3 ftco-animate">
+                                        <span class="notify-badge"><strong>3위</strong></span>
+                                        <div class="destination">
+                                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
+                                                <div class="icon d-flex justify-content-center align-items-center">
+                                                    <span class="icon-search2"></span>
+                                                </div>
+                                            </a>
+                                            <div class="text p-3">
+                                                <p class="bottom-area d-flex">
+                                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
+                        </span>
+                                                </p>
+                                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                                                <p class="bottom-area d-flex">
+                                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-lg-3 ftco-animate">
+                                        <span class="notify-badge"><strong>4위</strong></span>
+                                        <div class="destination">
+                                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
+                                                <div class="icon d-flex justify-content-center align-items-center">
+                                                    <span class="icon-search2"></span>
+                                                </div>
+                                            </a>
+                                            <div class="text p-3">
+                                                <p class="bottom-area d-flex">
+                                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
+                        </span>
+                                                </p>
+                                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
+                                                <p class="bottom-area d-flex">
+                                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <!-- body end -->
+
+                        <!-- footer -->
+
+                        <%- include ("./layout/footer") %>
 
 </body>
 

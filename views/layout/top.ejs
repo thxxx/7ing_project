@@ -1,0 +1,84 @@
+<!-- nav -->
+<nav class="navbar">
+
+    <!-- sidebar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="box">
+            <img class="pf_image" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg" onerror="this.src='/images/user.png'">
+        </div>
+        <div class="adv"><span class="advtext">친구초대하고 5000원 받기</span></div>
+        <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
+        <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">내 피드의 댓글 관리</button>
+        <button type="button" id="toMyLike" onclick="toMyLike()">내가 좋아요 한 목록</button>
+        <a href="#">알림</a>
+        <hr>
+        <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button> </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+    <!-- Logo -->
+    <div class="navbar__logo">
+        <a href="index.html">
+            <img src="/images/tripeople.png" alt="tripeople" height="23">
+        </a>
+    </div>
+    <!-- Menu -->
+    <ul class="navbar__menu">
+        <li><a href="/">&nbsp; 홈 &nbsp; </a></li>
+        <li><a href="../Calendar">캘린더</a></li>
+        <button type="button" id="toActivity" onclick="toActivity()">액티비티</button>
+
+    </ul>
+    <!-- 로그인 된 상태 -->
+    <% if(user) { %>
+        <ul class="navbar__icons">
+            <li>
+                <div class="nickname">
+                    <%=user.User_name%>님
+                </div>
+            </li>
+            <li>
+                <a href="#alarm">
+                    <img class="alarm" src="/images/bell.png" alt="alarm">
+                </a>
+            </li>
+            <li>
+                <div class="profile">
+                    <a href="#profile">
+                        <img class="pf_image" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg" onclick="openNav()" onerror="this.src='/images/user.png'">
+                    </a>
+                </div>
+            </li>
+            <li>
+                <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+            </li>
+        </ul>
+
+        <% } else  { %>
+            <!-- 로그인 안된 상태 -->
+            <ul class="navbar__icons">
+                <li>
+                    <a href="#alarm">
+                        <button id="toSignUp" onclick="toSignUp()">회원가입</button>
+                    </a>
+                </li>
+                <li>
+                    <button id="toSignIn" onclick="toSignIn()">로그인</button>
+                </li>
+            </ul>
+            <% } %>
+
+                <!-- Toggle button -->
+                <a href="#" class="navbar__toggleBtn">
+                    <i class="fas fa-bars"></i>
+                </a>
+</nav>

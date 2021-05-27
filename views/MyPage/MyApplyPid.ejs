@@ -26,21 +26,22 @@
 
             <!--하위 카테고리-->
             <div class="admin-menu2">
-                <a href="guest-comment.html">내가 쓴 댓글</a>
-                <a href="guest-accept.html">신청 내역</a>
+                <button type="button" id="toMyReply" onclick="toMyReply()">내가 단 댓글 목록</button>
+                <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
             </div>
+
             <div class="admin-menu2-2"> </div>
 
             <!--박스-->
             <hr class="admin-box-hr">
-            <div class="admin-box">
 
-
-                <% if (applypiddata) {%>
+            <% if (applypiddata) { %>
+                <div class="admin-box">
 
                     <% for(let i=0;i<applypiddata.length;i++){ %>
+
                         <div class="admin-pic">
-                            <img src="#" onerror="this.src='images/user-man.png'">
+                            <img src="#" onerror="this.src='/images/user-woman.png'">
                         </div>
                         <div class="admin-small-t2">
                             <span class="admin-name">(이름)</span> 님의 동행
@@ -49,117 +50,55 @@
                             <span class="admin-flag">(국기)</span>
                             <span class="admin-title"><%= applypiddata[i].Pid_title %></span>
                         </div>
-                        <button type="botton" class="guest-deny"><img src="images/guest-deny.png"></button>
-                        <hr class="admin-t2-hr">
+                        <% if(applypiddata[i].Pa_enter==2){ %>
+                            <button type="botton" class="guest-accept"><img src="/images/guest-accept.png"></button>
+                            <% } else if(applypiddata[i].Pa_enter==1){ %>
+                                <button type="botton" class="guest-deny"><img src="/images/guest-deny.png"></button>
+                                <% } else if (applypiddata[i].Pid_recruitNumber==applypiddata[i].Pid_currentNumber) {%>
+                                    <button type="botton" class="activity-pay"> 아쉽게도 모집이 마감되었어요 </button>
+                                    <% } else{ %>
+                                        <button type="botton" class="guest-wait"><img src="/images/waiting.png"></button>
+                                        <% } %>
+                                            <hr class="admin-t2-hr">
 
-                        <% } %>
-                            <% } %>
+                                            <% } %>
+                                                <% } else{ %>
+                                                    <p> 동행신청한 목록이 없습니다. </p>
+                                                    <% } %>
+                                                        <% if (activitydata) { %>
+                                                            <% for(let i=0;i<activitydata.length;i++){ %>
 
-                                <div class="admin-pic">
-                                    <img src="#" onerror="this.src='images/user-woman.png'">
-                                </div>
-                                <div class="admin-small-t2">
-                                    <span class="admin-name">(이름)</span> 님의 동행
-                                </div>
-                                <div class="admin-t2">
-                                    <span class="admin-flag">(국기)</span>
-                                    <span class="admin-title">(글 제목)</span>
-                                </div>
-                                <button type="botton" class="guest-accept"><img src="images/guest-accept.png"></button>
-                                <hr class="admin-t2-hr">
+                                                                <div class="admin-small-t2">
+                                                                    <span class="admin-name">(이름)</span> 님의 동행
+                                                                </div>
+                                                                <div class="admin-t2">
+                                                                    <span class="admin-flag">(국기)</span>
+                                                                    <span class="admin-title"><%= activitydata[i].At_title %></span>
+                                                                </div>
+                                                                <% if(activitydata[i].Aa_enter==2){ %>
+                                                                    <button type="botton" class="guest-accept"><img src="/images/guest-accept.png"></button>
 
-
-                                <div class="admin-pic">
-                                    <img src="#" onerror="this.src='images/user-woman.png'">
-                                </div>
-                                <div class="admin-small-t2">
-                                    <span class="admin-name">(이름)</span> 님의 동행
-                                </div>
-                                <div class="admin-t2">
-                                    <span class="admin-flag">(국기)</span>
-                                    <span class="admin-title">(글 제목)</span>
-                                </div>
-                                <button type="botton" class="guest-wait"><img src="images/waiting.png"></button>
-                                <hr class="admin-t2-hr">
-
-
-                                <div class="admin-pic">
-                                    <img src="#" onerror="this.src='images/user-man.png'">
-                                </div>
-                                <div class="admin-small-t2">
-                                    <span class="admin-name">(이름)</span> 님의 액티비티
-                                </div>
-                                <div class="admin-t2">
-                                    <span class="admin-flag">(국기)</span>
-                                    <span class="admin-title">(글 제목)</span>
-                                </div>
-
-                                <button type="botton" class="activity-pay"><img src="images/activity-pay.png"></button>
-                                <hr class="admin-t2-hr">
-
-            </div>
+                                                                    <form action="http://localhost:3000/MyPage/toPayment" method="POST">
+                                                                        <input type="hidden" id="At_code" name="At_code" value="<%= activitydata[i].At_code %>">
+                                                                        <button type="submit">결제하기</button>
+                                                                    </form>
+                                                                    <% } else if(activitydata[i].Aa_enter==1){ %>
+                                                                        <button type="botton" class="guest-deny"><img src="/images/guest-deny.png"></button>
+                                                                        <% } else if(activitydata[i].Aa_enter==3){ %>
+                                                                            <button type="botton" class="activity-pay"><img src="/images/activity-pay.png"></button>
+                                                                            <% } else if (activitydata[i].At_recruitNumber==activitydata[i].At_currentNumber) {%>
+                                                                                <button type="botton" class="activity-pay"> 아쉽게도 모집이 마감되었어요 </button>
+                                                                                <% } else{ %>
+                                                                                    <button type="botton" class="guest-wait"><img src="/images/waiting.png"></button>
+                                                                                    <% } %>
+                                                                                        <hr class="admin-t2-hr">
+                                                                                        <% } %>
+                </div>
+                <% }else{ %>
+                    <p> 신청한 액티비티 목록이 없습니다. </p>
+                    <% } %>
         </div>
     </div>
-
-    <% if (applypiddata) {%>
-
-        <% for(let i=0;i<applypiddata.length;i++){ %>
-            <p> 내가 동행 신청한 타이틀 :
-                <%= applypiddata[i].Pid_title %>
-                    <%= applypiddata[i].Pid_content %>
-                        <%= applypiddata[i].Pid_currentNumber %>
-                            <%= applypiddata[i].Pid_recruitNumber %>
-            </p>
-
-            <p>동행 수락 여부 :</p>
-            <% if(applypiddata[i].Pa_enter==2){ %>
-                <p>
-                    수락됨!
-                </p>
-                <% } else if(applypiddata[i].Pa_enter==1){ %>
-                    <p>거절됨!</p>
-                    <% } else if (applypiddata[i].Pid_recruitNumber==applypiddata[i].Pid_currentNumber) {%>
-                        <p> 아쉽게도 모집이 마감되었어요 </p>
-                        <% } else{ %>
-                            <p>대기중..</p>
-                            <% } %>
-                                <% } %>
-                                    <% }else{ %>
-                                        <p> 동행신청한 목록이 없습니다. </p>
-                                        <% } %>
-
-
-                                            <% if (applyactivitydata) {%>
-
-                                                <% for(let i=0;i<applyactivitydata.length;i++){ %>
-                                                    <p> 내가 동행 신청한 타이틀 :
-                                                        <%= applyactivitydata[i].At_title %>
-                                                            <%= applyactivitydata[i].At_content %>
-                                                    </p>
-
-                                                    <p>동행 수락 여부 :</p>
-                                                    <% if(applyactivitydata[i].Aa_enter==2){ %>
-                                                        <p>
-                                                            수락됨!
-                                                        </p>
-                                                        <form action="http://localhost:3000/MyPage/toPayment" method="POST">
-                                                            <input type="hidden" id="At_code" name="At_code" value="<%= applyactivitydata[i].At_code %>">
-                                                            <button type="submit">결제하기</button>
-                                                        </form>
-                                                        <% } else if(applyactivitydata[i].Aa_enter==1){ %>
-                                                            <p>거절됨!</p>
-                                                            <% } else if(applyactivitydata[i].Aa_enter==3){ %>
-                                                                <p>결제함!</p>
-                                                                <% } else if (applyactivitydata[i].At_recruitNumber==applyactivitydata[i].At_currentNumber) {%>
-                                                                    <p> 아쉽게도 모집이 마감되었어요 </p>
-                                                                    <% } else{ %>
-                                                                        <p>대기중..</p>
-                                                                        <% } %>
-                                                                            <% } %>
-                                                                                <% }else{ %>
-                                                                                    <p> 신청한 액티비티 목록이 없습니다. </p>
-                                                                                    <% } %>
-
 </body>
 
 </html>

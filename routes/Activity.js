@@ -82,7 +82,6 @@ router.post('/DetailActivity', (req, res) => { // 게시글작성 페이지 이�
     })
 })
 
-
 router.post('/applyActivity', (req, res) => { // 좋아요 클릭시.
 
     var At_code = parseInt(req.body.At_code);
@@ -141,16 +140,42 @@ router.post('/likeUp', (req, res) => { // 좋아요 클릭시.
 
 router.post('/Payforactivity', (req, res) => { // 좋아요 클릭시.
 
+
     var At_code = parseInt(req.body.At_code);
 
-    var sql = "UPDATE At_apply SET Aa_enter=3 WHERE At_code=? and Apply_user_code=?";
-
-    var params = [At_code, req.user.User_code];
-
-    conn.query(sql, params, (err, result_pid, fields) => {
+    conn.query("SELECT * FROM Activity WHERE At_code=?", [At_code], (err, result, fields) => {
         if (err) console.log(err);
         else {
-            return res.status(200).json({ Done: true });
+
+            if (result[0].At_currentNumber >= result[0].At_recruitNumber) {
+                var full_member = true;
+                var add = result[0].At_currentNumber;
+            } else {
+                var full_member = false;
+                var add = result[0].At_currentNumber + 1;
+            }
+
+            var sql2 = "Insert into At_apply (At_code, Aa_id, Aa_enter, Apply_User_code) values (?,?,3,?);";
+            var params2 = [result[0].At_code, "Aa_id", req.user.User_code];
+            conn.query(sql2, params2, (err2, result_apply) => {
+                if (err2) console.log(err2);
+                else {
+
+                    var sql3 = "Update Activity SET At_currentNumber=? where At_code=?";
+                    var params3 = [add, result[0].At_code];
+
+                    conn.query(sql3, params3, (err3, result3) => {
+                        if (err3) console.log(err3);
+                        else {
+                            if (full_member) {
+                                return res.status(200).json({ ApplyActivityDone: false, At_currentNumber: add });
+                            } else {
+                                return res.status(200).json({ ApplyActivityDone: true, At_currentNumber: add });
+                            }
+                        }
+                    })
+                }
+            })
         }
     })
 })

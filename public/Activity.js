@@ -98,11 +98,11 @@ function payforactivity() {
 
     axios.post('http://localhost:3000/Activity/Payforactivity', body, { header })
         .then(response => {
-            if (response.data.Done) {
+            if (response.data.ApplyActivityDone) {
                 alert("결제완료.");
                 document.location.href = '/'; // 지금은 무조건 main Page로 돌아간다. 나중에 수정 필요
             } else {
-                alert(response);
+                alert("인원이 꽉 찼습니다");
             }
         })
 

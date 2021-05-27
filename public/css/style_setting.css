@@ -6,10 +6,10 @@ body {
     margin: 0px 300px;
     padding: 70px;
     border-left: 50px solid #EEEFEF;
-    border-right: 50px solid  #EEEFEF;
+    border-right: 50px solid #EEEFEF;
 }
 
-.name_setting{
+#name_setting {
     margin-top: 10px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -31,7 +31,7 @@ body {
     color: #BABCBE;
 }
 
-.nicname_setting {
+#nicname_setting {
     margin-top: 10px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -42,7 +42,7 @@ body {
     border-radius: 10px;
 }
 
-.gender_setting {
+#gender_setting {
     margin-top: 10px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -54,7 +54,7 @@ body {
     font-size: 15px;
 }
 
-.birthday_setting {
+#birthday_setting {
     margin-top: 10px;
     margin-bottom: 15px;
     margin-left: 10px;
@@ -65,7 +65,7 @@ body {
     border-radius: 10px;
 }
 
-.nation_setting {
+#nation_setting {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10px;
@@ -74,4 +74,19 @@ body {
     width: 80%;
     border: 1px solid #EFEEEF;
     border-radius: 10px;
+}
+
+#btn-Yes {
+    padding-top: 2%;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 40%;
+    font-size: 15px;
+    background-color: #cdf96e;
+    color: black;
+    border-radius: 30px;
+    border: none;
+    letter-spacing: -2px;
+    width: 30%;
+    font-family: 'Noto Sans CJK KR Medium';
 }

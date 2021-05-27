@@ -35,4 +35,65 @@ router.get('/', (req, res, next) => { // 시작
         // 렌더는 실제 페이지로 이동하면서 정보까지 같이 보내준다.
 })
 
+router.get('/Calendar', (req, res, next) => {
+
+    var sql = 'select u.User_name, p.Pid_title, p.Pid_startDate, p.Pid_dday, p.Pid_content, p.Pid_currentNumber, p.Pid_recruitNumber from Pid as p join User as u on p.User_code = u.User_code';
+    //현재는 필터 제외
+    conn.query(sql, (err, rows, field) => {
+        if (err) return res.status(400).json({ getPid: false, message: "피드를 불러오는데 실패했습니다." });
+        else {
+            var Pids = [];
+            // console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                var Pid = {};
+                Pid.name = rows[i].User_name;
+                Pid.title = rows[i].Pid_title;
+                Pid.start = rows[i].Pid_startDate;
+                Pid.end = rows[i].Pid_dday;
+                Pid.content = rows[i].Pid_content;
+                Pid.currentNumber = rows[i].Pid_currentNumber;
+                Pid.recruitNumber = rows[i].Pid_recruitNumber;
+                Pids.push(Pid);
+            }
+
+            // console.log(Pids);
+
+            // console.log(Pids);
+            // return res.status(200).json({getPid : true, data : rows});
+            res.render('../views/Calendar', { Pids: Pids });
+        }
+    })
+})
+
+router.post('/Calendar/getDayPid', (req, res, next) => {
+
+    var sql = 'select u.User_name, p.Pid_title, p.Pid_startDate, p.Pid_dday, p.Pid_content, p.Pid_currentNumber, p.Pid_recruitNumber from Pid as p join User as u on p.User_code = u.User_code where date_format(Pid_startDate, \'%Y-%m-%d\') <= ? and date_format(Pid_dday, \'%Y-%m-%d\') > ?';
+    //현재는 필터 제외
+    params = [req.body.title, req.body.title];
+    conn.query(sql, params, (err, rows, field) => {
+        if (err) return res.status(400).json({ getPid: false, message: "피드를 불러오는데 실패했습니다." });
+        else {
+            var Pids = [];
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                var Pid = {};
+                Pid.name = rows[i].User_name;
+                Pid.title = rows[i].Pid_title;
+                Pid.start = rows[i].Pid_startDate;
+                Pid.end = rows[i].Pid_dday;
+                Pid.content = rows[i].Pid_content;
+                Pid.currentNumber = rows[i].Pid_currentNumber;
+                Pid.recruitNumber = rows[i].Pid_recruitNumber;
+                Pids.push(Pid);
+            }
+
+            // console.log(Pids);
+
+            // console.log(Pids);
+            // return res.status(200).json({getPid : true, data : rows});
+            res.status(200).json({ getPid: true, dayPids: Pids });
+        }
+    })
+});
+
 module.exports = router;

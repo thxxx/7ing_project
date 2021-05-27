@@ -1,0 +1,172 @@
+.activity_pay {
+    margin-top: 50px;
+    margin-left: 350px;
+    margin-bottom: 50px;
+    font-family: 'Noto Sans CJK KR';
+}
+
+.ac_ex_pay {
+    margin-left: 200px;
+}
+
+.ac_ex_tag_pay {
+    font-weight: bold;
+}
+
+.ac_ex_com_pay {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ac_ex_date_pay {
+    margin-top: 120px;
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    color: gray;
+}
+
+.ac_ex_pro_pay {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.ac_ex_cash_pay {
+    margin-right: 340px;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.ac_ex_cou_pay {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.ac_ex_sale_pay {
+    margin-right: 340px;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+    color: gray;
+}
+
+.ac_ex_select_pay {
+    margin-left: 10px;
+    width: 5%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_ex_total_pay {
+    margin-left: 15px;
+    padding: 15px;
+    width: 70%;
+    background-color: #cdf96e;
+}
+
+.ac_total_sale_pay {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ac_total_sa_cash_pay {
+    margin-right: 10px;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ac_total_final_pay {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ac_total_fi_cash_pay {
+    margin-right: 10px;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ac_met_card_pay {
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 8%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_met_phone_pay {
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 8%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_met_account_pay {
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 8%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_met_payco_pay {
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 8%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_met_toss_pay {
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 8%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    color: gray;
+    font-weight: 500;
+}
+
+.ac_checkbox_pay {
+    margin-left: 230px;
+    margin-right: 8px;
+    font-weight: bold;
+    float: left;
+}
+
+.ac_total_pay {
+    margin-top: 10px;
+    margin-left: 250px;
+    padding: 7px;
+    width: 30%;
+    background-color: #cdf96e;
+    border: none;
+    border-radius: 15px;
+}
