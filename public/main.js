@@ -49,3 +49,7 @@ function toApplyToMyPid() {
 function toMyReply() {
     document.location.href = '/MyPage/toMyReply';
 }
+
+function toMyLike() {
+    document.location.href = '/MyPage/toMyLike';
+}

@@ -99,7 +99,7 @@ function writeReply() {
     }
 
     if (Pid_content == '') {
-        alert("5글자는 쓰셔야죠");
+        alert("작성하고 등록을 눌러주세요.");
         document.location.href = '/';
     } else {
 

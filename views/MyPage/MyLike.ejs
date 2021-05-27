@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>내가 좋아요 한 목록</title>
+    <script src="/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/MyInfo.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <%=user.User_name%>님 안녕하세요</div>
+    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+    <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+
+    <% if (pidresult) {%>
+        <% for(let i=0;i<pidresult.length;i++){ %>
+            <p>
+                피드 이름 :
+                <%= pidresult[i].Pid_title %>
+            </p>
+
+            <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
+                <input type="hidden" id="pid_code" name="pid_code" value="<%= pidresult[i].Pid_code %>">
+                <button type="submit">해당 게시글로 이동</button>
+            </form>
+
+            <% } %>
+                <% } %>
+                    <% if (atresult) {%>
+                        <% for(let i=0;i<atresult.length;i++){ %>
+                            <p>
+                                액티비티 이름 :
+                                <%= atresult[i].At_title %>
+                            </p>
+
+                            <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                                <input type="hidden" id="At_code" name="At_code" value="<%= atresult[i].At_code %>">
+                                <button type="submit">해당 게시글로 이동</button>
+                            </form>
+
+                            <% } %>
+                                <% } %>
+</body>
+
+</html>

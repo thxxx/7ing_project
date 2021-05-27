@@ -110,8 +110,15 @@ router.post('/likeUp', (req, res) => { // 좋아요 클릭시.
     conn.query(sql, params, (err, result_pid, fields) => {
         if (err) console.log(err);
         else {
-            console.log("Pid_good", Pid_good);
-            return res.status(200).json({ LikeUpDone: true, Pid_good: Pid_good });
+
+            var sql2 = "INSERT INTO Pid_like (Pid_code, pl_id) VALUES (?,?);";
+            var params2 = [req.body.Pid_code, req.user.User_id];
+            conn.query(sql2, params2, (err2, result2) => {
+                if (err2) console.log(err2);
+                else {
+                    return res.status(200).json({ LikeUpDone: true, Pid_good: Pid_good });
+                }
+            })
         }
     })
 })
@@ -127,7 +134,7 @@ router.post('/applyPid', (req, res) => { // 좋아요 클릭시.
 
     var params = [Pid_code];
 
-    conn.query("SELECT * FROM Pid WHERE Pid_code=?", [Pid_code], (err, result, fields) => {
+    conn.query(sql, params, (err, result, fields) => {
         if (err) console.log(err);
         else {
 
@@ -136,7 +143,7 @@ router.post('/applyPid', (req, res) => { // 좋아요 클릭시.
                 var add = result[0].Pid_currentNumber;
             } else {
                 var full_member = false;
-                var add = result[0].Pid_currentNumber + 1;
+                var add = result[0].Pid_currentNumber;
             }
 
             var sql2 = "UPDATE Pid SET Pid_currentNumber = ? WHERE Pid_code = ?";

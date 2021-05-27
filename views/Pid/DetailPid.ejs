@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>디테일페이지</title>
     <!-- <script type="module" src="./signupnew.js"></script> -->
+    <link rel="stylesheet" href="./css/style_feed.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
@@ -53,9 +54,21 @@
                                 <br> 좋아요 수:
                                 <%= piddata[0].Pid_good %>
                                     <% for(let i=0;i<piddata.length;i++){ %>
-                                        <br> 댓글내용:
-                                        <%= piddata[i].Pr_content %>
-                                            <% } %>
+
+                                        <div class="comment-row_feed">
+                                            <img src="profile.jpg" style="width: 20px; border-radius: 70%; float: left;">
+                                            <div class="comment_profile_feed">
+                                                <%= piddata[i].Pr_author %>
+                                            </div>
+                                            <div class="comment-date_feed">
+                                                <%= piddata[i].Pr_writeDate%>
+                                            </div>
+                                            <div class="comment-content_feed">
+                                                <%= piddata[i].Pr_content %>
+                                            </div>
+                                        </div><br>
+
+                                        <% } %>
         </div>
 
         <!-- 작성자 -->

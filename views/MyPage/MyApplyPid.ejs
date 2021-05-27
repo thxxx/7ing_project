@@ -43,6 +43,38 @@
                                     <% }else{ %>
                                         <p> 동행신청한 목록이 없습니다. </p>
                                         <% } %>
+
+                                            <% if (applyactivitydata) {%>
+
+                                                <% for(let i=0;i<applyactivitydata.length;i++){ %>
+                                                    <p> 내가 동행 신청한 타이틀 :
+                                                        <%= applyactivitydata[i].At_title %>
+                                                            <%= applyactivitydata[i].At_content %>
+                                                    </p>
+
+                                                    <p>동행 수락 여부 :</p>
+                                                    <% if(applyactivitydata[i].Aa_enter==2){ %>
+                                                        <p>
+                                                            수락됨!
+                                                        </p>
+                                                        <form action="http://localhost:3000/MyPage/toPayment" method="POST">
+                                                            <input type="hidden" id="At_code" name="At_code" value="<%= applyactivitydata[i].At_code %>">
+                                                            <button type="submit">결제하기</button>
+                                                        </form>
+                                                        <% } else if(applyactivitydata[i].Aa_enter==1){ %>
+                                                            <p>거절됨!</p>
+                                                            <% } else if(applyactivitydata[i].Aa_enter==3){ %>
+                                                                <p>결제함!</p>
+                                                                <% } else if (applyactivitydata[i].At_recruitNumber==applyactivitydata[i].At_currentNumber) {%>
+                                                                    <p> 아쉽게도 모집이 마감되었어요 </p>
+                                                                    <% } else{ %>
+                                                                        <p>대기중..</p>
+                                                                        <% } %>
+                                                                            <% } %>
+                                                                                <% }else{ %>
+                                                                                    <p> 신청한 액티비티 목록이 없습니다. </p>
+                                                                                    <% } %>
+
 </body>
 
 </html>

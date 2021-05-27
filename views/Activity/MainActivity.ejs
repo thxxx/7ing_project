@@ -19,11 +19,10 @@
 
     <button type="button" id="toWriteActivity" onclick="toWriteActivityPage()">액티비티작성</button>
 
-    <% if(rank){ %>
-        <% for(let i=0;i<2;i++){ %>
+    <% if(rank.length>0){ %>
+        <% for(let i=0;i<rank.length;i++){ %>
             <p>
-                등수 :
-                <% i %> 등!
+                등수 : 1 등!
             </p>
             <p>NAME :
                 <%= rank[i].At_title %>
@@ -34,7 +33,7 @@
             <%}%>
                 <%}%>
 
-                    <% if(actdata){ %>
+                    <% if(actdata.length>0){ %>
                         <% for(let i=0;i<actdata.length;i++){ %>
                             <div id="" class="" style="background-color: bisque; border:black; border-style: solid;">
                                 <p>NAME :

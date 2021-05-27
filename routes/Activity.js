@@ -20,7 +20,6 @@ router.get('/', (req, res) => { // 게시글작성 페이지 이동
                 if (err2) {
                     throw err2;
                 } else {
-                    console.log("rank : ", result2)
                     res.render('../views/Activity/MainActivity', {
                         actdata: result, // 배열로 여러 액티비티가 다 날아갑니다
                         rank: result2
@@ -100,20 +99,58 @@ router.post('/applyActivity', (req, res) => { // 좋아요 클릭시.
                 var add = result[0].At_currentNumber;
             }
 
-            var sql2 = "UPDATE Activity SET At_currentNumber = ? WHERE At_code = ?";
-
-            var params2 = [add, result[0].At_code];
-
-            conn.query(sql2, params2, (err, result_at, fields) => {
-                if (err) console.log(err);
-                else {
-                    if (full_member) {
-                        return res.status(200).json({ ApplyActivityDone: false, At_currentNumber: add });
-                    } else {
-                        return res.status(200).json({ ApplyActivityDone: true, At_currentNumber: add });
-                    }
+            var sql2 = "Insert into At_apply (At_code, Aa_id, Apply_User_code) values (?,?,?);";
+            var params2 = [result[0].At_code, "Aa_id", req.user.User_code];
+            conn.query(sql2, params2, (err2, result_apply) => {
+                if (full_member) {
+                    return res.status(200).json({ ApplyActivityDone: false, At_currentNumber: add });
+                } else {
+                    return res.status(200).json({ ApplyActivityDone: true, At_currentNumber: add });
                 }
             })
+        }
+    })
+})
+
+
+router.post('/likeUp', (req, res) => { // 좋아요 클릭시.
+
+    var At_good = parseInt(req.body.At_good);
+    var At_code = parseInt(req.body.At_code);
+
+    var sql = "UPDATE Activity SET At_good=? WHERE At_code=?";
+
+    var params = [At_good + 1, At_code];
+
+    conn.query(sql, params, (err, result_pid, fields) => {
+        if (err) console.log(err);
+        else {
+
+            var sql2 = "INSERT INTO At_like (At_code, Atl_id) VALUES (?,?);";
+            var params2 = [req.body.At_code, req.user.User_id];
+
+            conn.query(sql2, params2, (err2, result2) => {
+                if (err2) console.log(err2);
+                else {
+                    return res.status(200).json({ LikeUpDone: true });
+                }
+            })
+        }
+    })
+})
+
+router.post('/Payforactivity', (req, res) => { // 좋아요 클릭시.
+
+    var At_code = parseInt(req.body.At_code);
+
+    var sql = "UPDATE At_apply SET Aa_enter=3 WHERE At_code=? and Apply_user_code=?";
+
+    var params = [At_code, req.user.User_code];
+
+    conn.query(sql, params, (err, result_pid, fields) => {
+        if (err) console.log(err);
+        else {
+            return res.status(200).json({ Done: true });
         }
     })
 })

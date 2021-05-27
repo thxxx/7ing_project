@@ -98,37 +98,5 @@ router.get('/logout', (req, res) => {
     res.redirect('http://localhost:3000/');
 })
 
-router.get('/MyPage', (req, res) => {
-    console.log("알이큐 유저 : ", req.user)
-    res.render('../views/User/MyPage', {
-        user: req.user
-    })
-})
-
-
-router.post('/modifymyinfo', (req, res) => {
-
-    console.log(req.body)
-
-    var sql = "UPDATE User SET User_name=?, User_nickname=?, User_sex=?, User_birth=?  WHERE User_code = ?;"
-
-    var params = [req.body.User_name, req.body.User_nickname, req.body.User_gender, req.body.User_birth, req.user.User_code]
-
-    conn.query(sql, params, (err, result) => {
-        if (err) {
-            throw err
-        } else {
-            var sql2 = "INSERT INTO InterestCountry (User_code, Country_name) VALUES (?,?);";
-            var params2 = [req.user.User_code, req.body.prefer_nation1];
-            conn.query(sql2, params2, (err, result2) => {
-                if (err) {
-                    throw err;
-                } else {
-                    return res.status(200).json({ ModifyInfoDone: true });
-                }
-            })
-        }
-    })
-})
 
 module.exports = router;

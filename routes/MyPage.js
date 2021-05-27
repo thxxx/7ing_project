@@ -58,10 +58,21 @@ router.get('/MyApplyPid', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render('../views/MyPage/MyApplyPid', {
-                user: req.user,
-                applypiddata: result
-            });
+
+            var sql2 = "SELECT * FROM At_apply LEFT JOIN Activity ON At_apply.At_code=Activity.At_code WHERE At_apply.Apply_user_code=?;";
+            var params2 = [req.user.User_code];
+
+            conn.query(sql2, params2, (err2, result2) => {
+                if (err2) console.log(err2);
+                else {
+                    console.log("내 신청 목록", result2);
+                    res.render('../views/MyPage/MyApplyPid', {
+                        user: req.user,
+                        applypiddata: result,
+                        applyactivitydata: result2
+                    });
+                }
+            })
         }
     })
 })
@@ -90,8 +101,14 @@ router.get('/ApplyToMyPid', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log("Rrr", result);
-            res.render('../views/MyPage/ApplyToMyPid', { applyToMyPid: result })
+
+            var sql2 = "SELECT * FROM Activity LEFT JOIN At_apply ON At_apply.At_code=Activity.At_code LEFT JOIN User ON At_apply.Apply_user_code=User.User_code WHERE Activity.User_code=?;";
+            var params2 = [req.user.User_code];
+
+            conn.query(sql2, params2, (err2, result2) => {
+                console.log("Rrr", result);
+                res.render('../views/MyPage/ApplyToMyPid', { applyToMyPid: result, applyToMyActivity: result2 })
+            })
         }
     })
 })
@@ -155,6 +172,65 @@ router.post('/acceptApply', (req, res) => {
     })
 })
 
+
+router.post('/rejectApplyActivity', (req, res) => {
+
+    var sql = "UPDATE At_apply SET Aa_enter=? WHERE Aa_code = ?;"
+
+    var params = [1, req.body.Aa_code];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            throw err
+        } else {
+            return res.status(200).json({ rejectApplyDone: true });
+        }
+    })
+})
+
+
+router.post('/acceptApplyActivity', (req, res) => {
+
+    console.log("수락")
+
+    var sql = "UPDATE At_apply SET Aa_enter=? WHERE Aa_code = ?;"
+
+    var params = [2, req.body.Aa_code];
+
+    conn.query(sql, params, (err, result) => {
+        if (err) {
+            throw err
+        } else {
+            var sql2 = "SELECT * FROM At_apply WHERE Aa_code=?";
+            var params2 = [req.body.Aa_code];
+            conn.query(sql2, params2, (err2, result2) => {
+                if (err2) {
+                    console.log(err2);
+                } else {
+                    var sql3 = "SELECT * FROM Activity WHERE At_code=?";
+                    var params3 = [result2[0].At_code];
+                    conn.query(sql3, params3, (err3, result3) => {
+                        if (err3) {
+                            console.log(err3);
+                        } else {
+                            console.log("r3", result3);
+                            var sql4 = "UPDATE Activity SET At_currentNumber=? WHERE At_code=?";
+                            var params4 = [result3[0].At_currentNumber + 1, result2[0].At_code];
+                            conn.query(sql4, params4, (err4, result4) => {
+                                if (err4) throw err4;
+                                else {
+                                    return res.status(200).json({ acceptApplyDone: true });
+                                }
+                            })
+
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
 router.get('/toMyReply', (req, res) => {
 
     var sql = "SELECT * FROM Pid LEFT JOIN Pid_reply ON Pid_reply.Pid_code=Pid.Pid_code WHERE Pid_reply.Pr_author=?";
@@ -168,6 +244,59 @@ router.get('/toMyReply', (req, res) => {
             res.render('../views/MyPage/MyReply', { myReply: result })
         }
     })
+})
+
+router.get('/toMyLike', (req, res) => {
+
+    var sql = "SELECT * FROM Pid_like LEFT JOIN Pid ON Pid.Pid_code=Pid_like.Pid_code WHERE Pid_like.Pl_id=?";
+    var params = [req.user.User_id];
+
+    conn.query(sql, params, (err, pidresult) => {
+        if (err) {
+            console.log(err);
+        } else {
+
+            var sql2 = "SELECT * FROM At_like LEFT JOIN Activity ON Activity.At_code=At_like.At_code WHERE At_like.Atl_id=?";
+            var params2 = [req.user.User_id];
+            conn.query(sql2, params2, (err2, atresult) => {
+                if (err2) console.log(err);
+                else {
+                    res.render('../views/MyPage/MyLike', { pidresult: pidresult, atresult: atresult })
+                }
+            })
+        }
+    })
+})
+
+
+router.post('/toPayment', (req, res) => {
+
+    var sql = "SELECT * FROM Activity WHERE At_code=?;";
+
+    var params = [req.body.At_code];
+
+    console.log("req body", req.body);
+
+    conn.query(sql, params, (err, result_at, fields) => {
+        var sql2 = "SELECT * FROM User where User_code=?";
+
+        var params2 = [result_at[0].User_code];
+        conn.query(sql2, params2, (err, result_user, fields) => {
+
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("result user", result_user[0]);
+                console.log("result At", result_at);
+                res.render('../views/MyPage/Payment', {
+                    atdata: result_at[0],
+                    atcode: req.body.At_code,
+                    user: result_user[0]
+                });
+            }
+        })
+    })
+
 })
 
 module.exports = router;

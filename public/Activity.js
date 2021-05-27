@@ -45,9 +45,7 @@ function applyActivity() {
 
     axios.post('http://localhost:3000/Activity/applyActivity', body, { header })
         .then(response => {
-            console.log("res", response);
             if (response.data.ApplyActivityDone) {
-                console.log(response.data.At_currentNumber);
                 alert("동행신청 완료");
                 document.location.href = '/Activity';
             } else {
@@ -55,4 +53,58 @@ function applyActivity() {
                 document.location.href = '/Activity';
             }
         })
+}
+
+
+function likeUp() {
+
+    var At_code = $('.At_code').val();
+    var At_good = $('.At_good').val();
+
+    // 입력받은 정보를 객체로 저장
+    var body = {
+        At_code: At_code,
+        At_good: At_good
+    };
+
+    console.log("바디", body);
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/Activity/likeUp', body, { header })
+        .then(response => {
+            if (response.data.LikeUpDone) {
+                alert("좋아요 상승.");
+                document.location.href = '/'; // 지금은 무조건 main Page로 돌아간다. 나중에 수정 필요
+            } else {
+                alert(response);
+            }
+        })
+
+    return false;
+}
+
+
+function payforactivity() {
+
+    var At_code = $('.At_code').val();
+
+    // 입력받은 정보를 객체로 저장
+    var body = {
+        At_code: At_code
+    };
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/Activity/Payforactivity', body, { header })
+        .then(response => {
+            if (response.data.Done) {
+                alert("결제완료.");
+                document.location.href = '/'; // 지금은 무조건 main Page로 돌아간다. 나중에 수정 필요
+            } else {
+                alert(response);
+            }
+        })
+
+    return false;
 }

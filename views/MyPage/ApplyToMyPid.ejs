@@ -40,6 +40,33 @@
                         <% } %>
                             <% } %>
                                 <% } %>
+
+                                    <!--  여기서부터는 액티비티 출력  -->
+                                    <% if (applyToMyActivity) {%>
+                                        <% for(let i=0;i<applyToMyActivity.length;i++){ %>
+                                            <p>
+                                                <%= applyToMyActivity[i].At_title %>에
+                                                    <%= applyToMyActivity[i].User_name %>님이 신청했습니다.</p>
+
+                                            <% if(applyToMyActivity[i].Aa_enter == 0){ %>
+                                                <form name="AcceptApply" action="#" method="POST">
+                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                    <button class="submit" type="button" onclick="acceptApplyActivity()">동행신청 수락</button>
+                                                </form>
+
+                                                <form name="RejectApply" action="#" method="POST">
+                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                    <button class="submit" type="button" onclick="rejectApplyActivity()">동행신청 거절</button>
+                                                </form>
+                                                <% } else if(applyToMyActivity[i].Aa_enter==1){ %>
+                                                    <p> 거절하셨습니다 </p>
+                                                    <% } else if (applyToMyActivity[i].Aa_enter==2){ %>
+                                                        <p> 수락하셨습니다. </p>
+                                                        <% } else if (applyToMyActivity[i].Aa_enter==3){ %>
+                                                            <p> 지원자가 결제를 마쳤습니다. </p>
+                                                            <% } %>
+                                                                <% } %>
+                                                                    <% } %>
 </body>
 
 </html>

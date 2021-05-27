@@ -81,20 +81,66 @@ function acceptApply() {
     return false;
 }
 
-function toMyReply() {
 
-    var Pa_code = $('.Pa_code').val();
+function acceptApplyActivity() {
+
+    var Aa_code = $('.Aa_code').val();
 
     var body = {
-        Pa_code: Pa_code,
+        Aa_code: Aa_code,
     }
 
     const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/MyPage/acceptApply', body, { header })
+    axios.post('http://localhost:3000/MyPage/acceptApplyActivity', body, { header })
         .then(response => {
             if (response.data.acceptApplyDone) {
                 alert("수락하셨습니다.");
+                document.location.href = "/Activity";
+            } else {
+                alert(response.data.message);
+            }
+        })
+    return false;
+}
+
+
+function rejectApplyActivity() {
+
+    var Aa_code = $('.Aa_code').val();
+
+    var body = {
+        Aa_code: Aa_code,
+    }
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/MyPage/rejectApplyActivity', body, { header })
+        .then(response => {
+            if (response.data.rejectApplyDone) {
+                alert("거절했습니다.");
+                document.location.href = "/Activity";
+            } else {
+                alert(response.data.message);
+            }
+        })
+    return false;
+}
+
+function payForActivity() {
+
+    var At_code = $('.At_code').val();
+
+    var body = {
+        At_code: At_code,
+    }
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/MyPage/payforactivity', body, { header })
+        .then(response => {
+            if (response.data.Done) {
+                alert("결제되었습니다.");
                 document.location.href = "/";
             } else {
                 alert(response.data.message);
