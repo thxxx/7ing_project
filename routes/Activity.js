@@ -15,7 +15,7 @@ router.get('/', (req, res) => { // 게시글작성 페이지 이동
     conn.query(sql, (err, result) => {
         if (err) console.log(err);
         else {
-            var sql2 = "SELECT * FROM Activity LEFT JOIN User ON Activity.User_code=User.User_code ORDER BY Activity.At_currentNumber DESC;";
+            var sql2 = "SELECT * FROM Activity LEFT JOIN User ON Activity.User_code=User.User_code WHERE Activity.At_currentNumber!=Activity.At_recruitNumber ORDER BY Activity.At_currentNumber DESC Limit 4;";
             conn.query(sql2, (err2, result2) => {
                 if (err2) {
                     throw err2;

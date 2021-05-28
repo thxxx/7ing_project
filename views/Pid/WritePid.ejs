@@ -9,10 +9,11 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
     <link rel="stylesheet" href="/css/style_WritePid.css">
+    <%- include ("./layout/header") %>
 </head>
 
 <body>
-    <div class="container">
+    <%- include ("./layout/top") %>
         <h2 style="font-size: 2vw; text-align: center; color:#383838;">동행 글 작성하기</h2>
 
         <hr style="width: 100%;">
@@ -149,7 +150,7 @@
             <button class="submit" type="button" onclick="writepid()">등록하기<br /><br />
             <button id="toMainPage" onclick="toMainPage()">취소</button>
         </form>
-    </div>
+        </div>
 </body>
 
 </html>

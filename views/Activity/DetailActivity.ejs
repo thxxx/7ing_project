@@ -8,57 +8,60 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/Activity.js"></script>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <div class="container">
+    <%- include ("../layout/top") %>
+        <div class="container">
 
-        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">액티비티 상세 페이지</h2>
+            <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">액티비티 상세 페이지</h2>
 
-        <form name="likeupform" action="#" method="POST">
-            <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
-            <input type="hidden" id="At_good" name="At_good" class="At_good" value="<%= atdata.At_good %>">
-            <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
-        </form>
+            <form name="likeupform" action="#" method="POST">
+                <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
+                <input type="hidden" id="At_good" name="At_good" class="At_good" value="<%= atdata.At_good %>">
+                <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
+            </form>
 
-        <form action="http://localhost:3000/MyPage/toPayment" method="POST">
-            <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
-            <button type="submit">결제하기</button>
-        </form>
+            <form action="http://localhost:3000/MyPage/toPayment" method="POST">
+                <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
+                <button type="submit">결제하기</button>
+            </form>
 
-        <div>
-            글 작성자 :
-            <%= user.User_name %>
-                <br> 글작성자 닉네임 :
-                <%= user.User_nickname %>
-                    <br> 글 작성자 국가:
-                    <%= user.User_country  %>
-        </div>
-        <div>
-            타이틀 :
-            <%= atdata.At_title %>
-                <br> 내용 :
-                <%= atdata.At_content %>
-                    <br> 디데이:
-                    <%= 
+            <div>
+                글 작성자 :
+                <%= user.User_name %>
+                    <br> 글작성자 닉네임 :
+                    <%= user.User_nickname %>
+                        <br> 글 작성자 국가:
+                        <%= user.User_country  %>
+            </div>
+            <div>
+                타이틀 :
+                <%= atdata.At_title %>
+                    <br> 내용 :
+                    <%= atdata.At_content %>
+                        <br> 디데이:
+                        <%= 
                     atdata.At_dday %>
 
-                        <br> 모집인원:
-                        <%= atdata.At_recruitNumber %>
-                            <br> 현재인원:
-                            <%= atdata.At_currentNumber %>
-                                <br> 좋아요 수:
-                                <%= atdata.At_good %>
+                            <br> 모집인원:
+                            <%= atdata.At_recruitNumber %>
+                                <br> 현재인원:
+                                <%= atdata.At_currentNumber %>
+                                    <br> 좋아요 수:
+                                    <%= atdata.At_good %>
+            </div>
+
+            <form name="writeform" action="#" method="POST">
+                <!-- 내용 -->
+                <input type="textfield" placeholder="본문내용" name="At_content" class="At_content" maxlength="500"><br /><br />
+
+                <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
+            </form>
+            <!-- <button>동행신청하기</button> -->
         </div>
-
-        <form name="writeform" action="#" method="POST">
-            <!-- 내용 -->
-            <input type="textfield" placeholder="본문내용" name="At_content" class="At_content" maxlength="500"><br /><br />
-
-            <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
-        </form>
-        <!-- <button>동행신청하기</button> -->
-    </div>
+        <%- include ("../layout/footer") %>
 </body>
 
 </html>

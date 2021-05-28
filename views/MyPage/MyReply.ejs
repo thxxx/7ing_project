@@ -9,56 +9,59 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
     <link rel="stylesheet" href="/css/admin.css">
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
 
-    <div>
-        <%=user.User_name%>님 안녕하세요</div>
-    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
-    <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+    <%- include ("../layout/top") %>
+        <div>
+            <%=user.User_name%>님 안녕하세요</div>
+        <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+        <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
 
-    <div class="container">
-        <div class="full-admin">
-            <!--상위 카테고리-->
-            <div class="admin-menu">활동 관리</div>
-            <hr class="admin-menu-hr">
+        <div class="container">
+            <div class="full-admin">
+                <!--상위 카테고리-->
+                <div class="admin-menu">활동 관리</div>
+                <hr class="admin-menu-hr">
 
-            <!--하위 카테고리-->
-            <div class="admin-menu2">
-                <button type="button" id="toMyReply" onclick="toMyReply()">내가 단 댓글 목록</button>
-                <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
-            </div>
-            <div class="admin-menu2-1"> </div>
+                <!--하위 카테고리-->
+                <div class="admin-menu2">
+                    <button type="button" id="toMyReply" onclick="toMyReply()">내가 단 댓글 목록</button>
+                    <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
+                </div>
+                <div class="admin-menu2-1"> </div>
 
 
-            <!--박스-->
-            <hr class="admin-box-hr">
-            <div class="admin-box">
-                <% if (myReply) {%>
-                    <% for(let i=0;i<myReply.length;i++){ %>
+                <!--박스-->
+                <hr class="admin-box-hr">
+                <div class="admin-box">
+                    <% if (myReply) {%>
+                        <% for(let i=0;i<myReply.length;i++){ %>
 
-                        <div class="admin-small-t1">
-                            <span class="admin-title">(글 제목)</span>
-                        </div>
-                        <div class="admin-t1">
-                            <span class="admin-flag">(국기)</span>
-                            <%= myReply[i].Pr_content %>
-                        </div>
+                            <div class="admin-small-t1">
+                                <span class="admin-title">(글 제목)</span>
+                            </div>
+                            <div class="admin-t1">
+                                <span class="admin-flag">(국기)</span>
+                                <%= myReply[i].Pr_content %>
+                            </div>
 
-                        <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
-                            <input type="hidden" id="pid_code" name="pid_code" value="<%= myReply[i].Pid_code %>">
-                            <button type="submit">해당 게시글로 이동</button>
-                        </form>
+                            <form action="http://localhost:3000/Pid/DetailPid/" method="POST">
+                                <input type="hidden" id="pid_code" name="pid_code" value="<%= myReply[i].Pid_code %>">
+                                <button id="pidbutton" type="submit">해당 게시글로 이동</button>
+                            </form>
 
-                        <hr class="admin-t1-hr">
+                            <hr class="admin-t1-hr">
 
-                        <% } %>
                             <% } %>
+                                <% } %>
+                </div>
             </div>
         </div>
-    </div>
 
+        <%- include ("../layout/footer") %>
 </body>
 
 </html>

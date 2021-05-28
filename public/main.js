@@ -53,3 +53,7 @@ function toMyReply() {
 function toMyLike() {
     document.location.href = '/MyPage/toMyLike';
 }
+
+function toAllPid() {
+    document.location.href = '/Pid/AllPid';
+}

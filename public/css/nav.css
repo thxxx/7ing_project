@@ -1,144 +1,197 @@
 /* Global */
+
 :root {
-  --text-color: #363a3c;
-  ;
-  --background-color: white;
-  --accent-color: #cdf96e;
+    --text-color: #363a3c;
+    ;
+    --background-color: white;
+    --accent-color: #cdf96e;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Noto Sans KR";
+    font-family: "Noto Sans CJK KR" !important;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--background-color);
-  padding: 20px 8%;
-  padding-bottom: 1%;
-  box-shadow: 0 4px 4px -4px rgba(105, 103, 103, 0.452);
+    line-height: 1.8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+    padding-bottom: 0;
+    padding-top: 17px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
-a {
-  text-decoration: none;
-  color: var(--text-color);
+.navbar a {
+    text-decoration: none;
+    color: var(--text-color);
 }
 
-/* logo*/
+
+/* 로고 */
+
 .navbar__logo {
-  color: var(--accent-color);
+    color: var(--accent-color);
 }
 
-/* Menu */
-.navbar__menu {
-  display: flex;
-  padding-left: 0;
-  list-style: none;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: 8px;
 
+/* 메뉴 */
+
+.navbar__menu {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 8px;
 }
 
 .navbar__menu li {
-  padding: 5px 20px;
+    padding: 5px 20px;
 }
 
 .navbar__menu :hover {
-  color: var(--accent-color) !important;
+    color: var(--accent-color) !important;
 }
 
 .navbar__icons {
-  list-style: none;
-  color: var(--text-color);
-  display: flex;
-  padding-left: 0;
+    list-style: none;
+    color: var(--text-color);
+    display: flex;
+    padding-left: 0;
 }
 
-/* Icons */
-.navbar__icons li {
-  padding: 6px 10px;
+
+/* 아이콘 */
+
+.nickname {
+    font-size: 15px;
+    color: var(--text-color);
+    margin-top: 3px;
 }
 
-.nickname{
-  font-size: 15px;
-  color: var(--text-color);
-  margin-top: 3px;
+.nav-btn {
+    border: 0;
+    background-color: white;
 }
 
-.alarm{
-  height: 26px;
+.alarm {
+    height: 26px;
+    padding-left: 1rem;
+    padding-top: 2px;
 }
 
-.profile{
-  width: 28px;
-  height: 28px; 
-  border:black;
-  border-radius: 35px;
-  overflow: hidden;
-  background: rgb(216, 216, 216);
+.bars {
+    height: 20px;
+    padding-left: 1rem;
+    padding-top: 2px;
 }
 
-.pf_image{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.profile {
+    margin-left: 1rem;
+    width: 30px;
+    height: 30px;
+    border: black;
+    border-radius: 35px;
+    overflow: hidden;
+    background: rgb(216, 216, 216);
+    margin-top: 1px;
 }
+
+.profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 /* Toggle button */
+
 .navbar__toggleBtn {
-  display: none;
-  position: absolute;
-  right: 32px;
-  font-size: 24px;
-  color: var(--accent-color);
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: var(--accent-color);
+}
+
+.nav-hr {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 5px 5px -4px rgba(105, 103, 103, 0.452);
+    width: 100%;
+    margin: 0 !important;
 }
 
 
 /* For small screen */
+
 @media screen and (max-width: 768px) {
-  /* Nav container */
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px 24px;
-  }
+    /* Nav container */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px;
+    }
+    /* Menu */
+    .navbar__menu {
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+        margin-top: 2rem;
+    }
+    .navbar__menu a {
+        /* Fill in an entire line so that user can click on any space */
+        display: block;
+        padding: 3px;
+    }
+    /* Icons */
+    .navbar__icons {
+        display: none;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    /* Toggle button */
+    .navbar__toggleBtn {
+        display: block;
+    }
+    /* When toggle button is clicked - active state */
+    .navbar__menu.active,
+    .navbar__icons.active {
+        display: flex;
+    }
+}
 
-  /* Menu */
-  .navbar__menu {
-    display: none;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-    margin-top: 2rem;
-  }
 
-  .navbar__menu a {
-    /* Fill in an entire line so that user can click on any space */
-    display: block;
-    padding: 3px;
-  }
+/*button 클릭 시 테두리*/
 
-  /* Icons */
-  .navbar__icons {
-    display: none;
-    justify-content: center;
-    width: 100%;
-    margin-top: 1rem;
-  }
+button:focus {
+    outline: none !important;
+}
 
-  /* Toggle button */
-  .navbar__toggleBtn {
-    display: block;
-  }
+.sidenav button,
+.navbar__menu button,
+.navbar__icons button {
+    background-color: #ffffff00;
+    border: 0;
+    color: #363a3c;
+}
 
-  /* When toggle button is clicked - active state */
-  .navbar__menu.active,
-  .navbar__icons.active {
-    display: flex;
-  }
+.navbar__menu button {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 19px 2px 19px;
+}
+
+.sidenav button,
+.navbar__icons button {
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 1rem;
 }

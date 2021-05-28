@@ -281,3 +281,8 @@
     float: right;
     opacity: 0.8;
 }
+
+#pidbutton {
+    background-color: red;
+    border-color: blue;
+}

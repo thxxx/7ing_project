@@ -9,53 +9,52 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
     <link rel="stylesheet" href="/css/admin.css">
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <div>
-        <%=user.User_name%>님 안녕하세요</div>
-    <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
-    <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+    <%- include ("../layout/top") %>[]
 
-    <div class="container">
-        <div class="full-admin">
-            <!--상위 카테고리-->
-            <div class="admin-menu">호스트 관리</div>
-            <hr class="admin-menu-hr">
+        <div class="container">
+            <div class="full-admin">
+                <!--상위 카테고리-->
+                <div class="admin-menu">호스트 관리</div>
+                <hr class="admin-menu-hr">
 
-            <!--하위 카테고리-->
-            <div class="admin-menu2">
+                <!--하위 카테고리-->
+                <div class="admin-menu2">
 
-                <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">댓글 관리</button>
+                    <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">댓글 관리</button>
 
-                <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">수락 및 거절</button>
+                    <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">수락 및 거절</button>
+
+                </div>
+                <div class="admin-menu2-1"> </div>
+
+
+                <!--박스-->
+                <hr class="admin-box-hr">
+
+
+                <% if (replyToMyPid) {%>
+                    <% for(let i=0;i<replyToMyPid.length;i++){ %>
+                        <div class="admin-box">
+
+                            <div class="admin-small-t1">
+                                <span class="admin-name"><%= replyToMyPid[i].Pr_author %></span> 님의 댓글
+                            </div>
+                            <div class="admin-t1">
+                                <span class="admin-flag">(국기)</span>
+                                <%= replyToMyPid[i].Pr_content %>
+                            </div>
+                            <hr class="admin-t1-hr">
+                        </div>
+                        <% } %>
+                            <% } %>
 
             </div>
-            <div class="admin-menu2-1"> </div>
-
-
-            <!--박스-->
-            <hr class="admin-box-hr">
-
-
-            <% if (replyToMyPid) {%>
-                <% for(let i=0;i<replyToMyPid.length;i++){ %>
-                    <div class="admin-box">
-
-                        <div class="admin-small-t1">
-                            <span class="admin-name"><%= replyToMyPid[i].Pr_author %></span> 님의 댓글
-                        </div>
-                        <div class="admin-t1">
-                            <span class="admin-flag">(국기)</span>
-                            <%= replyToMyPid[i].Pr_content %>
-                        </div>
-                        <hr class="admin-t1-hr">
-                    </div>
-                    <% } %>
-                        <% } %>
-
         </div>
-    </div>
+        <%- include ("../layout/footer") %>
 </body>
 
 </html>

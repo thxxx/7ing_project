@@ -1,92 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>디테일페이지</title>
-    <!-- <script type="module" src="./signupnew.js"></script> -->
-    <link rel="stylesheet" href="./css/style_feed.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>feed</title>
+    <link rel="stylesheet" href="/css/style_feed.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
-    <script>
-        var date = new Date();
-    </script>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <div class="container">
+    <%- include ("../layout/top") %>
 
-        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">게시글작성</h2>
+        <span class="finish_feed">
+            <p style="margin-top: 2%; font-weight: bold; font-size: 25px;">마감이 얼마 안 남았어요!</p>
+            <p class="finish_title_feed">마감 직전 제목</p>
+            <p class="finish_content_feed">마감이 얼마 안 남았대요~ 웅성웅성</p>
+            <!--여기도 수정 왕창 들어가야함-->
+            <p style="font-weight: 300;">(국기) | 닉네임 | D-() | 인원수</p>
+            <img src="/images/good.png" style="width: 18px; float: left;">
+            <p class="finish_good_feed">10</p>
+            <img src="/images/1.png" style="width: 18px; float: left; margin-left: 6%;">
+            <p class="finish_com_feed">12</p>
+            <hr class="one" style="margin-top: 5%;">
+        </span>
 
-        <form name="likeupform" action="#" method="POST">
-            <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
-            <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= piddata[0].Pid_good %>">
-            <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
-        </form>
-        <form name="applypidform" action="#" method="POST">
-            <input type="hidden" id="Pid_code" class="Pid_code" name="Pid_code" value="<%= pidcode %>">
-            <!-- <button class="submit" type="button">동행신청</button> -->
-            <button class="submit" type="button" onclick="applyPid()">동행신청</button>
-        </form>
+        <!--글 작성하기, 아이콘 수정 필요-->
+        <button type="button" class="but_write_feed"><img src="/images/write.png" style="width: 10%; margin-right: 5px; margin-bottom: 2px;">동행 글 작성하기</button>
 
-        <div>
-            글 작성자 :
-            <%= user.User_name %>
-                <br> 글작성자 닉네임 :
+        <div class="contest_feed">
+            <img src="/images/profile.jpg" style="margin-top: 15px; width: 10%; border-radius: 70%; float: left;">
+            <p class="profile_nicname_feed">
                 <%= user.User_nickname %>
-                    <br> 글 작성자 국가:
-                    <%= user.User_country  %>
-        </div>
-        <div>
-            타이틀 :
-            <%= piddata[0].Pid_title %>
-                <br> 내용 :
-                <%= piddata[0].Pid_content %>
-                    <br> 디데이:
-                    <%= 
-                    piddata[0].Pid_dday %>
+            </p>
+            <div class="contest_body">
+                <span class="contest_title_feed"><%= piddata[0].Pid_title %>
+                </span><br>
 
-                        <br> 모집인원:
+                <form name="applypidform" action="#" method="POST">
+                    <input type="hidden" id="Pid_code" class="Pid_code" name="Pid_code" value="<%= pidcode %>">
+                    <button class="but_apply_feed" type="button" onclick="applyPid()">
+                        <img src="/images/check.png" style="margin-bottom: 1px; margin-right: 3px; width: 18%;"> 동행신청</button>
+                </form>
+                <br>
+                <span class="contest_body_feed">
+                    <%= piddata[0].Pid_content %>
+            </span>
+                <!--디데이 표시랑 '현재 인원/모집 총 인원' 표시해야함. 우선 이렇게만 넣어둠!-->
+                <p style="color: gray; font-weight: lighter;">D-() |
+                    <%= piddata[0].Pid_currentNumber %> /
                         <%= piddata[0].Pid_recruitNumber %>
-                            <br> 현재인원:
-                            <%= piddata[0].Pid_currentNumber %>
-                                <br> 좋아요 수:
-                                <%= piddata[0].Pid_good %>
-                                    <% for(let i=0;i<piddata.length;i++){ %>
+                </p>
 
-                                        <div class="comment-row_feed">
-                                            <img src="profile.jpg" style="width: 20px; border-radius: 70%; float: left;">
-                                            <div class="comment_profile_feed">
-                                                <%= piddata[i].Pr_author %>
-                                            </div>
-                                            <div class="comment-date_feed">
-                                                <%= piddata[i].Pr_writeDate%>
-                                            </div>
-                                            <div class="comment-content_feed">
-                                                <%= piddata[i].Pr_content %>
-                                            </div>
-                                        </div><br>
 
-                                        <% } %>
+            </div>
+
+            <hr class="one_feed">
+
+            <form name="likeupform" action="#" method="POST">
+                <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
+                <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= piddata[0].Pid_good %>">
+                <button class="submit" type="button" onclick="likeUp()"></button>
+            </form>
+            <div class="like_feed">
+                <img src="/images/good.png" style="width: 4%; float: left;">
+                <p class="like_good_feed">
+                    <%= piddata[0].Pid_good %>
+                </p>
+                <img src="/images/1.png" style="margin-left: 10px; width: 4%; float: left;">
+
+                <p class="like_com_feed">
+                    <%= piddata.length %>
+                </p>
+                <script type="text/javascript">
+                    var i = 0;
+
+                    function toggle_object(post_id) {
+                        i = i + post_id;
+                        var obj = document.getElementById('test');
+                        if (!obj) return;
+
+                        if (i % 2 != 0) {
+                            obj.src = "/images/i.png";
+
+                        } else {
+                            obj.src = "/images/e.png";
+                        }
+                    }
+                </script>
+                <a href="#" onclick="toggle_object(1); return false;"> <img src="/images/e.png" style="width: 4%; margin-left: 10px; margin-top: 3px; margin-bottom: 35px;" id="test" /> </a>
+            </div>
+
+            <% for(let i=0;i<piddata.length;i++){ %>
+
+                <div class="comment-row_feed">
+                    <img src="/images/profile.jpg" style="width: 3%; border-radius: 70%; float: left;">
+                    <div class="comment_profile_feed">
+                        <%= piddata[i].Pr_author %>
+                    </div>
+                    <div class="comment-date_feed">
+                        <%= piddata[i].Pr_writeDate%>
+                    </div>
+                    <div class="comment-content_feed">
+                        <%= piddata[i].Pr_content %>
+                    </div>
+                </div><br>
+
+                <% } %>
+
+                    <form name="writeform" action="#" method="POST">
+                        <!-- 내용 -->
+
+                        <textarea id="new-comment_feed" name="new-comment_feed" name="Pid_content" class="Pid_content" rows=5 placeholder="댓글을 입력해주세요."></textarea>
+                        <br /><br />
+                        <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
+
+                        <button class="but_comment_feed" type="button" onclick="writeReply()">댓글달기<br /><br />
+        </form>
+
+        </div>
+        </div>
         </div>
 
-        <!-- 작성자 -->
-        <p> </p>
-        <!-- 작성 일시 -->
-
-        <!-- 내용 -->
-
-        <form name="writeform" action="#" method="POST">
-            <!-- 내용 -->
-            <input type="textfield" placeholder="본문내용" name="Pid_content" class="Pid_content" maxlength="500"><br /><br />
-
-            <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= pidcode %>">
-
-            <button class="submit" type="button" onclick="writeReply()">댓글달기<br /><br />
-        </form>
-        <!-- <button>동행신청하기</button> -->
-    </div>
+        <%- include ("../layout/footer") %>
 </body>
 
 </html>

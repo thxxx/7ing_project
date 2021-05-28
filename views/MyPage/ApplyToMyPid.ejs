@@ -9,113 +9,112 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
     <link rel="stylesheet" href="/css/admin.css">
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <div class="container">
-        <div>
-            <%=user.User_name%>님 안녕하세요</div>
-        <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
-        <button type="button" id="toMainPage" onclick="toMainPage()">메인으로</button>
+    <%- include ("../layout/top") %>
+        <div class="container">
 
-        <div class="full-admin">
-            <!--상위 카테고리-->
-            <div class="admin-menu">호스트 관리</div>
-            <hr class="admin-menu-hr">
+            <div class="full-admin">
+                <!--상위 카테고리-->
+                <div class="admin-menu">호스트 관리</div>
+                <hr class="admin-menu-hr">
 
-            <!--하위 카테고리-->
-            <div class="admin-menu2">
+                <!--하위 카테고리-->
+                <div class="admin-menu2">
 
-                <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">댓글 관리</button>
+                    <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">댓글 관리</button>
 
-                <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">수락 및 거절</button>
+                    <button type="button" id="toApplyToMyPid" onclick="toApplyToMyPid()">수락 및 거절</button>
 
-            </div>
-            <div class="admin-menu2-2"> </div>
+                </div>
+                <div class="admin-menu2-2"> </div>
 
 
-            <!--박스-->
-            <hr class="admin-box-hr">
+                <!--박스-->
+                <hr class="admin-box-hr">
 
-            <% if (applyToMyPid) {%>
-                <% for(let i=0;i<applyToMyPid.length;i++){ %>
+                <% if (applyToMyPid) {%>
+                    <% for(let i=0;i<applyToMyPid.length;i++){ %>
 
-                    <div class="admin-pic">
-                        <img src="#" onerror="this.src='/images/user-man.png'">
-                    </div>
-
-                    <div class="admin-box">
-
-                        <div class="admin-small-t2">
-                            <span class="admin-title"><%= applyToMyPid[i].Pid_title %></span>
-                        </div>
-                        <div class="admin-t2">
-                            <span class="admin-flag">(국기)</span>
-                            <span class="admin-name"><%= applyToMyPid[i].User_name %></span> 님이 동행을 신청하셨습니다.
+                        <div class="admin-pic">
+                            <img src="#" onerror="this.src='/images/user-man.png'">
                         </div>
 
-                        <% if(applyToMyPid[i].Pa_enter == 0){ %>
-                            <form name="AcceptApply" action="#" method="POST">
-                                <input type="hidden" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
-                                <button class="submit" id="host-accept" type="button" onclick="acceptApply()"><img src="/images/accept.png"></button>
-                            </form>
+                        <div class="admin-box">
 
-                            <form name="RejectApply" action="#" method="POST">
-                                <input type="hidden" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
-                                <button class="submit" id="host-deny" type="button" onclick="rejectApply()"><img src="/images/deny.png"></button>
-                            </form>
-                            <% } else if(applyToMyPid[i].Pa_enter==1){ %>
-                                <p> 거절하셨습니다 </p>
-                                <% } else if (applyToMyPid[i].Pa_enter==2){ %>
-                                    <p> 수락하셨습니다. </p>
-                                    <% } %>
+                            <div class="admin-small-t2">
+                                <span class="admin-title"><%= applyToMyPid[i].Pid_title %></span>
+                            </div>
+                            <div class="admin-t2">
+                                <span class="admin-flag">(국기)</span>
+                                <span class="admin-name"><%= applyToMyPid[i].User_name %></span> 님이 동행을 신청하셨습니다.
+                            </div>
+
+                            <% if(applyToMyPid[i].Pa_enter == 0){ %>
+                                <form name="AcceptApply" action="#" method="POST">
+                                    <input type="hidden" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
+                                    <button class="submit" id="host-accept" type="button" onclick="acceptApply()"><img src="/images/accept.png"></button>
+                                </form>
+
+                                <form name="RejectApply" action="#" method="POST">
+                                    <input type="hidden" class="Pa_code" name="Pa_code" value="<%= applyToMyPid[i].Pa_code %>">
+                                    <button class="submit" id="host-deny" type="button" onclick="rejectApply()"><img src="/images/deny.png"></button>
+                                </form>
+                                <% } else if(applyToMyPid[i].Pa_enter==1){ %>
+                                    <p> 거절하셨습니다 </p>
+                                    <% } else if (applyToMyPid[i].Pa_enter==2){ %>
+                                        <p> 수락하셨습니다. </p>
                                         <% } %>
                                             <% } %>
-                                                <hr class="admin-t2-hr">
+                                                <% } %>
+                                                    <hr class="admin-t2-hr">
 
 
-                                                <!--  여기서부터는 액티비티 출력  -->
-                                                <% if (applyToMyActivity) {%>
-                                                    <% for(let i=0;i<applyToMyActivity.length;i++){ %>
+                                                    <!--  여기서부터는 액티비티 출력  -->
+                                                    <% if (applyToMyActivity) {%>
+                                                        <% for(let i=0;i<applyToMyActivity.length;i++){ %>
 
-                                                        <div class="admin-pic">
-                                                            <img src="#" onerror="this.src='/images/user-woman.png'">
-                                                        </div>
+                                                            <div class="admin-pic">
+                                                                <img src="#" onerror="this.src='/images/user-woman.png'">
+                                                            </div>
 
-                                                        <div class="admin-small-t2">
-                                                            <span class="admin-title"><%= applyToMyActivity[i].At_title %></span>
-                                                        </div>
-                                                        <div class="admin-t2">
-                                                            <span class="admin-flag">(국기)</span>
-                                                            <span class="admin-name"><%= applyToMyActivity[i].User_name %></span> 님이 액티비티를 신청하셨습니다.
-                                                        </div>
+                                                            <div class="admin-small-t2">
+                                                                <span class="admin-title"><%= applyToMyActivity[i].At_title %></span>
+                                                            </div>
+                                                            <div class="admin-t2">
+                                                                <span class="admin-flag">(국기)</span>
+                                                                <span class="admin-name"><%= applyToMyActivity[i].User_name %></span> 님이 액티비티를 신청하셨습니다.
+                                                            </div>
 
-                                                        <% if(applyToMyActivity[i].Aa_enter == 0){ %>
-                                                            <form name="AcceptApply" action="#" method="POST">
-                                                                <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
-                                                                <button class="submit" id="host-accept" type="button" onclick="acceptApplyActivity()"><img src="/images/accept.png"></button>
-                                                            </form>
+                                                            <% if(applyToMyActivity[i].Aa_enter == 0){ %>
+                                                                <form name="AcceptApply" action="#" method="POST">
+                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                                    <button class="submit" id="host-accept" type="button" onclick="acceptApplyActivity()"><img src="/images/accept.png"></button>
+                                                                </form>
 
-                                                            <form name="RejectApply" action="#" method="POST">
-                                                                <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
-                                                                <button class="submit" id="host-deny" type="button" onclick="rejectApplyActivity()"><img src="/images/deny.png"></button>
-                                                            </form>
-                                                            <% } else if(applyToMyActivity[i].Aa_enter==1){ %>
-                                                                <p> 거절하셨습니다 </p>
-                                                                <% } else if (applyToMyActivity[i].Aa_enter==2){ %>
-                                                                    <p> 수락하셨습니다. </p>
-                                                                    <% } else if (applyToMyActivity[i].Aa_enter==3){ %>
-                                                                        <button type="botton" class="activity-pay"><img src="/images/activity-pay.png"></button>
-                                                                        <% } %>
-                                                                            <hr class="admin-t2-hr">
+                                                                <form name="RejectApply" action="#" method="POST">
+                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                                    <button class="submit" id="host-deny" type="button" onclick="rejectApplyActivity()"><img src="/images/deny.png"></button>
+                                                                </form>
+                                                                <% } else if(applyToMyActivity[i].Aa_enter==1){ %>
+                                                                    <p> 거절하셨습니다 </p>
+                                                                    <% } else if (applyToMyActivity[i].Aa_enter==2){ %>
+                                                                        <p> 수락하셨습니다. </p>
+                                                                        <% } else if (applyToMyActivity[i].Aa_enter==3){ %>
+                                                                            <button type="botton" class="activity-pay"><img src="/images/activity-pay.png"></button>
                                                                             <% } %>
+                                                                                <hr class="admin-t2-hr">
                                                                                 <% } %>
+                                                                                    <% } %>
 </body>
 
 </div>
 </div>
 </div>
 
-</body>
+<%- include ("../layout/footer") %>
+    </body>
 
 </html>

@@ -189,4 +189,27 @@ router.post('/writeReply', (req, res) => {
     })
 })
 
+
+router.get('/AllPid', (req, res) => { // 게시글작성 페이지 이동
+    conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code ORDER BY Pid_good DESC LIMIT 4;", (err, sorted_result, fileds) => {
+        if (err) console.log("err", err);
+        else {
+            conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code;", function(err, result, fields) {
+                if (err) throw err;
+                else {
+                    var sql = "select * from pid_reply";
+                    conn.query(sql, (err2, result2) => {
+                        res.render('../views/Pid/AllPid', {
+                            data: result, // Pid data 
+                            user: req.user ? req.user : "", // 현재 로그인한 유저
+                            sorted_good: sorted_result, // 좋아요순으로 정렬된 Pid 4개의 데이터
+                            piddata: result2
+                        });
+                    })
+                }
+            });
+        }
+    })
+})
+
 module.exports = router;
