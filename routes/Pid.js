@@ -191,20 +191,84 @@ router.post('/writeReply', (req, res) => {
 
 
 router.get('/AllPid', (req, res) => { // 게시글작성 페이지 이동
+
     conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code ORDER BY Pid_good DESC LIMIT 4;", (err, sorted_result, fileds) => {
+
         if (err) console.log("err", err);
         else {
             conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code;", function(err, result, fields) {
                 if (err) throw err;
                 else {
+
                     var sql = "select * from pid_reply";
+
                     conn.query(sql, (err2, result2) => {
-                        res.render('../views/Pid/AllPid', {
-                            data: result, // Pid data 
-                            user: req.user ? req.user : "", // 현재 로그인한 유저
-                            sorted_good: sorted_result, // 좋아요순으로 정렬된 Pid 4개의 데이터
-                            piddata: result2
-                        });
+
+                        var sql2 = "select * from interestcountry where User_code=?";
+                        var params2 = [req.user.User_code];
+
+                        conn.query(sql2, params2, (err3, result3) => {
+                            res.render('../views/Pid/AllPid', {
+                                data: result, // Pid data 
+                                user: req.user ? req.user : "", // 현재 로그인한 유저
+                                sorted_good: sorted_result, // 좋아요순으로 정렬된 Pid 4개의 데이터
+                                piddata: result2,
+                                intcountry: result3
+                            });
+                        })
+                    })
+
+                }
+            });
+        }
+    })
+})
+
+router.post('/SearchPid', (req, res) => { // 게시글작성 페이지 이동
+
+    //var category = req.body.intcountry;
+    var category = '';
+    var search = req.body.searchContent; // search가 비어있더라도 where에 조건 지정해서 넣으면 가능!
+
+
+    conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code ORDER BY Pid_good DESC LIMIT 4;", (err, sorted_result, fileds) => {
+        if (err) console.log("err", err);
+        else {
+            if (category) {
+                var sql = "SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code where User.User_country=? and Pid.Pid_content like ?;";
+                var params = [category, `%${search}%`];
+            } else {
+                var sql = "SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code where Pid.Pid_content like ?;";
+                var params = [`%${search}%`];
+            }
+            conn.query(sql, params, function(err, result, fields) {
+                if (err) throw err;
+                else {
+
+                    var sql = "select * from pid_reply";
+
+                    conn.query(sql, (err2, result2) => {
+                        if (err2) console.log(err2)
+                        else {
+
+                            console.log("data", result);
+                            console.log("서치 ", search);
+
+
+                            var sql2 = "select * from interestcountry where User_code=?";
+                            var params2 = [req.user.User_code];
+
+                            conn.query(sql2, params2, (err3, result3) => {
+                                res.render('../views/Pid/SearchPid', {
+                                    data: result, // Pid data 
+                                    user: req.user ? req.user : "", // 현재 로그인한 유저
+                                    sorted_good: sorted_result, // 좋아요순으로 정렬된 Pid 4개의 데이터
+                                    piddata: result2,
+                                    category: category,
+                                    searchcountry: search
+                                });
+                            })
+                        }
                     })
                 }
             });

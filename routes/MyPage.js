@@ -40,7 +40,23 @@ router.post('/modifymyinfo', (req, res) => {
                 if (err) {
                     throw err;
                 } else {
-                    return res.status(200).json({ ModifyInfoDone: true });
+                    var sql2 = "INSERT INTO InterestCountry (User_code, Country_name) VALUES (?,?);";
+                    var params2 = [req.user.User_code, req.body.prefer_nation2];
+                    conn.query(sql2, params2, (err, result2) => {
+                        if (err) {
+                            throw err;
+                        } else {
+                            var sql2 = "INSERT INTO InterestCountry (User_code, Country_name) VALUES (?,?);";
+                            var params2 = [req.user.User_code, req.body.prefer_nation3];
+                            conn.query(sql2, params2, (err, result2) => {
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    return res.status(200).json({ ModifyInfoDone: true });
+                                }
+                            })
+                        }
+                    })
                 }
             })
         }

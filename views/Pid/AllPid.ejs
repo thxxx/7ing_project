@@ -16,6 +16,63 @@
     <%- include ("../layout/top") %>
         <!--글 작성하기, 아이콘 수정 필요-->
 
+        <!-- search bar -->
+        <div class="full-index">
+            <div class="boxContainer">
+                <form name="searchbutton" action="#" method="post" class="d-block d-flex">
+
+                    <div class="elementsContainer">
+                        <input type="text" placeholder="내가 꿈꾸던 동행을 검색해보세요." class="searchContent" style="width:100%; border:none;">
+                    </div>
+
+                    <button class="submit" id="searchPid" type="button" onclick="searchSomePid()" style="border:none; border-radius:20px; height:100%; margin-top:1%;">
+
+                        <input type="image" src="/images/search.png" id="search_icon" alt="search">
+
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+
+        <!--글 작성하기, 아이콘 수정 필요-->
+
+        <!--필터-->
+        <div class="filter_feed" style="margin-left:35%;">
+            <span style="margin-right: 2px;">
+
+                <% if(intcountry.length>0) { %>
+                    관심국가
+                    <% }else{ %>
+                        관심국가를 설정해주세요
+                        <% } %>
+            </span>
+            <img src="/images/f.png" style="width: 1.5%; margin-right: 50px;">
+            <input type="checkbox" class="filter_1_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                            
+                                <% if(intcountry.length>0) { %>
+                                    <%= intcountry[0].Country_name %>
+                                        <% }else{ %>
+                                                ㅁ
+                                            <% } %></span>
+
+            <input type="checkbox" class="filter_2_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                            
+                                <% if(intcountry.length>1) { %>
+                                    <%= intcountry[1].Country_name %>
+                                        <% }else{ %>
+                                                ㅁ
+                                            <% } %></span>
+
+            <input type="checkbox" class="filter_3_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                                <% if(intcountry.length>2) { %>
+                                    <%= intcountry[2].Country_name %>
+                                        <% }else{ %>
+                                            ㅁ
+                                            <% } %></span>
+        </div>
+
         <button type="button" class="but_write_feed"><img src="/images/write.png" style="width: 10%; margin-right: 5px; margin-bottom: 2px;">동행 글 작성하기</button>
 
         <% if(data) { %>
@@ -25,6 +82,8 @@
                     <p class="profile_nicname_feed">
                         <%= user.User_nickname %>
                     </p>
+
+
                     <div class="contest_body">
                         <span class="contest_title_feed"><%= data[i].Pid_title %>
                 </span><br>
@@ -43,7 +102,6 @@
                             <%= data[i].Pid_currentNumber %> /
                                 <%= data[i].Pid_recruitNumber %>
                         </p>
-
 
                     </div>
 
@@ -85,7 +143,7 @@
 
                     <% for(let j=0;j<piddata.length;j++){ %>
                         <% if(piddata[j].Pid_code==data[i].Pid_code ) { %>
-                            <div class="comment-row_feed">
+                            <div class="comment-row_feed" style="padding-left:15%;">
                                 <img src="/images/profile.jpg" style="width: 3%; border-radius: 70%; float: left;">
                                 <div class="comment_profile_feed">
                                     <%= piddata[j].Pr_author %>
@@ -100,14 +158,14 @@
                             <% } %>
                                 <% } %>
 
-                                    <form name="writeform" action="#" method="POST">
+                                    <form name="writeform" action="#" method="POST" style="margin-left:15%;">
                                         <!-- 내용 -->
 
-                                        <textarea id="new-comment_feed" name="new-comment_feed" name="Pid_content" class="Pid_content" rows=5 placeholder="댓글을 입력해주세요."></textarea>
+                                        <textarea id="new-comment_feed" name="new-comment_feed" name="Pid_content" class="Pid_content" rows=5 placeholder="댓글을 입력해주세요." style="width:30%;"></textarea>
                                         <br /><br />
                                         <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= data[i].Pid_code %>">
 
-                                        <button class="but_comment_feed" type="button" onclick="writeReply()">댓글달기<br /><br />
+                                        <button class="but_comment_feed" type="button" onclick="writeReply()" style="width:100px; padding-top:30px;">댓글달기<br /><br />
         </form>
 
         </div>
@@ -123,7 +181,23 @@
             <p class="finish_title_feed"><%= sorted_good[k].Pid_title %></p>
             <p class="finish_content_feed"><%= sorted_good[k].Pid_content %></p>
             <!--여기도 수정 왕창 들어가야함-->
-            <p style="font-weight: 300;">(국기) | <%= sorted_good[k].User_nickname %> | D-() | <%= sorted_good[k].Pid_currentNumber %></p>
+            <p style="font-weight: 300;"> 
+                <% if(sorted_good[k].User_country=="프랑스") { %>
+                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                    <% } else if(sorted_good[k].User_country=="대한민국") { %>
+                        <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                        <% } else if(sorted_good[k].User_country=="독일") { %>
+                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                            <% } else if(sorted_good[k].User_country=="미국/캐나다") { %>
+                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                <% } else if(sorted_good[k].User_country=="스페인") { %>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                    <% } else if(sorted_good[k].User_country=="중화인민공화국") { %>
+                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                            <% } else if(sorted_good[k].User_country=="영국") { %>
+                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                <% } %>
+                                | <%= sorted_good[k].User_nickname %> | D-() | <%= sorted_good[k].Pid_currentNumber %></p>
             <img src="/images/good.png" style="width: 18px; float: left;">
             <p class="finish_good_feed"><%= sorted_good[k].Pid_good %></p>
             <img src="/images/1.png" style="width: 18px; float: left; margin-left: 6%;">
@@ -134,6 +208,7 @@
         </div>
 
         <%- include ("../layout/footer") %>
+
 </body>
 
 </html>

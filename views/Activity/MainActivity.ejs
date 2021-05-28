@@ -19,7 +19,7 @@
         <!--Top4 액티비티!-->
         <section class="ftco-section-ac">
             <div class="container">
-                <div class="row justify-content-start mb-5 pb-3">
+                <div class="row justify-content-start">
                     <div class="col-md-7 heading-section ftco-animate">
                         <h2 class="mb-4" style="margin-top:10%;"><strong>Top4 액티비티! </strong> </h2>
                     </div>
@@ -85,7 +85,7 @@
         <!-- row1-->
         <section class="ftco-section-ac">
             <div class="container">
-                <div class="row justify-content-start mb-5 pb-3">
+                <div class="row justify-content-start">
                     <div class="col-md-7 heading-section ftco-animate">
                         <h2 class="mb-4"><strong>액티비티 전체보기 </strong> </h2>
                     </div>
@@ -102,8 +102,8 @@
                                         <div class="close-badge">마감</div>
                                         <% }else if(actdata[i].At_code==rank[j].At_code){ %>
                                             <span class="notify-badge"><%= j+1 %>위</span>
-                                            <%}%>
-                                                <%}%>
+                                            <% } %>
+                                                <% } %>
                                                     <% actdata[i].At_title %>
                                                         <div class="destination ac">
                                                             <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">

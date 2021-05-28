@@ -1,7 +1,12 @@
+.filter_feed {
+    margin-top: 10px;
+    margin-left: 795px;
+}
+
 .contest_feed {
     margin-top: 50px;
     margin-bottom: 50px;
-    margin-left: 210px;
+    margin-left: 120px;
     padding-top: 50px;
     padding-bottom: 30px;
     padding-left: 60px;
@@ -14,10 +19,10 @@
 }
 
 .but_write_feed {
-    margin-right: 17%;
-    margin-top: 100px;
-    width: 15%;
-    height: 50px;
+    margin-right: 210px;
+    margin-top: -70px;
+    width: 10%;
+    height: 35px;
     float: right;
     background-color: #cdf96e;
     border: none;
@@ -26,7 +31,7 @@
 
 .profile_nicname_feed {
     margin-top: 90px;
-    padding-left: 15px;
+    padding-left: 20px;
     font-weight: 300;
 }
 
@@ -62,6 +67,7 @@
 }
 
 .like_feed {
+    margin-top: -30px;
     margin-left: 115px;
     margin-bottom: 20px;
 }
@@ -80,7 +86,7 @@
 
 .comments_feed {
     margin-top: -30px;
-    margin-left: 120px;
+    margin-left: 100px;
 }
 
 .comment-content_feed {
@@ -104,8 +110,11 @@
 }
 
 .but_comment_feed {
+    margin-top: -130px;
+    margin-right: 330px;
     padding: 1% 0.5%;
-    width: 13%;
+    width: 11%;
+    float: right;
     font-weight: 500;
     border: none;
     border-radius: 10px;
@@ -114,8 +123,8 @@
 
 .finish_feed {
     float: right;
-    margin-top: -183%;
-    margin-left: 64%;
+    margin-top: -133%;
+    margin-right: 6%;
     padding: 20px 20px;
     border: 3px solid #F3F2F2;
     border-radius: 20px;

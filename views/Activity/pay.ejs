@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>pay</title>
+    <link rel="stylesheet" href="/css/css/style_pay.css">
+
+    <!-- import -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+    <script type="text/javascript" src="/pay.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <%- include ("../layout/header") %>
+</head>
+
+<body class="full_feed">
+
+    <%- include ("../layout/top") %>
+
+        <!-- search bar -->
+        <div class="boxContainer">
+            <form action="" method="post" class="d-block d-flex">
+                <div class="elementsContainer">
+                    <input type="text" placeholder="내가 꿈꾸던 동행을 검색해보세요." class="search">
+                </div>
+                <div class="search_click">
+                    <input type="image" src="/images/search.png" id="search_icon" alt="search">
+                </div>
+            </form>
+        </div>
+
+        <div class="activity_pay">
+            <img src="/images/activity.jpg" style="width: 14%; height: 14%; float: left; border-radius: 15px;">
+            <div class="ac_ex_pay">
+                <span class="ac_ex_tag_pay">#독일 #문화 #음식 #액티비티</span><br>
+                <span class="ac_ex_com_pay"><%= payData.title%></span>
+            </div>
+
+            <div class="ac_ex_date_pay">5월 29일(토) 17:00 x 1개</div>
+
+            <hr style="width: 1120px; color: gray;">
+
+            <span class="ac_ex_pro_pay">상품 금액</span><span class="ac_ex_cash_pay"><%= payData.price%> 원</span>
+
+            <hr style="width: 1120px; color: gray;">
+
+            <span class="ac_ex_cou_pay">쿠폰/할인 코드</span>
+            <span class="ac_ex_sale_pay">- 0 원</span>
+            <button type="button" class="ac_ex_select_pay">선택</button>
+
+            <hr style="width: 1120px; color: gray;">
+
+            <p style="font-size: 10px; color: blue;">* 쿠폰/할인코드를 사용하여 결제 시 개별 취소를 할 수 없습니다.</p>
+
+            <br>
+
+            <div class="ac_ex_total_pay">
+                <span class="ac_total_sale_pay">할인금액</span>
+                <span class="ac_total_sa_cash_pay">- 0 원</span><br>
+                <span class="ac_total_final_pay">최종 결제 금액</span>
+                <span class="ac_total_fi_cash_pay"><%= payData.price %> 원</span>
+            </div>
+
+            <br><br><br>
+
+            <button type="button" class="ac_total_pay"><img src="/images/check.png" style="margin-bottom: 1px; margin-right: 5px; width: 5%;">결제하기</button>
+
+            <script>
+                $(document).ready(function() {
+                    $(".ac_total_pay").on("click", function() {
+                        var IMP = window.IMP; // 생략가능
+                        IMP.init('imp97827071'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+                        var payData = "<%= JSON.stringify(payData) %>";
+                        payData = payData.replaceAll('&#34;', '\"');
+                        payData = JSON.parse(payData);
+
+                        var user = "<%= JSON.stringify(user) %>";
+                        user = user.replaceAll('&#34;', '\"');
+                        user = JSON.parse(user);
+
+                        console.log(user.User_name)
+
+                        const header = {
+                            "Content-Type": "application/json"
+                        }
+
+                        IMP.request_pay({
+                            pg: 'inicis', // version 1.1.0부터 지원.
+                            pay_method: 'card',
+                            merchant_uid: 'Activity_' + new Date().getTime(), // 고유번호
+                            name: payData.title, // 액티비티 이름
+                            amount: payData.price, // 가격
+                            buyer_name: user.User_name, // 유저이름
+                            buyer_tel: '010-1234-5678', // 유저전화 알아서 바꿔
+                            buyer_addr: '서울특별시 강남구 삼성동', // 주소 알아서 바꿔
+                            // m_redirect_url : 'http://localhost:3000/'
+                        }, function(rsp) {
+                            if (rsp.success) {
+
+                                //콜백 - 디비에 currentNumber 올리기
+                                //페이지 - recruitNumber == currentNumber 이면 결제 안됨 경고창 띄우기
+                                //상세페이지에 Pid - User 테이블 조인해서 데이터 다 받아와야함.
+
+                                var msg = '결제가 완료되었습니다.';
+                                msg += '고유ID : ' + rsp.imp_uid;
+                                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                                msg += '결제 금액 : ' + rsp.paid_amount;
+                                msg += '카드 승인번호 : ' + rsp.apply_num;
+
+                                var body = {
+                                    code: payData.code,
+                                    currentNumber: payData.currentNumber
+                                }
+
+                                console.log("body", body);
+
+                                axios.post('http://localhost:3000/paySuccess', body, {
+                                        header
+                                    })
+                                    .then(response => {
+                                        if (response.data.paySuccess) {
+                                            alert(msg);
+                                            document.location.href = "http://localhost:3000/";
+                                        } else {
+                                            alert(response.data.message);
+                                        }
+                                    }).catch(function(err) { //결제 axios 오류
+                                        if (err.response) {
+                                            // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+                                            console.log(err.response.data);
+                                            console.log(err.response.status);
+                                            console.log(err.response.headers);
+                                        } else if (err.request) {
+                                            // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+                                            // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+                                            // Node.js의 http.ClientRequest 인스턴스입니다.
+                                            console.log(err.request);
+                                        }
+                                    });
+
+                            } else {
+                                var msg = '결제에 실패하였습니다.';
+                                msg += '에러내용 : ' + rsp.error_msg;
+                            }
+                            // alert(msg);
+                        });
+                    })
+                })
+            </script>
+        </div>
+
+        <%- include ("../layout/footer") %>
+</body>
+
+</html>

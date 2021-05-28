@@ -764,6 +764,8 @@ a.fc-event:hover {
     flex-grow: 1;
     flex-shrink: 1;
     min-width: 0;
+    color: #707070;
+    font-weight: bold;
     /* important for allowing to shrink all the way */
 }
 
@@ -1139,6 +1141,7 @@ a.fc-event:hover {
 
 .fc-daygrid-block-event .fc-event-time {
     font-weight: bold;
+    color: #363a3c;
 }
 
 .fc-daygrid-block-event .fc-event-time,

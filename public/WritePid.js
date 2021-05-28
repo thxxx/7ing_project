@@ -108,11 +108,25 @@ function writeReply() {
         axios.post('http://localhost:3000/Pid/writeReply', body, { header })
             .then(response => {
                 if (response.data.WriteReplyDone) {
-                    alert("댓글 작성 완료");
-                    document.location.href = '/';
+                    console.log
                 } else {
                     console.log(reponse);
                 }
             })
     }
+}
+
+function searchSomePid() {
+
+    var searchContent = $('.searchContent').val();
+
+    var body = {
+        searchContent: searchContent,
+    }
+
+    console.log("서치:", body);
+
+    const header = { "Content-Type": "application/json" }
+
+    axios.post('http://localhost:3000/Pid/SearchPid', body, { header });
 }

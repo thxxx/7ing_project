@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>feed</title>
+    <link rel="stylesheet" href="/css/style_feed.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/WritePid.js"></script>
+    <%- include ("../layout/header") %>
+</head>
+
+<body>
+    <%- include ("../layout/top") %>
+        <!--글 작성하기, 아이콘 수정 필요-->
+
+        <% if(category) { %>
+            <h3 style="font-size:15px;">
+                <% category %>로 필터를 걸었습니다. </h3>
+            <% } %>
+                <% if(searchcountry) { %>
+                    <h3 style="font-size:15px;">
+                        <% searchcountry %>를 검색했습니다. </h3>
+                    <% } %>
+
+                        <!--필터-->
+                        <div class="filter_feed">
+                            <sapn style="margin-right: 2px;">
+
+                                <% if(intcountry.length>0) { %>
+                                    관심국가
+                                    <% }else{ %>
+                                        관심국가를 설정해주세요
+                                        <% } %>
+                            </sapn>
+                            <img src="images/f.png" style="width: 1.5%; margin-right: 15px;">
+                            <input type="checkbox" class="filter_1_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                            
+                                <% if(intcountry.length>0) { %>
+                                    <%= intcountry[0].Country_name %>
+                                        <% }else{ %>
+                                                ㅁ
+                                            <% } %></span>
+
+                            <input type="checkbox" class="filter_2_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                            
+                                <% if(intcountry.length>1) { %>
+                                    <%= intcountry[1].Country_name %>
+                                        <% }else{ %>
+                                                ㅁ
+                                            <% } %></span>
+
+                            <input type="checkbox" class="filter_3_feed"><span style="margin-top: -18px; margin-left: 5px; margin-right: 20px;">
+                                <% if(intcountry.length>2) { %>
+                                    <%= intcountry[2].Country_name %>
+                                        <% }else{ %>
+                                            ㅁ
+                                            <% } %></span>
+                        </div>
+
+                        <button type="button" class="but_write_feed"><img src="/images/write.png" style="width: 10%; margin-right: 5px; margin-bottom: 2px;">동행 글 작성하기</button>
+
+                        <% if(data) { %>
+                            <% for(let i=0;i<data.length;i++){ %>
+                                <div class="contest_feed">
+                                    <img src="/images/profile.jpg" style="margin-top: 15px; width: 10%; border-radius: 70%; float: left;">
+                                    <p class="profile_nicname_feed">
+                                        <%= user.User_nickname %>
+                                    </p>
+                                    <div class="contest_body">
+                                        <span class="contest_title_feed"><%= data[i].Pid_title %>
+                </span><br>
+
+                                        <form name="applypidform" action="#" method="POST">
+                                            <input type="hidden" id="Pid_code" class="Pid_code" name="Pid_code" value="<%= data[i].Pid_code %>">
+                                            <button class="but_apply_feed" type="button" onclick="applyPid()">
+                        <img src="/images/check.png" style="margin-bottom: 1px; margin-right: 3px; width: 18%;"> 동행신청</button>
+                                        </form>
+                                        <br>
+                                        <span class="contest_body_feed">
+                    <%= data[i].Pid_content %>
+            </span>
+                                        <!--디데이 표시랑 '현재 인원/모집 총 인원' 표시해야함. 우선 이렇게만 넣어둠!-->
+                                        <p style="color: gray; font-weight: lighter;">D-() |
+                                            <%= data[i].Pid_currentNumber %> /
+                                                <%= data[i].Pid_recruitNumber %>
+                                        </p>
+
+
+                                    </div>
+
+                                    <hr class="one_feed">
+
+                                    <form name="likeupform" action="#" method="POST">
+                                        <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= data %>">
+                                        <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= data[i].Pid_good %>">
+                                        <button class="submit" type="button" onclick="likeUp()"></button>
+                                    </form>
+                                    <div class="like_feed">
+                                        <img src="/images/good.png" style="width: 4%; float: left;">
+                                        <p class="like_good_feed">
+                                            <%= data[i].Pid_good %>
+                                        </p>
+                                        <img src="/images/1.png" style="margin-left: 10px; width: 4%; float: left;">
+
+                                        <p class="like_com_feed">
+                                            <%= data.length %>
+                                        </p>
+                                        <script type="text/javascript">
+                                            var i = 0;
+
+                                            function toggle_object(post_id) {
+                                                i = i + post_id;
+                                                var obj = document.getElementById('test');
+                                                if (!obj) return;
+
+                                                if (i % 2 != 0) {
+                                                    obj.src = "/images/i.png";
+
+                                                } else {
+                                                    obj.src = "/images/e.png";
+                                                }
+                                            }
+                                        </script>
+                                        <a href="#" onclick="toggle_object(1); return false;"> <img src="/images/e.png" style="width: 4%; margin-left: 10px; margin-top: 3px; margin-bottom: 35px;" id="test" /> </a>
+                                    </div>
+
+                                    <% for(let j=0;j<piddata.length;j++){ %>
+                                        <% if(piddata[j].Pid_code==data[i].Pid_code ) { %>
+                                            <div class="comment-row_feed">
+                                                <img src="/images/profile.jpg" style="width: 3%; border-radius: 70%; float: left;">
+                                                <div class="comment_profile_feed">
+                                                    <%= piddata[j].Pr_author %>
+                                                </div>
+                                                <div class="comment-date_feed">
+                                                    <%= piddata[j].Pr_writeDate%>
+                                                </div>
+                                                <div class="comment-content_feed">
+                                                    <%= piddata[j].Pr_content %>
+                                                </div>
+                                            </div><br>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <form name="writeform" action="#" method="POST">
+                                                        <!-- 내용 -->
+
+                                                        <textarea id="new-comment_feed" name="new-comment_feed" name="Pid_content" class="Pid_content" rows=5 placeholder="댓글을 입력해주세요."></textarea>
+                                                        <br /><br />
+                                                        <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= data[i].Pid_code %>">
+
+                                                        <button class="but_comment_feed" type="button" onclick="writeReply()">댓글달기<br /><br />
+        </form>
+
+        </div>
+        <% } %>
+        <% } %>
+        </div>
+        </div>
+        <div class="finish_feed" style="width:30%;">
+
+            <p style="margin-top: 2%; font-weight: bold; font-size: 25px;">마감이 얼마 안 남았어요!</p>
+            <% for(let k=0;k<sorted_good.length;k++){ %>
+            <span>
+            <p class="finish_title_feed"><%= sorted_good[k].Pid_title %></p>
+            <p class="finish_content_feed"><%= sorted_good[k].Pid_content %></p>
+            <!--여기도 수정 왕창 들어가야함-->
+            <p style="font-weight: 300;">(국기) | <%= sorted_good[k].User_nickname %> | D-() | <%= sorted_good[k].Pid_currentNumber %></p>
+            <img src="/images/good.png" style="width: 18px; float: left;">
+            <p class="finish_good_feed"><%= sorted_good[k].Pid_good %></p>
+            <img src="/images/1.png" style="width: 18px; float: left; margin-left: 6%;">
+            <p class="finish_com_feed"> 4 </p>
+            <hr class="one" style="margin-top: 5%;">
+            </span>
+            <% } %>
+        </div>
+
+        <%- include ("../layout/footer") %>
+</body>
+
+</html>

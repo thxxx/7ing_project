@@ -7,61 +7,168 @@
     <!-- <script type="module" src="./signupnew.js"></script> -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="/css/style_activity_pay.css">
     <script type="text/javascript" src="/Activity.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
     <%- include ("../layout/header") %>
 </head>
 
 <body>
     <%- include ("../layout/top") %>
-        <div class="container">
-
-            <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">액티비티 상세 페이지</h2>
-
-            <form name="likeupform" action="#" method="POST">
-                <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
-                <input type="hidden" id="At_good" name="At_good" class="At_good" value="<%= atdata.At_good %>">
-                <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
-            </form>
-
-            <form action="http://localhost:3000/MyPage/toPayment" method="POST">
-                <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
-                <button type="submit">결제하기</button>
-            </form>
-
-            <div>
-                글 작성자 :
-                <%= user.User_name %>
-                    <br> 글작성자 닉네임 :
-                    <%= user.User_nickname %>
-                        <br> 글 작성자 국가:
-                        <%= user.User_country  %>
+        <!-- <div class="boxContainer">
+        <form action="" method="post" class="d-block d-flex">
+            <div class="elementsContainer">
+                    <input type="text" placeholder="액티비티를 찾아보세요" class="search">     
             </div>
-            <div>
-                타이틀 :
-                <%= atdata.At_title %>
-                    <br> 내용 :
-                    <%= atdata.At_content %>
-                        <br> 디데이:
-                        <%= 
+            <div class="search_click">
+                <input type="image" src="/images/search.png" id="search_icon" alt="search">
+            </div>
+        </form>
+    </div>
+    <br><br><br>
+
+    <div class="container">
+
+        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">액티비티 상세 페이지</h2>
+
+        <form name="likeupform" action="#" method="POST">
+            <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
+            <input type="hidden" id="At_good" name="At_good" class="At_good" value="<%= atdata.At_good %>">
+            <button class="submit" type="button" onclick="likeUp()">좋아요 업</button>
+        </form>
+
+        <form action="http://localhost:3000/MyPage/toPayment" method="POST">
+            <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
+            <button type="submit">결제하기</button>
+        </form>
+
+        <div>
+            글 작성자 :
+            <%= user.User_name %>
+                <br> 글작성자 닉네임 :
+                <%= user.User_nickname %>
+                    <br> 글 작성자 국가:
+                    <%= user.User_country  %>
+        </div>
+        <div>
+            타이틀 :
+            <%= atdata.At_title %>
+                <br> 내용 :
+                <%= atdata.At_content %>
+                    <br> 디데이:
+                    <%= 
                     atdata.At_dday %>
 
-                            <br> 모집인원:
-                            <%= atdata.At_recruitNumber %>
-                                <br> 현재인원:
-                                <%= atdata.At_currentNumber %>
-                                    <br> 좋아요 수:
-                                    <%= atdata.At_good %>
+                        <br> 모집인원:
+                        <%= atdata.At_recruitNumber %>
+                            <br> 현재인원:
+                            <%= atdata.At_currentNumber %>
+                                <br> 좋아요 수:
+                                <%= atdata.At_good %>
+        </div>
+
+        <form name="writeform" action="#" method="POST">
+            <input type="textfield" placeholder="본문내용" name="At_content" class="At_content" maxlength="500"><br /><br />
+
+            <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
+        </form>
+    </div> -->
+
+        <!--필터_수정해야 함!!-->
+        <!--<img src="images/f.png" style="margin-left: 350px; margin-top: 40px; width: 2%;">
+  <button type="button" class="but_filter_feed">
+      <img src="images/f.png" style="margin-left: 350px; margin-top: 40px; width: 2%;">
+  </button>-->
+
+        <!-- search bar -->
+        <div class="full-index">
+            <div class="boxContainer">
+                <form action="" method="post" class="d-block d-flex">
+                    <div class="elementsContainer">
+                        <input type="text" placeholder="내가 꿈꾸던 동행을 검색해보세요." class="search">
+                    </div>
+                    <div class="search_click">
+                        <input type="image" src="/images/search.png" id="search_icon" alt="search">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="activity_full_ap">
+            <img src="/images/activity.jpg" style="width: 28%; border-radius: 20px; margin-top: 50px; margin-left: 250px;">
+
+            <div class="ac_full_ap">
+                <div class="ac_profile_ap">
+                    <span class="ac_nic_ap"><%= user.User_name %>(<%= user.User_nickname %>)</span>
+                    <img src="/images/profile.jpg" style="width: 5%; border-radius: 50px;"><br>
+                </div>
+                <span class="ac_tag_ap">#독일 #문화 #음식 #액티비티</span><br><br>
+                <span class="ac_title_ap"><%= atdata.At_title %></span><br><br><br><br><br><br><br><br><br><br><br>
+                <span class="ac_cash_ap"><%= atdata.At_price %>원</span><br><br>
+                <div class="ac_but_ap" style="margin-top:-15%;">
+                    <span><strong>현재<%= atdata.At_currentNumber %>/<%= atdata.At_recruitNumber %></strong></span>
+                    <button type="button" class="but_like_ap"><img src="/images/e.png" style="margin-right: 5px; width: 18%;">좋아요</button>
+                    <button type="button" class="but_share_ap"><img src="/images/share.png" style="margin-right: 5px; width: 15%;">공유하기</button>
+                    <form action="http://localhost:3000/pay" method="POST">
+                        <input type="hidden" id="At_title" name="At_title" value="<%= atdata.At_title %>">
+                        <input type="hidden" id="At_price" name="At_price" value="<%= atdata.At_price %>">
+                        <input type="hidden" id="User_name" name="User_name" value="<%= user.User_name %>">
+                        <input type="hidden" id="At_currentNumber" name="At_currentNumber" value="<%= atdata.At_currentNumber %>">
+                        <input type="hidden" id="At_recruitNumber" name="At_recruitNumber" value="<%= atdata.At_recruitNumber %>">
+                        <input type="hidden" id="At_code" name="At_code" value="<%= atdata.At_code %>">
+                        <button type="submit" class="but_pay_ap"><img src="/images/check.png"style="margin-top: -10px; margin-right: 5px; width: 4%;">바로 결제</button>
+                    </form>
+                </div>
             </div>
 
-            <form name="writeform" action="#" method="POST">
-                <!-- 내용 -->
-                <input type="textfield" placeholder="본문내용" name="At_content" class="At_content" maxlength="500"><br /><br />
+            <p class="introduce_ap" style="width: 33%;">
+                <button id="box1" type="button">액티비티 소개</button>
+                <button id="box2" type="button">호스트 소개</button>
+                <button id="box3" type="button">상세정보</button>
+                <button id="box4" type="button">장소</button>
+            </p>
 
-                <input type="hidden" id="At_code" name="At_code" class="At_code" value="<%= atcode %>">
-            </form>
-            <!-- <button>동행신청하기</button> -->
+            <hr style="margin-left: 250px; width: 61%; border-top: 2px solid black;">
+
+            <div class="box1">
+                <div class="activity_title_ap">
+                    <%= atdata.At_content %>
+                </div>
+                <div class="activity_contest_ap">
+                    <p style="margin-bottom: 20px; font-weight: bold;">이런 분들께 추천드려요!</p>
+                    <span><img src="/images/check.png" style="margin-right: 5px; width: 2%;">슈바인학센이 대체 뭐길래 싶은 트리피플</span><br><br>
+                    <span><img src="/images/check.png" style="margin-right: 5px; width: 2%;">사우어크라우트의 00효과가 궁금한 트리피플</span><br><br>
+                    <span><img src="/images/check.png" style="margin-right: 5px; width: 2%;">눅눅해진 빵들,, 어떡하지? 고민되는 트리피플</span><br><br>
+                    <span><img src="/images/check.png" style="margin-right: 5px; width: 2%;">고급진 비쥬얼과 이색적인 맛, 최고의 집들이를 하고싶은 트리피플</span><br><br>
+                    <span><img src="/images/check.png" style="margin-right: 5px; width: 2%;">전문 셰프의 슈바인학센 학상차림 해보고싶은 트리피플</span><br><br>
+                </div><br><br><br>
+            </div>
+
+            <div class="box2">
+                <div class="host_title_ap">안녕하세요<br>트리피플 리오입니다:)</div>
+                <img src="/images/profile.jpg" style="margin-top: 50px; margin-right: 50px; width: 30%; border-radius: 5px; float: left;">
+                <div class="host_contest_ap">독일식 레스토랑 운영<br><br> JTBC 팀셰프 독일 셰프<br><br> GTV 세계의 99밥상 독일 셰프<br><br> EBS 국제식당 독일 셰프<br><br> 평창동계올림픽 독일 홍보대사</div>
+            </div><br>
+
+            <div class="box3">
+                <p style="font-weight: bold; color: #93b6f9;">슈바인학센 + 샤우어크라우트 + 젬멜크뢰넬 + 맥주</p><br>
+                <p>독일인 셰프가 엄선한 정통 독일 한상을<br><br> 즐겁게 만들고 먹어보는 1석 2조 쿡티비티<br><br> 오늘 밤 행운아는 '나야 나~' '나야 나~'</p><br><br><br><br>
+
+                <p>독일 보양식, 겉바속촉 슈바인학센</p><br><br>
+
+                <p>독일인 셰프 다리오가<br><br> 소개해드리는 새로운 족발 BBQ!<br><br><br> 돼지의 발목 윗부분을 겉바속촉 구워낸<br><br> 독일 전통 음식 '슈바인학센'입니다.
+                </p>
+            </div>
+
+            <div class="box4">
+                <div class="place_title_ap">장소</div>
+                <p style="margin-bottom: 30px;">서울 성동구 아차산로7나길 14</p>
+                <img src="/images/place.png" style="margin-left: 40px; width: 90%;">
+            </div>
         </div>
+
         <%- include ("../layout/footer") %>
+
 </body>
 
 </html>

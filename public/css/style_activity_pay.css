@@ -1,0 +1,170 @@
+.activity_full_ap {
+    margin-left: 103px;
+    margin-bottom: -50px;
+}
+
+.ac_full_ap {
+    margin-top: -480px;
+    margin-left: 750px;
+    margin-bottom: 50px;
+    padding: 15px 25px;
+    width: 32%;
+    height: 480px;
+    border: 3px solid #F3F2F2;
+    border-radius: 15px;
+}
+
+.ac_profile_ap {
+    margin-bottom: 10px;
+    text-align: right;
+    float: right;
+}
+
+.ac_nic_ap {
+    font-size: 13px;
+}
+
+.ac_tag_ap {
+    font-size: 15px;
+}
+
+.ac_title_ap {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.ac_cash_ap {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ac_but_ap {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.but_like_ap {
+    padding: 5px 10px;
+    width: 25%;
+    border: none;
+    border-radius: 10px;
+    background-color: #EDEDEC;
+    font-size: 15px;
+}
+
+.but_share_ap {
+    padding: 5px 10px;
+    width: 25%;
+    border: none;
+    border-radius: 10px;
+    background-color: #EDEDEC;
+    font-size: 15px;
+}
+
+.but_pay_ap {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    background-color: #cdf96e;
+    font-weight: bold;
+}
+
+.introduce_ap {
+    margin-top: 20px;
+    margin-left: 250px;
+    width: 100%;
+}
+
+#box1 {
+    width: 25%;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#box2 {
+    width: 25%;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#box3 {
+    width: 15%;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#box4 {
+    width: 13%;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.box1 {
+    margin-top: 30px;
+    margin-left: 270px;
+    width: 60%;
+}
+
+.activity_title_ap {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.activity_contest_ap {
+    margin-top: 40px;
+    padding: 20px 30px;
+    border: 3px solid #EDEDEC;
+    border-radius: 15px;
+}
+
+.box2 {
+    margin-left: 270px;
+    margin-bottom: 50px;
+    width: 60%;
+}
+
+.host_title_ap {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.host_contest_ap {
+    margin-top: 100px;
+}
+
+.box3 {
+    margin-top: 40px;
+    margin-left: 270px;
+    padding: 20px 30px;
+    width: 60%;
+    border: 3px solid #EDEDEC;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+.box4 {
+    margin-left: 270px;
+    margin-bottom: 50px;
+    width: 60%;
+}
+
+.place_title_ap {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 30px;
+}

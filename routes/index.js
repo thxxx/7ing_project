@@ -96,4 +96,34 @@ router.post('/Calendar/getDayPid', (req, res, next) => {
     })
 });
 
+router.post('/pay', (req, res, next) => {
+
+    var payData = {
+        code: req.body.At_code,
+        title: req.body.At_title,
+        price: req.body.At_price,
+        UserName: req.body.User_name,
+        currentNumber: req.body.At_currentNumber,
+        recruitNumber: req.body.At_recruitNumber
+    }
+
+    if (payData.currentNumber == payData.recruitNumber) {
+        res.send("<script>alert(\"현재 마감인 액티비티입니다.\"); window.location.href = \"http://localhost:3000/Activity\"; </script>");
+    } else {
+        res.render('../views/Activity/pay', { payData: payData, user: req.user ? req.user : "" });
+    }
+})
+
+router.post('/paySuccess', (req, res, next) => {
+
+    sql = "update activity set At_currentNumber = ? where At_code = ?";
+    params = [parseInt(req.body.currentNumber) + parseInt(1), req.body.code];
+    conn.query(sql, params, (err, rows, field) => {
+        if (err) return res.status(400).json({ paySuccess: false, message: "결제 실패" });
+        else {
+            return res.status(200).json({ paySuccess: true, message: "결제성공" });
+        }
+    })
+})
+
 module.exports = router;

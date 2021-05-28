@@ -206,12 +206,15 @@ li {
 /* 전체보기 버튼*/
 
 .view-all {
+    background-color: #ffffff00;
+    border: 0;
+    color: #000000;
+    position: relative;
+    margin-left: 89.5%;
+    margin-top: -80px;
+}
+
+.view-all :hover {
+    color: var(--accent-color) !important;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 400;
-    color: #4d4d4d;
-    float: right;
-    margin-top: 1rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
 }

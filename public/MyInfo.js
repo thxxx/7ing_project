@@ -26,7 +26,7 @@ function modifyMyInfo() {
         .then(response => {
             if (response.data.ModifyInfoDone) {
                 alert("회원정보 수정 완료");
-                document.location.href = "http://localhost:3000/User/MyPage";
+                document.location.href = "http://localhost:3000/";
             } else {
                 alert(response.data.message);
             }

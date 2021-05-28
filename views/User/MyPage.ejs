@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <title>setting</title>
     <link rel="stylesheet" href="/css/style_setting.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/MyInfo.js"></script>
 </head>
 
 <body>
@@ -26,12 +29,12 @@
             <div style="font-weight: bold;">성별</div>
             <select name="User_gender" class="User_gender" id="gender_setting" aria-label="성별">
             <option value="">성별을 선택해 주세요</option>
-            <option value="M">남자</option>
-            <option value="F">여자</option>
+            <option value="1">남자</option>
+            <option value="0">여자</option>
         </select><br><br>
 
             <div style="font-weight: bold;">생년월일</div>
-            <input id="birthday_setting" class="User_birth" name="User_birth" maxlength="8" value="<%= user.User_birth %>"><br><br>
+            <input type="date" id="birthday_setting" class="User_birth" name="User_birth" maxlength="8" value="<%= user.User_birth %>"><br><br>
 
             <div style="font-weight: bold;">관심국가</div>
             <span style="margin-left: 15px; font-weight: bold;">1순위</span><input id="nation_setting" class="prefer_nation1"><br>

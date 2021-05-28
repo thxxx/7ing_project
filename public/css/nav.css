@@ -24,6 +24,7 @@
     padding-top: 17px;
     padding-left: 0;
     padding-right: 0;
+    padding: 10px 0 0 0 !important;
 }
 
 .navbar a {
@@ -48,6 +49,7 @@
     font-weight: 600;
     font-size: 16px;
     margin-top: 8px;
+    margin-bottom: 0 !important;
 }
 
 .navbar__menu li {
@@ -56,6 +58,7 @@
 
 .navbar__menu :hover {
     color: var(--accent-color) !important;
+    text-decoration: none;
 }
 
 .navbar__icons {
@@ -71,7 +74,7 @@
 .nickname {
     font-size: 15px;
     color: var(--text-color);
-    margin-top: 3px;
+    margin-top: 18px;
 }
 
 .nav-btn {
@@ -81,25 +84,23 @@
 
 .alarm {
     height: 26px;
-    padding-left: 1rem;
     padding-top: 2px;
 }
 
 .bars {
     height: 20px;
-    padding-left: 1rem;
     padding-top: 2px;
 }
 
 .profile {
-    margin-left: 1rem;
+    margin-left: 20px;
     width: 30px;
     height: 30px;
     border: black;
     border-radius: 35px;
     overflow: hidden;
     background: rgb(216, 216, 216);
-    margin-top: 1px;
+    margin-top: 12px;
 }
 
 .profile img {
@@ -194,4 +195,5 @@ button:focus {
     font-weight: 500;
     font-size: 16px;
     margin-left: 1rem;
+    margin-top: 12px;
 }

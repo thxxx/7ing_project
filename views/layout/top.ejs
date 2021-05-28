@@ -1,19 +1,24 @@
 <!-- nav -->
 <nav class="navbar container">
 
-    <!-- sidebar -->
+    <!-- sidebar  -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="box">
             <img class="pf_image" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg" onerror="this.src='/images/user.png'">
         </div>
-        <div class="adv"><span class="advtext">친구초대하고 5000원 받기</span></div>
-        <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">내가 동행신청한 목록</button>
-        <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">내 피드의 댓글 관리</button>
-        <button type="button" id="toMyLike" onclick="toMyLike()">내가 좋아요 한 목록</button>
-        <a href="#">알림</a>
+        <div class="slide-name">
+            <%= user.User_name %>님</div>
         <hr>
-        <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button> </div>
+        <div class="slide-b">
+            <button type="button" id="toMyApplyPid" onclick="toMyApplyPid()">활동 관리</button>
+            <button type="button" id="toReplyToMyPid" onclick="toReplyToMyPid()">호스트 관리</button>
+            <button type="button" id="toMyLike" onclick="toMyLike()">좋아요</button>
+        </div>
+        <hr>
+        <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
+    </div>
+
 
     <script>
         function openNav() {
@@ -25,9 +30,10 @@
         }
     </script>
 
+
     <!-- Logo -->
     <div class="navbar__logo">
-        <a href="index.html">
+        <a href="/">
             <img src="/images/tripeople.png" alt="tripeople" height="23">
         </a>
     </div>
@@ -53,18 +59,15 @@
             </li>
             <li>
                 <button type="button" class="nav-btn">
-					<img src="images/bars.png" class="bars" alt="bars">
+					<img src="images/bars.png"  src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg" onclick="openNav()" class="bars" alt="bars">
 				</button>
             </li>
             <li>
                 <div class="profile">
                     <a href="#profile">
-                        <img class="pf_image" src="https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2020/10/PS20100800026.jpg" onclick="openNav()" onerror="this.src='/images/user.png'">
+                        <img class="pf_image" onerror="this.src='/images/user.png'" onclick="toMyPage()">
                     </a>
                 </div>
-            </li>
-            <li>
-                <button id="logout" onclick="location.href = '/User/logout'">로그아웃</button>
             </li>
         </ul>
 
