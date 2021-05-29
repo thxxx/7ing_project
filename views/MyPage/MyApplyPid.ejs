@@ -9,7 +9,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
     <link rel="stylesheet" href="/css/admin.css">
-    <%- include ("") %>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
@@ -41,10 +41,25 @@
                                 <img src="#" onerror="this.src='/images/user-woman.png'">
                             </div>
                             <div class="admin-small-t2">
-                                <span class="admin-name">(이름)</span> 님의 동행
+                                <span class="admin-name"><%= applypiddata[i].User_nickname %></span> 님의 동행
                             </div>
                             <div class="admin-t2">
-                                <span class="admin-flag">(국기)</span>
+                                <span class="admin-flag">
+                                    <% if(applypiddata[i].User_country=="프랑스") { %>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                    <% } else if(applypiddata[i].User_country=="대한민국") { %>
+                                        <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                        <% } else if(applypiddata[i].User_country=="독일") { %>
+                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                            <% } else if(applypiddata[i].User_country=="미국/캐나다") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                                <% } else if(applypiddata[i].User_country=="스페인") { %>
+                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                    <% } else if(applypiddata[i].User_country=="중화인민공화국") { %>
+                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                            <% } else if(applypiddata[i].User_country=="영국") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                                <% } %></span>
                                 <span class="admin-title"><%= applypiddata[i].Pid_title %></span>
                             </div>
                             <% if(applypiddata[i].Pa_enter==2){ %>
@@ -52,7 +67,7 @@
                                 <% } else if(applypiddata[i].Pa_enter==1){ %>
                                     <button type="botton" class="guest-deny"><img src="/images/guest-deny.png"></button>
                                     <% } else if (applypiddata[i].Pid_recruitNumber==applypiddata[i].Pid_currentNumber) {%>
-                                        <button type="botton" class="activity-pay"> 아쉽게도 모집이 마감되었어요 </button>
+                                        <button type="botton" class="activity-pay" style="font-size:14px;"> 아쉽게도 모집이 마감되었어요 </button>
                                         <% } else{ %>
                                             <button type="botton" class="guest-wait"><img src="/images/waiting.png"></button>
                                             <% } %>
@@ -66,10 +81,24 @@
                                                                 <% for(let i=0;i<activitydata.length;i++){ %>
 
                                                                     <div class="admin-small-t2">
-                                                                        <span class="admin-name">(이름)</span> 님의 동행
+                                                                        <span class="admin-name"><%= activitydata[i].User_nickname %></span> 님의 동행
                                                                     </div>
                                                                     <div class="admin-t2">
-                                                                        <span class="admin-flag">(국기)</span>
+                                                                        <span class="admin-flag"><% if(activitydata[i].User_country=="프랑스") { %>
+                                                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                                                            <% } else if(activitydata[i].User_country=="대한민국") { %>
+                                                                                <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                                                                <% } else if(activitydata[i].User_country=="독일") { %>
+                                                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                                                                    <% } else if(activitydata[i].User_country=="미국/캐나다") { %>
+                                                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                                                                        <% } else if(activitydata[i].User_country=="스페인") { %>
+                                                                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                                                            <% } else if(activitydata[i].User_country=="중화인민공화국") { %>
+                                                                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                                                                    <% } else if(activitydata[i].User_country=="영국") { %>
+                                                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                                                                        <% } %></span>
                                                                         <span class="admin-title"><%= activitydata[i].At_title %></span>
                                                                     </div>
                                                                     <% if(activitydata[i].Aa_enter==2){ %>

@@ -8,41 +8,44 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/MyInfo.js"></script>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <div class="profile_setting">
-        <form name="signupform" action="#" method="POST">
-            <img src="images/profile.jpg" style="margin-left: 300px; margin-bottom: 10px; border-radius: 70px; width: 15%;">
-            <span class="box">
-            <label class="profile_file_setting" for="input-file"><img src="images/setting.png" style="width: 3%; margin-bottom: 20px; margin-left: -25px;"> </label> 
+    <%- include ("../layout/top") %>
+        <div class="profile_setting">
+            <form name="signupform" action="#" method="POST">
+                <img src="images/profile.jpg" style="margin-left: 400px; margin-bottom: 10px; border-radius: 70px; width: 15%;">
+                <span class="box">
+            <label class="profile_file_setting" for="input-file"><img src="images/setting.png" style="width: 3%; margin-bottom: 1px; margin-left: -80px;"> </label> 
             <input type="file" id="input-file" class="int_file" accept="image/*" style="display: none;"/>
         </span>
-            <div class="email_setting">kusitms@gmail.com</div>
-            <div style="font-weight: bold;">이름</div>
-            <input type="text" name="User_name" class="User_name" id="name_setting" maxlength="15" value="<%= user.User_name %>"><br /><br />
+                <div class="email_setting">kusitms@gmail.com</div>
+                <div style="font-weight: bold;">이름</div>
+                <input type="text" name="User_name" class="User_name" id="name_setting" maxlength="15" value="<%= user.User_name %>"><br /><br />
 
-            <div style="font-weight: bold;">닉네임</div>
-            <input type="text" name="User_nickname" class="User_nickname" id="nicname_setting" maxlength="15" value="<%= user.User_nickname %>"><br /><br />
+                <div style="font-weight: bold;">닉네임</div>
+                <input type="text" name="User_nickname" class="User_nickname" id="nicname_setting" maxlength="15" value="<%= user.User_nickname %>"><br /><br />
 
 
-            <div style="font-weight: bold;">성별</div>
-            <select name="User_gender" class="User_gender" id="gender_setting" aria-label="성별">
+                <div style="font-weight: bold;">성별</div>
+                <select name="User_gender" class="User_gender" id="gender_setting" aria-label="성별">
             <option value="">성별을 선택해 주세요</option>
             <option value="1">남자</option>
             <option value="0">여자</option>
         </select><br><br>
 
-            <div style="font-weight: bold;">생년월일</div>
-            <input type="date" id="birthday_setting" class="User_birth" name="User_birth" maxlength="8" value="<%= user.User_birth %>"><br><br>
+                <div style="font-weight: bold;">생년월일</div>
+                <input type="date" id="birthday_setting" class="User_birth" name="User_birth" maxlength="8" value="<%= user.User_birth %>"><br><br>
 
-            <div style="font-weight: bold;">관심국가</div>
-            <span style="margin-left: 15px; font-weight: bold;">1순위</span><input id="nation_setting" class="prefer_nation1"><br>
-            <span style="margin-left: 15px; font-weight: bold;">2순위</span><input id="nation_setting" class="prefer_nation2"><br>
-            <span style="margin-left: 15px; font-weight: bold;">3순위</span><input id="nation_setting" class="prefer_nation3"><br>
+                <div style="font-weight: bold;">관심국가</div>
+                <span style="margin-left: 15px; font-weight: bold;">1순위</span><input id="nation_setting" class="prefer_nation1"><br>
+                <span style="margin-left: 15px; font-weight: bold;">2순위</span><input id="nation_setting" class="prefer_nation2"><br>
+                <span style="margin-left: 15px; font-weight: bold;">3순위</span><input id="nation_setting" class="prefer_nation3"><br>
 
-            <button id="btn-Yes" class="submit" type="button" onclick="modifyMyInfo()">수정하기<br /><br />
+                <button id="btn-Yes" class="submit" type="button" onclick="modifyMyInfo()">수정하기<br /><br />
         </form>
     </div>  
+    <%- include ("../layout/footer") %>
 </body>
 </html>

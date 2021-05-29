@@ -83,16 +83,16 @@
                 <input type="radio" name="pos" id="pos4">
                 <ul>
                     <li>
-                        <img class="picture" src="/images/bg_2.jpg">
+                        <img class="picture" src="/images/bg_2.png">
                     </li>
                     <li>
-                        <img class="picture" src="/images/bg_1.jpg">
+                        <img class="picture" src="/images/bg_1.png">
                     </li>
                     <li>
-                        <img class="picture" src="/images/bg_3.jpg">
+                        <img class="picture" src="/images/bg_3.png">
                     </li>
                     <li>
-                        <img class="picture" src="/images/bg_4.jpg">
+                        <img class="picture" src="/images/bg_4.png">
                     </li>
                 </ul>
                 <p class="pos">
@@ -167,8 +167,13 @@
                                                                                     <% } else if(data[i].User_country=="영국") { %>
                                                                                         <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
                                                                                         <% } %>
-                                                                                            <span class="feed-dday"> <strong><%= data[i].User_name %> &#124 D-12 &#124  <%= data[i].Pid_currentNumber %>/<%= data[i].Pid_recruitNumber %></strong></span>
-                                                        </div>
+                                                                                            <span class="feed-dday"> <strong><%= data[i].User_name %> &#124 
+                                                                                            <% if(data_date[i] > 0) { %>
+                                                                                                D+<%=data_date[i] %>
+                                                                                            <% } else if(data_date[i] <= 0) { %>
+                                                                                                D<%=data_date[i] %>
+                                                                                            <% } %> 
+                                                                                        &#124  <%= data[i].Pid_currentNumber %>/<%= data[i].Pid_recruitNumber %></strong></span>                                                                                            </div>
 
                                                     </div>
                                                 </div>
@@ -225,9 +230,28 @@
                                                             <%= sorted_good[i].Pid_content %>
                                                         </div>
                                                         <div class="feed-name">
-                                                            <img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png">
-                                                            <span class="feed-dday"> <strong><%= sorted_good[i].User_name %> &#124 D-12 &#124  <%= sorted_good[i].Pid_currentNumber %>/<%= sorted_good[i].Pid_recruitNumber %></strong></span>
-                                                        </div>
+                                                            <% if(sorted_good[i].User_country=="프랑스") { %>
+                                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                                                <% } else if(sorted_good[i].User_country=="대한민국") { %>
+                                                                    <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                                                    <% } else if(sorted_good[i].User_country=="독일") { %>
+                                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                                                        <% } else if(sorted_good[i].User_country=="미국/캐나다") { %>
+                                                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                                                            <% } else if(sorted_good[i].User_country=="스페인") { %>
+                                                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                                                <% } else if(sorted_good[i].User_country=="중화인민공화국") { %>
+                                                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                                                                    <% } else if(sorted_good[i].User_country=="영국") { %>
+                                                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                                                                        <% } %>
+                                                                                            <span class="feed-dday"> <strong><%= data[i].User_name %> &#124 
+                                                                <% if(data_date[i] > 0) { %>
+                                                                    D+<%=data_date[i] %>
+                                                                <% } else if(data_date[i] <= 0) { %>
+                                                                    D<%=data_date[i] %>
+                                                                <% } %> 
+                                                            &#124  <%= data[i].Pid_currentNumber %>/<%= data[i].Pid_recruitNumber %></strong></span> </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,7 +273,7 @@
                     <div class="col-md-7 heading-section ftco-animate">
                         <h2 class="mb-4"><strong>Top4 액티비티! </strong> </h2>
                     </div>
-                    <button type="button" id="toAllPid" onclick="toAllPid()" style=" 
+                    <button type="button" id="toAllPid" onclick="toActivity()" style=" 
                     background-color: #ffffff00;
                     border: 0;
                     color: #000000;
@@ -258,93 +282,65 @@
                     margin-top: -80px;"> 액티비티 전체보기</button>
                 </div>
 
-                <div class="row" style="margin-top:-6%;">
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <span class="notify-badge"><strong>1위</strong></span>
-                        <div class="destination">
-                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
+                <div class="row">
+                    <% for(let j=0;j<rank.length;j++){ %>
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <span class="notify-badge"> <%= j+1 %>위</span>
+                            <div class="destination">
+                                <form action="http://localhost:3000/Activity/DetailActivity/" method="POST">
+                                    <input type="hidden" id="At_code" name="At_code" value="<%= rank[j].At_code %>">
+                                    <button class="movebutton" style="border:none; background-color: #ffffff; width:100%;" type="submit">
+                                        <% if(rank[j].activiy_picture) { %>
+                                            <a class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(<%= rank[j].activiy_picture %>);">
+                                                <div class="icon d-flex justify-content-center align-items-center">
+                                                    <span class="icon-search2"></span>
+        
+                                                </div>
+                                            </a>
+                                            <%} else{%>
+                                                <a class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(/images/restaurant-1.jpg);">
+                                                    <div class="icon d-flex justify-content-center align-items-center">
+                                                        <span class="icon-search2"></span>
+            
+                                                    </div>
+                                                </a>
+                                                <%}%>
+                            </button>
+                                </form>
+                                <div class="text p-3 ac-text">
+                                    <p class="bottom-area d-flex">
+                                        <span>
+                                <% if(rank[j].User_country=="프랑스") { %>
+                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                <% } else if(rank[j].User_country=="대한민국") { %>
+                                    <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                    <% } else if(rank[j].User_country=="독일") { %>
+                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                        <% } else if(rank[j].User_country=="미국/캐나다") { %>
+                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                            <% } else if(rank[j].User_country=="스페인") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                <% } else if(rank[j].User_country=="중화인민공화국") { %>
+                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                        <% } else if(rank[j].User_country=="영국") { %>
+                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                            <% } %>
+                                <strong><%= rank[j].User_name %></strong>
+                            </span>
+                                    </p>
+                                    <p class="activity">
+                                        <%= rank[j].At_title %>
+                                    </p>
+                                    <p class="bottom-area d-flex">
+                                        <span class="dday"> D-4 &nbsp; &#124 &nbsp; <%= rank[j].At_currentNumber %> / <%= rank[j].At_recruitNumber %> </span>
+                                    </p>
                                 </div>
-                            </a>
-                            <div class="text p-3">
-                                <p class="bottom-area d-flex">
-                                    <span>
-                           <img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
-                        </span>
-                                </p>
-                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
-                                <p class="bottom-area d-flex">
-                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
-                                </p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <span class="notify-badge"><strong>2위</strong></span>
-                        <div class="destination">
-                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <p class="bottom-area d-flex">
-                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
-                        </span>
-                                </p>
-                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
-                                <p class="bottom-area d-flex">
-                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <span class="notify-badge"><strong>3위</strong></span>
-                        <div class="destination">
-                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <p class="bottom-area d-flex">
-                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
-                        </span>
-                                </p>
-                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
-                                <p class="bottom-area d-flex">
-                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <span class="notify-badge"><strong>4위</strong></span>
-                        <div class="destination">
-                            <a href="#" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/restaurant-1.jpg);">
-                                <div class="icon d-flex justify-content-center align-items-center">
-                                    <span class="icon-search2"></span>
-                                </div>
-                            </a>
-                            <div class="text p-3">
-                                <p class="bottom-area d-flex">
-                                    <span><img class="flag" src="https://countrywisecodes.com/css/img/flags/DE-square.png"> <strong>gutentaghallo</strong>
-                        </span>
-                                </p>
-                                <p class="activity">찐 독일인과 함께 독일 학센을 만들어봅시다! Willkommen!</p>
-                                <p class="bottom-area d-flex">
-                                    <span class="dday"> D-12 &nbsp; &#124 &nbsp; 0/3</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                        <% } %>
 
                 </div>
+            </div>
             </div>
         </section>
         <!-- body end -->

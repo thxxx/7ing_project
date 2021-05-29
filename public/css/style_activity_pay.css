@@ -34,17 +34,18 @@
 }
 
 .ac_cash_ap {
+    margin-top: 20px;
     float: right;
     font-size: 20px;
     font-weight: bold;
 }
 
 .ac_but_ap {
-    margin-top: 10px;
     width: 100%;
 }
 
 .but_like_ap {
+    margin-left: 176px;
     padding: 5px 10px;
     width: 25%;
     border: none;
@@ -54,6 +55,7 @@
 }
 
 .but_share_ap {
+    margin-right: -76px;
     padding: 5px 10px;
     width: 25%;
     border: none;
@@ -63,9 +65,8 @@
 }
 
 .but_pay_ap {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding-top: 7px;
+    margin-top: 15px;
+    padding-top: 8px;
     padding-bottom: 7px;
     width: 100%;
     border: none;

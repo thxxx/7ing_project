@@ -7,7 +7,7 @@ function writepid() {
     var Pid_content = $('.Pid_content').val();
     var Pid_dday = $('.Pid_dday').val();
     var Pid_recruitNumber = $('.Pid_recruitNumber').val();
-    var Pid_religion = $('.Pid_religion').val();
+    //var Pid_religion = $('.Pid_religion').val();
 
     // 입력받은 정보를 객체로 저장
     var body = {
@@ -16,7 +16,7 @@ function writepid() {
         Pid_content: Pid_content,
         Pid_dday: Pid_dday,
         Pid_recruitNumber: parseInt(Pid_recruitNumber),
-        Pid_religion: Pid_religion
+        //Pid_religion: Pid_religion
     };
 
     const header = { "Content-Type": "application/json" }
@@ -98,22 +98,16 @@ function writeReply() {
         Pid_code: parseInt(Pid_code),
     }
 
-    if (Pid_content == '') {
-        alert("작성하고 등록을 눌러주세요.");
-        document.location.href = '/';
-    } else {
+    const header = { "Content-Type": "application/json" }
 
-        const header = { "Content-Type": "application/json" }
-
-        axios.post('http://localhost:3000/Pid/writeReply', body, { header })
-            .then(response => {
-                if (response.data.WriteReplyDone) {
-                    console.log
-                } else {
-                    console.log(reponse);
-                }
-            })
-    }
+    axios.post('http://localhost:3000/Pid/writeReply', body, { header })
+        .then(response => {
+            if (response.data.WriteReplyDone) {
+                alter("댓글이 등록되었습니다!")
+            } else {
+                console.log(reponse);
+            }
+        })
 }
 
 function searchSomePid() {
@@ -128,5 +122,12 @@ function searchSomePid() {
 
     const header = { "Content-Type": "application/json" }
 
-    axios.post('http://localhost:3000/Pid/SearchPid', body, { header });
+    axios.post('http://localhost:3000/Pid/SearchPid', body, { header })
+        .then(response => {
+            if (response.data.WriteReplyDone) {
+                document.location.href = '/Pid/SearchPid';
+            } else {
+                document.location.href = '/Pid/SearchPid';
+            }
+        })
 }

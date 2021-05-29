@@ -36,27 +36,42 @@ form {
 }
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
+
 /* Modal Content/Box */
+
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto; /* 15% from the top and centered */
+    margin: 10% auto;
+    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */                          
+    width: 30%;
+    /* Could be more or less, depending on screen size */
 }
+
+
 /* The Close Button */
+
 .close {
     margin-left: -20px;
     color: #aaa;
@@ -64,6 +79,7 @@ form {
     font-size: 28px;
     font-weight: bold;
 }
+
 .close:hover,
 .close:focus {
     color: black;
@@ -112,14 +128,15 @@ form {
 }
 
 .Pid_dday {
-    margin-top: -8px;
+    margin-top: 120px;
     margin-left: 10px;
     float: left;
 }
 
 .submit {
-    margin-left: 78%;
-    width: 10%;
+    margin-left: 75%;
+    padding: 2px 0px;
+    width: 12%;
     height: 30px;
     background-color: #cdf96e;
     border: none;

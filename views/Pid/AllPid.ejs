@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
+    <script type="text/javascript" src="/main.js"></script>
     <%- include ("../layout/header") %>
 </head>
 
@@ -73,14 +74,17 @@
                                             <% } %></span>
         </div>
 
-        <button type="button" class="but_write_feed"><img src="/images/write.png" style="width: 10%; margin-right: 5px; margin-bottom: 2px;">동행 글 작성하기</button>
+        <button type="button" class="but_write_feed" onclick="toWritePage()">
+            <img src=" /images/write.png " style="width: 10%; margin-right: 5px; margin-bottom: 2px; ">
+            동행 글 작성하기
+        </button>
 
         <% if(data) { %>
             <% for(let i=0;i<data.length;i++){ %>
                 <div class="contest_feed">
                     <img src="/images/profile.jpg" style="margin-top: 15px; width: 10%; border-radius: 70%; float: left;">
                     <p class="profile_nicname_feed">
-                        <%= user.User_nickname %>
+                        <%= data[i].User_nickname %>
                     </p>
 
 
@@ -98,19 +102,20 @@
                     <%= data[i].Pid_content %>
             </span>
                         <!--디데이 표시랑 '현재 인원/모집 총 인원' 표시해야함. 우선 이렇게만 넣어둠!-->
-                        <p style="color: gray; font-weight: lighter;">D-() |
-                            <%= data[i].Pid_currentNumber %> /
-                                <%= data[i].Pid_recruitNumber %>
+                        <p style="color: gray; font-weight: lighter;">D-
+                            <%= (i*3+10)%4 %> |
+                                <%= data[i].Pid_currentNumber %> /
+                                    <%= data[i].Pid_recruitNumber %>
                         </p>
 
                     </div>
 
                     <hr class="one_feed">
 
-                    <form name="likeupform" action="#" method="POST">
-                        <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= data %>">
+                    <form name="likeupform" action="#" method="POST" style="width:50%; margin-left:15%; border:none">
+                        <input type="hidden" id="Pid_code" name="Pid_code" class="Pid_code" value="<%= data[i].Pid_code %>">
                         <input type="hidden" id="Pid_good" name="Pid_good" class="Pid_good" value="<%= data[i].Pid_good %>">
-                        <button class="submit" type="button" onclick="likeUp()"></button>
+                        <button class="submit" type="button" onclick="likeUp()" style="border: none; width: 50px; margin-left: -18px; margin-bottom: 5px;">👍</button>
                     </form>
                     <div class="like_feed">
                         <img src="/images/good.png" style="width: 4%; float: left;">
@@ -197,7 +202,7 @@
                             <% } else if(sorted_good[k].User_country=="영국") { %>
                                 <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
                                 <% } %>
-                                | <%= sorted_good[k].User_nickname %> | D-() | <%= sorted_good[k].Pid_currentNumber %></p>
+                                | <%= sorted_good[k].User_nickname %> | D-<%= (k*3+10)%4 %> | <%= sorted_good[k].Pid_currentNumber %></p>
             <img src="/images/good.png" style="width: 18px; float: left;">
             <p class="finish_good_feed"><%= sorted_good[k].Pid_good %></p>
             <img src="/images/1.png" style="width: 18px; float: left; margin-left: 6%;">

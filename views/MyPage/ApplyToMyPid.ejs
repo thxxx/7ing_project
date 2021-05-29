@@ -48,7 +48,22 @@
                                 <span class="admin-title"><%= applyToMyPid[i].Pid_title %></span>
                             </div>
                             <div class="admin-t2">
-                                <span class="admin-flag">(국기)</span>
+                                <span class="admin-flag">
+                                    <% if(applyToMyPid[i].User_country=="프랑스") { %>
+                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                        <% } else if(applyToMyPid[i].User_country=="대한민국") { %>
+                                            <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                            <% } else if(applyToMyPid[i].User_country=="독일") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                                <% } else if(applyToMyPid[i].User_country=="미국/캐나다") { %>
+                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                                    <% } else if(applyToMyPid[i].User_country=="스페인") { %>
+                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                        <% } else if(applyToMyPid[i].User_country=="중화인민공화국") { %>
+                                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                                            <% } else if(applyToMyPid[i].User_country=="영국") { %>
+                                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                                                <% } %></span>
                                 <span class="admin-name"><%= applyToMyPid[i].User_name %></span> 님이 동행을 신청하셨습니다.
                             </div>
 
@@ -73,36 +88,36 @@
 
 
                                                     <!--  여기서부터는 액티비티 출력  -->
-                                                    <% if (applyToMyActivity) {%>
-                                                        <% for(let i=0;i<applyToMyActivity.length;i++){ %>
+                                                    <% if (applyToMyActivity>0) {%>
+                                                        <% for(let h=0;h<applyToMyActivity.length;h++){ %>
 
                                                             <div class="admin-pic">
                                                                 <img src="#" onerror="this.src='/images/user-woman.png'">
                                                             </div>
 
                                                             <div class="admin-small-t2">
-                                                                <span class="admin-title"><%= applyToMyActivity[i].At_title %></span>
+                                                                <span class="admin-title"><%= applyToMyActivity[h].At_title %></span>
                                                             </div>
                                                             <div class="admin-t2">
                                                                 <span class="admin-flag">(국기)</span>
-                                                                <span class="admin-name"><%= applyToMyActivity[i].User_name %></span> 님이 액티비티를 신청하셨습니다.
+                                                                <span class="admin-name"><%= applyToMyActivity[h].User_name %></span> 님이 액티비티를 신청하셨습니다.
                                                             </div>
 
                                                             <% if(applyToMyActivity[i].Aa_enter == 0){ %>
                                                                 <form name="AcceptApply" action="#" method="POST">
-                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[h].Aa_code %>">
                                                                     <button class="submit" id="host-accept" type="button" onclick="acceptApplyActivity()"><img src="/images/accept.png"></button>
                                                                 </form>
 
                                                                 <form name="RejectApply" action="#" method="POST">
-                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[i].Aa_code %>">
+                                                                    <input type="hidden" id="Aa_code" class="Aa_code" name="Aa_code" value="<%= applyToMyActivity[h].Aa_code %>">
                                                                     <button class="submit" id="host-deny" type="button" onclick="rejectApplyActivity()"><img src="/images/deny.png"></button>
                                                                 </form>
-                                                                <% } else if(applyToMyActivity[i].Aa_enter==1){ %>
+                                                                <% } else if(applyToMyActivity[h].Aa_enter==1){ %>
                                                                     <p> 거절하셨습니다 </p>
-                                                                    <% } else if (applyToMyActivity[i].Aa_enter==2){ %>
+                                                                    <% } else if (applyToMyActivity[h].Aa_enter==2){ %>
                                                                         <p> 수락하셨습니다. </p>
-                                                                        <% } else if (applyToMyActivity[i].Aa_enter==3){ %>
+                                                                        <% } else if (applyToMyActivity[h].Aa_enter==3){ %>
                                                                             <button type="botton" class="activity-pay"><img src="/images/activity-pay.png"></button>
                                                                             <% } %>
                                                                                 <hr class="admin-t2-hr">

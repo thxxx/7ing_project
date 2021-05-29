@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../config/database.js');
 const conn = db.init();
 const router = express.Router();
+const moment = require('moment');
 
 router.use((req, res, next) => {
     res.locals.user = req.user;
@@ -20,12 +21,41 @@ router.get('/', (req, res, next) => { // 시작
                 conn.query("SELECT * FROM Pid LEFT JOIN User ON Pid.User_code=User.User_code;", function(err, result, fields) {
                     if (err) throw err;
                     else {
-                        console.log(result);
-                        res.render('../views/index', {
-                            data: result, // Pid data 
-                            user: req.user ? req.user : "", // 현재 로그인한 유저
-                            sorted_good: sorted_result // 좋아요순으로 정렬된 Pid 4개의 데이터
-                        });
+                        var sql2 = "SELECT * FROM Activity LEFT JOIN User ON Activity.User_code=User.User_code WHERE Activity.At_currentNumber!=Activity.At_recruitNumber ORDER BY Activity.At_currentNumber DESC Limit 4;";
+                        conn.query(sql2, (err2, result2) => {
+                            var cd;
+
+                            var data_dday = [];
+                            var data_date = [];
+                            for (var j = 0; j < result.length; j++) {
+                                data_dday[j] = moment(result[j].Pid_dday).format('YYYY-MM-DD').split('-');
+                                cd = moment(new Date()).format('YYYY-MM-DD').split('-')
+                                    // console.log("dday[j]", dday[j]);
+                                var day1 = new Date(data_dday[j][0], data_dday[j][1], data_dday[j][2]);
+                                var day2 = new Date(cd[0], cd[1], cd[2]);
+                                data_date[j] = (Math.ceil((day2.getTime() - day1.getTime()) / (1000 * 3600 * 24)));
+                            }
+
+                            // sorted_data 날짜 수정
+                            var dday = [];
+                            var sorted_good_date = [];
+                            for (var j = 0; j < sorted_result.length; j++) {
+                                dday[j] = moment(sorted_result[j].Pid_dday).format('YYYY-MM-DD').split('-');
+                                cd = moment(new Date()).format('YYYY-MM-DD').split('-')
+                                console.log("dday[j]", dday[j]);
+                                var day1 = new Date(dday[j][0], dday[j][1], dday[j][2]);
+                                var day2 = new Date(cd[0], cd[1], cd[2]);
+                                sorted_good_date[j] = (Math.ceil((day2.getTime() - day1.getTime()) / (1000 * 3600 * 24)));
+                            }
+                            res.render('../views/index', {
+                                data: result, // Pid data 
+                                user: req.user ? req.user : "", // 현재 로그인한 유저
+                                sorted_good: sorted_result, // 좋아요순으로 정렬된 Pid 4개의 데이터
+                                rank: result2,
+                                sorted_good_date: sorted_good_date,
+                                data_date: data_date
+                            });
+                        })
                     }
                 });
             }

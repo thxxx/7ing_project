@@ -9,29 +9,27 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/WritePid.js"></script>
     <link rel="stylesheet" href="/css/style_WritePid.css">
-    <%- include ("./layout/header") %>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
-    <%- include ("./layout/top") %>
-        <h2 style="font-size: 2vw; text-align: center; color:#383838;">동행 글 작성하기</h2>
+    <%- include ("../layout/top") %>
+        <h2 style="font-size: 2vw; text-align: center; color:#383838; margin-top:5%;">동행 글 작성하기</h2>
 
         <hr style="width: 100%;">
         <!--프로필하고 작성자 닉네임 입력-->
-        <img src="/images/profile.jpg" style="margin-top: 15px; width: 7%; border-radius: 70%; float: left;">
-        <div class="write_profile_writepid">닉네임_길이체크</div> <br><br>
 
-        <form name="writeform" action="#" method="POST">
+        <form name="writeform" action="#" method="POST" style="margin-left: 550px;">
             <input type="text" placeholder="제목을 입력하세요" name="Pid_title" class="Pid_title" maxlength="20"><br /><br />
             <hr>
             <input type="textarea" placeholder="내용을 입력하세요" name="Pid_content" class="Pid_content" maxlength="500"><br /><br />
 
             <span class="box">
-                <label class="input-file-button" for="input-file"><img src="/images/photo.png" style="width: 7%; margin-bottom: -50px;"> </label> 
+                <label class="input-file-button" for="input-file"><img src="/images/photo.png" style="width: 50%; margin-left: -65px; margin-bottom: -353px;"> </label> 
                 <input type="file" id="input-file" class="int_file" accept="image/*" style="display: none;"/>
             </span> <br /><br />
 
-            <img src="/images/option.png" alt="" onclick="js:showPopUp()" style="float: left; margin-top: -18px; margin-left: 50px; width: 7%;">
+            <img src="/images/option.png" alt="" onclick="js:showPopUp()" style="float: left; margin-top: 112px; margin-left: 50px; width: 7%;">
             <script>
                 function showPopUp() {
                     var Modal = document.querySelector('#Modal');
@@ -139,18 +137,14 @@
             <br/> <br/>
             <br/>
 
-            <input type="text" placeholder="목표인원" name="Pid_recruitNumber" id="Pid_recruitNumber" class="Pid_recruitNumber"><br/><br />
+            <input type="text" placeholder="목표인원" name="Pid_recruitNumber" id="Pid_recruitNumber" class="Pid_recruitNumber" style="float: right; margin-top: 50px;"><br/><br />
 
-            <input type="text" placeholder="지역" name="Pid_religion" class="Pid_religion" maxlength="15"><br /><br />
-
-            <span class="box">
-                <input type="file" id="file" class="int_file" accept="image/*" style="display: block">
-            </span> <br /><br />
             <br /><br />
             <button class="submit" type="button" onclick="writepid()">등록하기<br /><br />
-            <button id="toMainPage" onclick="toMainPage()">취소</button>
+            <button id="toMainPage" onclick="toMainPage()" style="margin-left: 10px;">취소</button>
         </form>
         </div>
+        <%- include ("../layout/footer") %>
 </body>
 
 </html>

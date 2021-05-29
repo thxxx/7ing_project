@@ -44,7 +44,23 @@
                                 <span class="admin-name"><%= replyToMyPid[i].Pr_author %></span> 님의 댓글
                             </div>
                             <div class="admin-t1">
-                                <span class="admin-flag">(국기)</span>
+                                <span class="admin-flag">
+                                    <% if(replyToMyPid[i].User_country=="프랑스") { %>
+                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/FR-square.png">
+                                    <% } else if(replyToMyPid[i].User_country=="대한민국") { %>
+                                        <img class="flag" style="height:100%;" src="https://countrywisecodes.com//css/img/flags/KR-square.png">
+                                        <% } else if(replyToMyPid[i].User_country=="독일") { %>
+                                            <img class="flag" src="https://countrywisecodes.com//css/img/flags/DE-square.png">
+                                            <% } else if(replyToMyPid[i].User_country=="미국/캐나다") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/US-square.png">
+                                                <% } else if(replyToMyPid[i].User_country=="스페인") { %>
+                                                    <img class="flag" src="https://countrywisecodes.com//css/img/flags/ES-square.png">
+                                                    <% } else if(replyToMyPid[i].User_country=="중화인민공화국") { %>
+                                                        <img class="flag" src="https://countrywisecodes.com//css/img/flags/CN-square.png">
+                                            <% } else if(replyToMyPid[i].User_country=="영국") { %>
+                                                <img class="flag" src="https://countrywisecodes.com//css/img/flags/GB-square.png">
+                                                <% } %>
+                                </span>
                                 <%= replyToMyPid[i].Pr_content %>
                             </div>
                             <hr class="admin-t1-hr">

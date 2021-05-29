@@ -6,7 +6,7 @@
 .contest_feed {
     margin-top: 50px;
     margin-bottom: 50px;
-    margin-left: 120px;
+    margin-left: 140px;
     padding-top: 50px;
     padding-bottom: 30px;
     padding-left: 60px;
@@ -19,7 +19,7 @@
 }
 
 .but_write_feed {
-    margin-right: 210px;
+    margin-right: 300px;
     margin-top: -70px;
     width: 10%;
     height: 35px;
@@ -30,9 +30,12 @@
 }
 
 .profile_nicname_feed {
-    margin-top: 90px;
-    padding-left: 20px;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: -720px;
+    padding-left: 15px;
     font-weight: 300;
+    font-size: 18px;
 }
 
 .contest_body {
@@ -91,7 +94,7 @@
 
 .comment-content_feed {
     margin-top: 0px;
-    margin-left: 20px;
+    margin-left: 28px;
     font-size: 16px;
 }
 
@@ -123,8 +126,8 @@
 
 .finish_feed {
     float: right;
-    margin-top: -133%;
-    margin-right: 6%;
+    margin-top: -370%;
+    margin-right: 9%;
     padding: 20px 20px;
     border: 3px solid #F3F2F2;
     border-radius: 20px;

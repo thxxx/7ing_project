@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <link rel="stylesheet" href="/SignUp.css">
-    <!-- <script type="module" src="./signupnew.js"></script> -->
+    <link rel="stylesheet" href="css/style_signup.css">
+    <script src="/main.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/WritePid.js"></script>
     <script type="text/javascript" src="/SignUp.js"></script>
+    <%- include ("../layout/header") %>
 </head>
 
 <body>
     <div class="container">
-        <h2 style="height: 50px; margin-left: 20%; font-size: 2vw; text-align: center; color:#383838;">회원가입</h2>
+        <h2 style="height: 50px; margin-top:-20%; padding-bottom: 110px; margin-left: -90%; font-size: 2vw; text-align: center; color:#383838;">회원가입</h2>
         <form name="signupform" action="#" method="POST">
 
             <input type="text" placeholder="성명" name="User_name" class="User_name" maxlength="15"><br /><br />
@@ -696,6 +699,7 @@
             <button class="submit" type="button" onclick="form2()">가입하기<br /><br />
         </form>
     </div>
+    <%- include ("../layout/footer") %>
 </body>
 
 </html>

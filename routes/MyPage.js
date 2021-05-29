@@ -66,7 +66,7 @@ router.post('/modifymyinfo', (req, res) => {
 
 router.get('/MyApplyPid', (req, res) => {
 
-    var sql = "SELECT * FROM Pid_apply LEFT JOIN Pid ON Pid_apply.Pid_code=Pid.Pid_code WHERE Pid_apply.Apply_User_code=?";
+    var sql = "SELECT * FROM Pid_apply LEFT JOIN Pid ON Pid_apply.Pid_code=Pid.Pid_code LEFT JOIN User ON User.User_code=Pid.User_code WHERE Pid_apply.Apply_User_code=?";
 
     var params = [req.user.User_code];
 
@@ -74,7 +74,7 @@ router.get('/MyApplyPid', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            var sql2 = "SELECT * FROM At_apply LEFT JOIN Activity ON At_apply.At_code=Activity.At_code WHERE At_apply.Apply_user_code=?;";
+            var sql2 = "SELECT * FROM At_apply LEFT JOIN Activity ON At_apply.At_code=Activity.At_code LEFT JOIN User ON User.User_code=Activity.User_code WHERE At_apply.Apply_user_code=?;";
             var params2 = [req.user.User_code];
 
             conn.query(sql2, params2, (err2, result2) => {

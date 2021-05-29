@@ -1,0 +1,99 @@
+.container {
+    width: 500px;
+    margin-top: 20%;
+    margin-left: 30%;
+    line-height: 16px;
+}
+
+.singup {
+    margin-left: 20%;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-bottom: 20px;
+    height: 10%;
+    background-color: #fff;
+    border: 1px solid #e9eaeb;
+}
+
+.name {
+    padding: 20px 15px;
+    width: 250px;
+    height: 2px;
+    border: none;
+}
+
+.id {
+    padding: 20px 15px;
+    width: 250px;
+    height: 2px;
+    border: none;
+}
+
+.pw {
+    padding: 20px 15px;
+    width: 250px;
+    height: 2px;
+    border: none;
+}
+
+.error_pw {
+    font-size: 12px;
+    line-height: 14px;
+    color: red;
+}
+
+#yy.int {
+    padding: 20px 15px;
+    width: 90px;
+    height: 2px;
+    border: none;
+}
+
+#mm.sel {
+    width: 50px;
+    height: 40px;
+}
+
+#dd.int {
+    padding: 20px 15px;
+    width: 90px;
+    height: 2px;
+    border: none;
+}
+
+#gender.sel {
+    width: 100px;
+    height: 40px;
+}
+
+#nationNo.sel {
+    width: 200px;
+    height: 40px;
+}
+
+.int {
+    padding: 20px 15px;
+    width: 200px;
+    height: 2px;
+    border: none;
+}
+
+#nation.sel {
+    width: 105px;
+    height: 40px;
+}
+
+.but_num {
+    width: 90px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #cdf96e;
+}
+
+.submit {
+    margin-left: 50%;
+    width: 90px;
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #cdf96e;
+}
